@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>탄소발자국 계산기</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/html5up-phantom/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/html5up-phantom/assets/css/noscript.css" /></noscript>
+    <style>
+
+    </style>
+</head>
+<body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
+        
+        <!-- Main -->
+        <div id="main">
+            <div class="inner">
+                <h1>탄소발자국 계산기</h1>
+                <div class="row">
+                    <section class="col-6 col-12-narrower" id="calculator" style="background-color: #f6f6f6;">
+                        <div>전기</div>
+                        <input type="text" name="" value="" id="" placeholder="kwh/월"/>
+                        <!-- 전기 CO₂ 발생량 | (전기 사용량 * 0.4781) -->
+                        <p>result</p>
+                    </section>
+                    <section class="col-6 col-12-narrower" id="calculator" style="background-color: #f6f6f6;">
+                        <div>가스</div>
+                        <input type="text" name="" value="" id="" placeholder="m³/월"/>
+                        <!-- 가스 CO₂ 발생량 | (가스 사용량 * 2.176) -->
+                        <p>result</p>
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="col-6 col-12-narrower" id="calculator" style="background-color: #f6f6f6;">
+                        <div>수도</div>
+                        <input type="text" name="" value="" id="" placeholder="m³/월"/>
+                        <!-- 수도 CO₂ 발생량 | (수도 사용량 * 0.237) -->
+                        <p>result</p>
+                    </section>
+                    <section class="col-6 col-12-narrower" id="calculator" style="background-color: #f6f6f6;">
+                        <div>교통</div>
+                        <input type="text" name="" value="" id="" placeholder="km/월"/>
+                        <!-- 교통 CO₂ 발생량 | 휘발유 : (이동거리 / 16.04 * 2.097) 경유 : (이동거리 / 15.35 * 2.582) LPG : (이동거리 / 11.06 * 1.868) -->
+                        <p>result</p>
+                    </section>
+                </div>
+
+                <!-- 합계 -->
+                <div class="row">
+                    <section class="col-12" id="summary" style="background-color: #f6f6f6;">
+                        CO₂발생합계 <p>result summary ${} kg/월</p></div>
+                    </section>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
