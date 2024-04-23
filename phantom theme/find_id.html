@@ -10,6 +10,9 @@
         #errorMsg {
           color: red;
         }
+        .errorMsg {
+            color: red;
+        }
       </style>
 
 </head>
@@ -39,7 +42,9 @@
                             </div>
                             <div class="col-3 col-12-xsmall"></div>
                             <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall" id="errorMsg">이름: 필수 정보입니다.</div>
+                            <div class="col-6 col-12-xsmall">
+                                <div class="errorMsg">아이디: 필수 정보입니다.</div>
+                            </div>
                             <div class="col-3 col-12-xsmall"></div>
                             
 
@@ -64,7 +69,9 @@
                             </div>
                             <div class="col-3 col-12-xsmall"></div>
                             <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall" id="errorMsg">이메일 인증에 실패하셨습니다.</div>
+                            <div class="col-6 col-12-xsmall">
+                                <div class="errorEmMsg">이메일 인증에 실패하셨습니다.</div>
+                            </div>
                             <div class="col-3 col-12-xsmall"></div>
                             
                             
@@ -91,5 +98,24 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+    <script type="text/javascript">
+        
+        $(document).ready(function(){
+            $('.errorMsg').hide();
+            $('.errorEmMsg').hide();
+            $("#nm").blur(function() {
+                showErrorMsg($('.errorMsg'));
+            });
+        });
+        function showErrorMsg(obj) {
+            if ($("#nm").val().trim() === "") {
+                obj.show();
+            } else {
+                obj.hide();
+            }
+        }
+
+
+    </script>
 </body>
 </html>
