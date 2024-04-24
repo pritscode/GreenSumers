@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>게시글 페이지</title>
+<link rel="stylesheet" href="assets/css/main.css" />
+<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+<style>
+    .post {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .post-title-input {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 5px;
+        font-size: 1.2em;
+    }
+    .post-author-input input {
+        width: 100%;
+        padding: 5px;
+        font-size: 1em;
+    }
+    #date {
+        width: 100%;
+        padding: 5px;
+        font-size: 0.9em;
+    }
+    #content {
+        width: 100%;
+        height: 200px;
+        padding: 5px;
+        font-size: 1em;
+        resize: none; /* 사용자가 크기를 조절할 수 없도록 함 */
+    }
+    .button-container {
+        margin-top: 20px;
+        text-align: center; /* 버튼을 가운데로 정렬 */
+    }
+    .button-container button {
+        margin-right: 10px;
+        padding: 8px 30px; /* 게시 버튼의 가로 넓이를 더 넓게 조정 */
+        cursor: pointer;
+    }
+    .comment-container {
+        margin-top: 20px; /* 댓글 입력 칸과의 간격을 더욱 벌림 */
+    }
+    .comment-container input[type="text"] {
+        width: calc(100% - 22px);
+        padding: 5px;
+        font-size: 1em;
+        margin-bottom: 10px; /* 댓글 입력 칸과 댓글 작성 버튼 사이의 간격 조정 */
+    }
+    .comment-container button {
+        width: 100px;
+        margin-left: 10px;
+        padding: 8px 16px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div class="post">
+    <input type="text" id="title" class="post-title-input" placeholder="게시글 제목">
+    <p class="post-author-input"><input type="text" id="author" placeholder="작성자 이름"></p>
+    <p class="post-date"><span id="date"></span></p>
+    <div class="post-content">
+        <textarea id="content" rows="10" placeholder="게시물 내용을 입력하세요."></textarea>
+    </div>
+    <div class="button-container">
+        <input type="submit" onclick="editPost()" value="수정">
+        <input type="submit" onclick="deletePost()" value="삭제">
+    </div>
+    <div class="button-container">
+        <input onclick="submitPost()" class="button primary small" id="postsubmitbutton" value="게시" />
+    </div>
+    <div class="button-container">
+        <input onclick="submitPost()" class="button small" id="" value="추천" />
+    </div>
+    <div class="comment-container">
+        <input type="text" id="comment" placeholder="댓글을 입력하세요">
+        <input type="submit" value="댓글 작성" onclick="addComment()">
+    </div>
+</div>
+
+<script>
+    // JavaScript로 현재 날짜 가져오기
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const currentDate = `${year}년 ${month}월 ${day}일`;
+
+    // 작성일자 업데이트
+    document.getElementById('date').innerText = currentDate;
+
+    function editPost() {
+        alert("수정이 완료 되었습니다.");
+    }
+
+    function deletePost() {
+        alert("삭제가 완료 되었습니다.");
+    }
+
+    function submitPost() {
+        alert("게시가 완료 되었습니다.");
+    }
+
+    function addComment() {
+        const comment = document.getElementById('comment').value;
+        if (comment.trim() !== '') {
+            alert("댓글이 추가되었습니다: " + comment);
+        } else {
+            alert("댓글을 입력하세요.");
+        }
+    }
+</script>
+
+</body>
+</html>
