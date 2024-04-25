@@ -13,6 +13,9 @@
         .errorMsg {
             color: red;
         }
+        .errorEmMsg {
+            color: red;
+        }
       </style>
 
 </head>
@@ -41,11 +44,6 @@
                                 <input type="text" name="" id="nm" value="" placeholder="이름"/>
                             </div>
                             <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall">
-                                <div class="errorMsg">이름: 필수 정보입니다.</div>
-                            </div>
-                            <div class="col-3 col-12-xsmall"></div>
                             
 
                             <!-- 이메일 -->
@@ -68,18 +66,38 @@
                                 <input type="submit" value="인증 요청" class="button fit"/>
                             </div>
                             <div class="col-3 col-12-xsmall"></div>
+
+                            <!-- 에러메시지 -->
+                            <div class="col-3 col-12-xsmall"></div>
+                            <div class="col-6 col-12-xsmall">
+                                <div class="errorMsg">이름: 필수 정보입니다.</div>
+                            </div>
+                            <div class="col-3 col-12-xsmall"></div>
                             <div class="col-3 col-12-xsmall"></div>
                             <div class="col-6 col-12-xsmall">
                                 <div class="errorEmMsg">이메일 인증에 실패하셨습니다.</div>
                             </div>
                             <div class="col-3 col-12-xsmall"></div>
                             
-                            
+                            <!-- 아이디 확인 -->
                             <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall" style="text-align: center;">
-                                <input type="submit" value="아이디 찾기" class="primary" style="align-content: center;"/>
+                            <div class="col-6 col-12-xsmall">
+                                <div class="ID verification" style="text-align: center;">회원님의 아이디는 '@@@@@'입니다.</div>
                             </div>
                             <div class="col-3 col-12-xsmall"></div>
+                            
+                            
+                            <div class="col-4 col-12-xsmall"></div>
+                            <div class="col-4 col-12-xsmall" style="text-align: center;">
+                                <input type="submit" value="아이디 찾기" class="primary fit" style="align-content: center;"/>
+                            </div>
+                            <div class="col-4 col-12-xsmall"></div>
+
+                            <div class="col-4 col-12-xsmall"></div>
+                            <div class="col-4 col-12-xsmall" style="text-align: center;">
+                                <a href="#" class="button primary fit">로그인 화면 이동</a>
+                            </div>
+                            <div class="col-4 col-12-xsmall"></div>
                         </div>
                     </form>
                 </section>
@@ -102,11 +120,12 @@
         
         $(document).ready(function(){
             $('.errorMsg').hide();
-            $('.errorEmMsg').hide();
+            // $('.errorEmMsg').hide();
             $("#nm").blur(function() {
                 showErrorMsg($('.errorMsg'));
             });
         });
+
         function showErrorMsg(obj) {
             if ($("#nm").val().trim() === "") {
                 obj.show();
