@@ -20,93 +20,163 @@
                 <h1>자유 게시판</h1>
                 <!-- Table -->
                 <section>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>작성자</th>
-                                    <th>제목</th>
-                                    <th>조회수</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <a href="#">
+                    <div class="row gtr-uniform">
+                        
+                        <!-- 검색 폼, 게시버튼, 게시물필터정렬 -->
+                        <!-- 검색 폼 -->
+                        <div class="col-4 col-12-xsmall">
+                            <form method="get" action="#">
+                                <div class="row gtr-uniform">
+                                    <div class="col-6 col-12-xsmall">
+                                        <select name="filterSearch" id="filterSearch">
+                                            <option value="1">제목+내용</option>
+                                            <option value="2">제목</option>
+                                            <option value="3">내용</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6 col-12-xsmall"></div>
+                                    <div class="col-8 col-12-xsmall">
+                                        <input type="text" placeholder="검색"/>
+                                    </div>
+                                    <div class="col-4 col-12-xsmall">
+                                        <input type="submit" value="검색" class="button">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-6 col-12-xsmall"></div>
+                        
+                        <!-- 게시 버튼 -->
+                        <div class="col-2 col-12-xsmall">
+                            <div class="row gtr-uniform">
+                                <div class="col-12">
+                                    <a href="#" class="button primary fit">게시</a>
+                                </div>
+                                <div class="col-12">
+
+                                </div>
+                            </div>
+                            <select name="sortingFilter" id="sortingFilter">
+                                <option value="1">최신순</option>
+                                <option value="2">추천순</option>
+                            </select>
+                        </div>
+
+                        
+                        <div class="table-wrapper col-12">
+                            <table>
+                                <thead>
                                     <tr>
-                                        <td>name</td>
-                                        <td>demo-title</td>
-                                        <td>10</td>
+                                        <th>작성자</th>
+                                        <th>제목</th>
+                                        <th>조회수</th>
+                                        <th>추천수</th>
+                                        <th>작성일자</th>
                                     </tr>
-                                </a>
-                                <a href="#">
-                                    <tr>
-                                        <td>name</td>
-                                        <td>demo-title</td>
-                                        <td>10</td>
-                                    </tr>
-                                </a>
-                                <a href="#">
-                                    <tr>
-                                        <td>name</td>
-                                        <td>demo-title</td>
-                                        <td>10</td>
-                                    </tr>
-                                </a>
-                                <a href="#">
-                                    <tr>
-                                        <td>name</td>
-                                        <td>demo-title</td>
-                                        <td>10</td>
-                                    </tr>
-                                </a>
-                                <a href="#">
-                                    <tr>
-                                        <td>name</td>
-                                        <td>demo-title</td>
-                                        <td>10</td>
-                                    </tr>
-                                </a>
-                                <a href="#">
-                                    <tr>
-                                        <td>name</td>
-                                        <td>demo-title</td>
-                                        <td>10</td>
-                                    </tr>
-                                </a>
-                                <a href="#">
-                                    <tr>
-                                        <td>name</td>
-                                        <td>demo-title</td>
-                                        <td>10</td>
-                                    </tr>
-                                </a>
-                                <a href="#">
-                                    <tr>
-                                        <td>name</td>
-                                        <td>demo-title</td>
-                                        <td>10</td>
-                                    </tr>
-                                </a>
-                                <a href="#">
-                                    <tr>
-                                        <td>name</td>
-                                        <td>demo-title</td>
-                                        <td>10</td>
-                                    </tr>
-                                </a>
-                                <a href="#">
-                                    <tr>
-                                        <td>name</td>
-                                        <td>demo-title</td>
-                                        <td>10</td>
-                                    </tr>
-                                </a>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <a href="#">
+                                        <tr>
+                                            <td>name</td>
+                                            <td>demo-title</td>
+                                            <td>10</td>
+                                            <td>6</td>
+                                            <td>2024.04.21</td>
+                                        </tr>
+                                    </a>
+                                    <a href="#">
+                                        <tr>
+                                            <td>name</td>
+                                            <td>demo-title</td>
+                                            <td>10</td>
+                                            <td>6</td>
+                                            <td>2024.04.21</td>
+                                        </tr>
+                                    </a>
+                                    <a href="#">
+                                        <tr>
+                                            <td>name</td>
+                                            <td>demo-title</td>
+                                            <td>10</td>
+                                            <td>6</td>
+                                            <td>2024.04.21</td>
+                                        </tr>
+                                    </a>
+                                    <a href="#">
+                                        <tr>
+                                            <td>name</td>
+                                            <td>demo-title</td>
+                                            <td>10</td>
+                                            <td>6</td>
+                                            <td>2024.04.21</td>
+                                        </tr>
+                                    </a>
+                                    <a href="#">
+                                        <tr>
+                                            <td>name</td>
+                                            <td>demo-title</td>
+                                            <td>10</td>
+                                            <td>6</td>
+                                            <td>2024.04.21</td>
+                                        </tr>
+                                    </a>
+                                    <a href="#">
+                                        <tr>
+                                            <td>name</td>
+                                            <td>demo-title</td>
+                                            <td>10</td>
+                                            <td>6</td>
+                                            <td>2024.04.21</td>
+                                        </tr>
+                                    </a>
+                                    <a href="#">
+                                        <tr>
+                                            <td>name</td>
+                                            <td>demo-title</td>
+                                            <td>10</td>
+                                            <td>6</td>
+                                            <td>2024.04.21</td>
+                                        </tr>
+                                    </a>
+                                    <a href="#">
+                                        <tr>
+                                            <td>name</td>
+                                            <td>demo-title</td>
+                                            <td>10</td>
+                                            <td>6</td>
+                                            <td>2024.04.21</td>
+                                        </tr>
+                                    </a>
+                                    <a href="#">
+                                        <tr>
+                                            <td>name</td>
+                                            <td>demo-title</td>
+                                            <td>10</td>
+                                            <td>6</td>
+                                            <td>2024.04.21</td>
+                                        </tr>
+                                    </a>
+                                    <a href="#">
+                                        <tr>
+                                            <td>name</td>
+                                            <td>demo-title</td>
+                                            <td>10</td>
+                                            <td>6</td>
+                                            <td>2024.04.21</td>
+                                        </tr>
+                                    </a>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </section>
+                <br/>
+                <br/>
+                <br/>
+
 
                 <!-- 페이지 이동 바 -->
-                <div class="col-12-medium">
+                <div class="col-12-medium" style="text-align: center;">
                     <ul class="icons">
                         <li><a href="#" class="button"><span class="label"><</span></a></li>
                         <li><a href="#" class="button"><span class="label">1</span></a></li>
