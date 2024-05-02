@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.my.member.dao.IMemberDAO">
+
+<insert id="registMember" parameterType="com.test.my.member.vo.MemberVO">
+	
+	INSERT INTO members(mem_id, mem_pw, mem_nm, mem_als, mem_tel, mem_LOTNO_ADDR
+                    , mem_KORN_ROAD_NM, mem_addr_id, mem_dtl_addr,mem_ext_addr
+                    ,mem_email)                    
+	VALUES(#{memId}, #{memPw}, #{memNm}, #{memAls}, #{memTel}, #{memLotnoAddr}
+      , #{memKornRoadNm}, #{memAddrId}, #{memDtlAddr}, #{memExtAddr}, #{memEmail})
+
+</insert>
+<!-- <select id="loginMember" parameterType="MemberVO" resultType="MemberVO">
+	SELECT mem_id
+         , mem_pw
+         , mem_nm
+         , profile_img
+	FROM members 
+	WHERE use_yn = 'Y'
+	AND mem_id = #{memId}
+
+</select> -->
+
+</mapper>
