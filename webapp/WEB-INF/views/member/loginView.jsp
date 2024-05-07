@@ -63,13 +63,20 @@
                     <div class="row gtr-uniform">
                         <div class="col-3 col-12-xsmall"></div>
                         <div class="col-6 col-12-xsmall" style="text-align: center;">
-                                <a href="#" style="text-decoration: none"><span class="label">아이디 찾기</span></a>
+                                <a href="<c:url value="/findIdView"/>" style="text-decoration: none"><span class="label">아이디 찾기</span></a>
                                 <span class="label"> | </span></li>
-                                <a href="#" style="text-decoration: none"><span class="label">비밀번호 찾기</span></a>
+                                <a href="<c:url value="/findPwView"/>" style="text-decoration: none"><span class="label">비밀번호 찾기</span></a>
                         </div>
                         <div class="col-3 col-12-xsmall"></div>
                     </div>
                 </section>
+                
+                <!-- 소셜 로그인 -->
+                <!-- 구글 로그인 화면으로 이동 시키는 URL -->
+				<!-- 구글 로그인 화면에서 ID, PW를 올바르게 입력하면 oauth2callback 메소드 실행 요청-->
+				<div id="google_id_login" style="text-align:center"><a href="${google_url}"><img width="230" src="assets/img/web_neutral_rd_SI@2x.png"/></a></div>
+
+                
             </div>
         </div>
 
