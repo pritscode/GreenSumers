@@ -27,9 +27,9 @@
     <ul>
         <li><a href="#">캘린더</a></li>
         <li><a href="#">가계부</a></li>
-        <li><a href="statistics.html">탄소배출 통계</a></li>
-        <li><a href="board.html">게시판</a></li>
-        <li><a href="mypage.html">마이페이지</a></li>
+        <li><a href="<c:url value="/statisticsView"/>">탄소배출 통계</a></li>
+        <li><a href="<c:url value="/boardView"/>">게시판</a></li>
+        <li><a href="<c:url value="/mypageView"/>">마이페이지</a></li>
         <li><a href="<c:url value="/loginView" />">로그인</a></li>
         <li><a href="<c:url value="/registView" />">회원가입</a></li>
     </ul>
