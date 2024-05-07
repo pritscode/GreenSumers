@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.test.my.commons.emailtemplete.VerificationEmailTemplete;
 import com.test.my.commons.service.MailService;
 import com.test.my.commons.utils.RandomStringGenerator;
 import com.test.my.commons.vo.MailVO;
@@ -22,7 +23,13 @@ public class MailController {
 	
 	@RequestMapping("/test")
 	public String test() throws UnsupportedEncodingException {
-		mailService.sendMail("heeheena24@naver.com", "연습용 메일", RandomStringGenerator.generateVerificationString());
+		mailService.sendMail("hyy91234@gmail.com", "연습용 메일", VerificationEmailTemplete.registerEmailContent());
+		return "/registView";
+	}
+	
+	@RequestMapping("/testVerification")
+	public String testVerification() throws UnsupportedEncodingException {
+		mailService.sendVerificationMail("hyy91234@gmail.com", "연습용 인증 메일");
 		return "/registView";
 	}
 	
