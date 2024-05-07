@@ -9,7 +9,7 @@ public class RandomStringGenerator {
     }
     
     
-    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static final Random random = new Random();
     
     public static String generateVerificationString() {
