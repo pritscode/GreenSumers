@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,8 +8,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <link rel="stylesheet" href="css/main.css" />
+    <noscript><link rel="stylesheet" href="css/noscript.css" /></noscript>
     <style>
         #errorMsg {
           color: red;
@@ -91,7 +94,7 @@
     <div id="wrapper">
         
         <!-- Header -->
-        <header id="header"></header>
+        <jsp:include page="/WEB-INF/inc/top.jsp" ></jsp:include>
         
         <!-- Main -->
         <div id="main">
@@ -204,16 +207,16 @@
         </div>
 
         <!-- Footer -->
-        <footer id="footer"></footer>
+        <jsp:include page="/WEB-INF/inc/footer.jsp" ></jsp:include>
 
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/browser.min.js"></script>
+    <script src="js/breakpoints.min.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/main.js"></script>
     <script type="text/javascript">
         
         $(document).ready(function(){
