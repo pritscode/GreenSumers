@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
-    <link rel="stylesheet" href="css/main.css" />
-    <noscript><link rel="stylesheet" href="css/noscript.css" /></noscript>
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
     <style>
         #errorMsg {
           color: red;
@@ -94,159 +91,129 @@
     <div id="wrapper">
         
         <!-- Header -->
-        <jsp:include page="/WEB-INF/inc/top.jsp" ></jsp:include>
+        <header id="header"></header>
         
         <!-- Main -->
         <div id="main">
             <div class="inner">
                 
-                <h1 style="text-align: center;">회원가입</h1>
+                <div class="row gtr-uniform">
+                    <div class="col-3 col-12-xsmall" style="float: left;"></div>
+                    <div class="col-6 col-12-xsmall" style="float: left;">
+                    
+                        <h1 style="text-align: center;">회원가입</h1>
 
-                <!-- Form -->
-                <section>
-                    <form method="post" action="#">
-                        <!-- name값과 value값을 지정하지 않았습니다. spring 하면서 수정해주세요 -->
-                        <div class="row gtr-uniform">
-                            
-                            <!-- ID, PW -->
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-4 col-12-xsmall">
-                                <input type="text" name="" id="id" value="" placeholder="아이디"/>
-                            </div>
-                            <div class="col-2 col-12-xsmall">
-                                <input type="submit" value="중복체크" class="button fit"/>
-                            </div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall">
-                                <input type="password" name="" id="pw" value="" placeholder="비밀번호"/>
-                            </div>
-                            <div class="col-3 col-12-xsmall"></div>
+                        <!-- Form -->
+                        <section>
+                            <form method="post" action="#">
+                                <!-- name값과 value값을 지정하지 않았습니다. spring 하면서 수정해주세요 -->
+                                <div class="row gtr-uniform">
+                                    
+                                    <!-- ID, PW -->
+                                    <div class="col-8 col-12-xsmall">
+                                        <input type="text" name="" id="id" value="" placeholder="아이디"/>
+                                    </div>
+                                    <div class="col-4 col-12-xsmall">
+                                        <input type="submit" value="중복체크" class="button fit"/>
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="password" name="" id="pw" value="" placeholder="비밀번호"/>
+                                    </div>
 
-                            <!-- 이메일 -->
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-4 col-12-xsmall">
-                                <input type="email" name="" id="email" value="" placeholder="이메일"/>
-                            </div>
-                            <div class="col-2 col-12-xsmall">
-                                <!-- action 입니다. -->
-                                <input type="submit" value="이메일 인증" class="button fit">
-                            </div>
-                            <div class="col-3 col-12-xsmall"></div>
+                                    <!-- 이메일 -->
+                                    <div class="col-8 col-12-xsmall">
+                                        <input type="email" name="" id="email" value="" placeholder="이메일"/>
+                                    </div>
+                                    <div class="col-4 col-12-xsmall">
+                                        <!-- action 입니다. -->
+                                        <input type="submit" value="이메일 인증" class="button fit">
+                                    </div>
 
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-4 col-12-xsmall">
-                                <input type="text" name="" id="" value="" placeholder="인증번호"/>
-                            </div>
-                            <div class="col-2 col-12-xsmall">
-                                <!-- action 입니다. -->
-                                <input type="submit" value="인증 요청" class="button fit"/>
-                            </div>
-                            <div class="col-3 col-12-xsmall"></div>
+                                    <div class="col-8 col-12-xsmall">
+                                        <input type="text" name="" id="" value="" placeholder="인증번호"/>
+                                    </div>
+                                    <div class="col-4 col-12-xsmall">
+                                        <!-- action 입니다. -->
+                                        <input type="submit" value="인증 요청" class="button fit"/>
+                                    </div>
 
-                            <!-- 에러 메시지 -->
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall">
-                                <div class="errorMsg">
-                                    아이디: 필수 정보입니다.
+                                    <!-- 에러 메시지 -->
+                                    <div class="col-12">
+                                        <div class="errorMsg">
+                                            아이디: 필수 정보입니다.
+                                        </div>
+                                    </div>
+                                    <div class="col-12-xsmall" id="errorMsg">
+                                        <div class="errorMsg">
+                                            비밀번호: 필수 정보입니다.
+                                        </div>
+                                    </div>
+                                    <div class="col-12" id="errorMsg">이메일 인증에 실패하셨습니다.</div>
+                                    
+
+                                    <!-- 개인정보 -->
+                                    <div class="col-12">
+                                        <input type="text" name="" id="nm" value="" placeholder="이름"/>
+                                    </div>
+                                    <div class="col-8 col-12-xsmall">
+                                        <input type="text" name="" id="nn" value="" placeholder="닉네임"/>
+                                    </div>
+                                    <div class="col-4 col-12-xsmall">
+                                        <input type="submit" value="중복체크" class="button fit"/>
+                                    </div>
+                                    
+                                    <div class="col-12">
+                                        <input type="text" name="" id="" value="" placeholder="전화번호 ( - 없이 입력)"/>
+                                    </div>
+                                    
+                                    
+                                    <!-- 주소 -->
+                                    <div class="col-8 col-12-xsmall">
+                                        <input type="text" id="sample6_postcode" placeholder="우편번호"/>
+                                    </div>
+                                    <div class="col-4 col-12-xsmall">
+                                        <input class="button fit" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"/>
+                                    </div>
+                                    <div class="col-8 col-12-xsmall">
+                                        <input type="text" id="sample6_address" placeholder="주소">
+                                    </div>
+                                    <div class="col-4 col-12-xsmall">
+                                        <input type="text" name="" id="세부주소" value="" placeholder="세부주소"/>
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="text" name="" id="상세주소" value="" placeholder="상세주소"/>
+                                    </div>
+
+                                    <!-- 에러메시지 -->
+                                    <div class="col-12" id="errorMsg">이름: 필수 정보입니다.</div>
+                                    <div class="col-12" id="errorMsg">닉네임: 필수 정보입니다.</div>
+                                    <div class="col-12" id="errorMsg">전화번호: 필수 정보입니다.</div>
+                                    <div class="col-12" id="errorMsg">주소: 필수 정보입니다.</div>
+                                    
+                                    <div class="col-12" style="text-align: center;">
+                                        <input type="submit" value="가입하기" class="primary"/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall" id="errorMsg">
-                                <div class="errorMsg">
-                                    비밀번호: 필수 정보입니다.
-                                </div>
-                            </div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall" id="errorMsg">이메일 인증에 실패하셨습니다.</div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            
+                            </form>
+                        </section>
 
-                            <!-- 개인정보 -->
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall">
-                                <input type="text" name="" id="nm" value="" placeholder="이름"/>
-                            </div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-4 col-12-xsmall">
-                                <input type="text" name="" id="nn" value="" placeholder="닉네임"/>
-                            </div>
-                            <div class="col-2 col-12-xsmall">
-                                <input type="submit" value="중복체크" class="button fit"/>
-                            </div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            
-                            
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall">
-                                <input type="text" name="" id="" value="" placeholder="전화번호 ( - 없이 입력)"/>
-                            </div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            
-                            
-                            <!-- 주소 -->
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-4 col-12-xsmall">
-                                <input type="text" id="sample6_postcode" placeholder="우편번호"/>
-                            </div>
-                            <div class="col-2 col-12-xsmall">
-                                <input class="button fit" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"/>
-                            </div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-4 col-12-xsmall">
-                                <input type="text" id="sample6_address" placeholder="주소">
-                            </div>
-                            <div class="col-2 col-12-xsmall">
-                                <input type="text" name="" id="세부주소" value="" placeholder="세부주소"/>
-                            </div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall">
-                                <input type="text" name="" id="상세주소" value="" placeholder="상세주소"/>
-                            </div>
-                            <div class="col-3 col-12-xsmall"></div>
-
-                            <!-- 에러메시지 -->
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall" id="errorMsg">이름: 필수 정보입니다.</div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall" id="errorMsg">닉네임: 필수 정보입니다.</div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall" id="errorMsg">전화번호: 필수 정보입니다.</div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall" id="errorMsg">주소: 필수 정보입니다.</div>
-                            <div class="col-3 col-12-xsmall"></div>
-                            
-                            <div class="col-3 col-12-xsmall"></div>
-                            <div class="col-6 col-12-xsmall" style="text-align: center;">
-                                <input type="submit" value="가입하기" class="primary" style="align-content: center;"/>
-                            </div>
-                            <div class="col-3 col-12-xsmall"></div>
-                        </div>
-                    </form>
-                </section>
-
+                    </div>
+                    <div class="col-3 col-12-xsmall" style="float: left;"></div>
+                </div>
             </div>
         </div>
 
         <!-- Footer -->
-        <jsp:include page="/WEB-INF/inc/footer.jsp" ></jsp:include>
+        <footer id="footer"></footer>
 
     </div>
 
     <!-- Scripts -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/browser.min.js"></script>
-    <script src="js/breakpoints.min.js"></script>
-    <script src="js/util.js"></script>
-    <script src="js/main.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
     <script type="text/javascript">
         
         $(document).ready(function(){
