@@ -114,8 +114,6 @@
 	
 </script>
 
-</head>
-<body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
@@ -172,6 +170,8 @@
         }).open();
     }
 </script>
+</head>
+<body>
 	<div id="app">
 		<!-- 탑 영역  -->
 		<jsp:include page="/WEB-INF/inc/top.jsp"></jsp:include>
