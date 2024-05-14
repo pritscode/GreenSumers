@@ -220,7 +220,7 @@
 													<div class="col-12">
 														<div class="form-group">
 															<label for="memNm" class="form-label"><i
-																class="bi bi-lock"></i> name</label> <input type="text"
+																class="bi bi-person-vcard"></i> name</label> <input type="text"
 																class="form-control" id="memNm" name="memNm"
 																placeholder="이름" data-parsley-required="true">
 														</div>
@@ -229,7 +229,7 @@
 													<div class="col-12">
 														<div class="form-group">
 															<label for="memAls" class="form-label"><i
-																class="bi bi-lock"></i> alias</label>
+																class="bi bi-vector-pen"></i> alias</label>
 															<div class="input-group mb-3">
 																<input type="text"
 																	class="form-control" id="memAls" name="memAls"
