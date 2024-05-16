@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <script>
 	function changeStyleDisplay(){
 		var hiddenDiv = document.getElementById("hiddenDiv");
@@ -14,7 +13,6 @@
 	        hiddenDiv.style.display = "";
 	    }
 		memEmail = $("#memEmail").val()
-		alert(memEmail)
 		$.ajax({
 			url : "<c:url value='sendVerifMailDo' />",
 			type : 'post',
@@ -65,26 +63,31 @@
 	function idChk(){
 		
 		let memId = $("#memId").val();
-		$.ajax({
-			url: "<c:url value='loginCheck'/>",
-			type: 'post',
-			contentType: 'application/json', // Content-Type을 명시하여 JSON 형식으로 데이터를 보냄
-	        data: JSON.stringify({ memId: memId }),
-			success: function(res){
-				console.log(res);
-				if(res == "notnull"){
-					alert("중복된 아이디가 존재합니다.");
-					$("#memId").val('');
-					$("#memId").focus();
-					
-				} else {
-					alert("사용 가능한 아이디입니다.");
+		if(memId === ''){
+			$("#memId").focus();
+		} else {
+			$.ajax({
+				url: "<c:url value='loginCheck'/>",
+				type: 'post',
+				contentType: 'application/json', // Content-Type을 명시하여 JSON 형식으로 데이터를 보냄
+		        data: JSON.stringify({ memId: memId }),
+				success: function(res){
+					console.log(res);
+					if(res === "notnull"){
+						alert("중복된 아이디가 존재합니다.");
+						$("#memId").val('');
+						$("#memId").focus();
+						
+					} else {
+						alert("사용 가능한 아이디입니다.");
+					}
+				},
+				error: function(e){
+					console.log(e);
+					alert("아이디 확인 중 오류가 발생했습니다. 다시 시도해 주세요.");
 				}
-			},
-			error: function(e){
-				console.log(e);
-			}
-		});
+			});
+		}
 	}
 	
 	function alsChk(){
@@ -97,7 +100,7 @@
 	        data: JSON.stringify({ memAls: memAls }),
 			success: function(res){
 				console.log(res);
-				if(res == "notnull"){
+				if(res === "notnull"){
 					alert("중복된 닉네임이 존재합니다.");
 					$("#memAls").val('');
 					$("#memAls").focus();
@@ -157,7 +160,6 @@
                     }
                 }
                 address_id= data.bcode+bun+ge
-                alert(address_id)
 
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
@@ -207,12 +209,11 @@
 															<label for="memId" class="form-label"><i
 																class="bi bi-person"></i> ID</label>
 															<div class="input-group mb-3">
-																<input type="text" class="form-control" id="memId"
-																	name="memId" placeholder="4~12글자"
-																	data-parsley-required="true">
+																<input type="text" class="form-control was-validated" id="memId"
+																	name="memId" placeholder="4~12글자" data-parsley-required="true">
 																<button
 																	class="btn btn-outline-primary col-lg-2 col-xs-4"
-																	type="submit" onclick="idChk()">체크</button>
+																	type="button" onclick="idChk()">체크</button>
 															</div>
 														</div>
 													</div>
@@ -236,39 +237,35 @@
 																	placeholder="별명" data-parsley-required="true">
 																<button
 																	class="btn btn-outline-primary col-lg-2 col-xs-4"
-																	type="submit" onclick="alsChk()">체크</button>
+																	type="button" onclick="alsChk()">체크</button>
 															</div>
 														</div>
 													</div>
 
 													<div class="col-12">
-														<form class="form form-vertical" data-parsley-validate
-															action="<c:url value='/VerificationDo'/>">
-															<div class="form-group">
-																<label for="memEmail" class="form-label"><i
-																	class="bi bi-envelope"></i> Email</label>
-																<div class="input-group mb-3">
-																	<input type="email" class="form-control" id="memEmail"
-																		name="memEmail" placeholder="email"
-																		data-parsley-required="true">
-																	<button type="submit"
-																		class="btn btn-outline-primary col-lg-2 col-xs-4"
-																		onclick="changeStyleDisplay()">
-																		<i class="bi bi-send"></i>
-																	</button>
-																</div>
-																<div class="input-group mb-3" id="hiddenDiv" style="display:none;">
-																	<input type="text" class="form-control" id="verifCode"
-																		name="verifCode" placeholder="code"
-																		data-parsley-required="true">
-																	<button type="submit"
-																		class="btn btn-outline-primary col-lg-2 col-xs-4"
-																		onclick="checkVerification()">
-																		<i class="bi bi-check2"></i>
-																	</button>
-																</div>
+														<div class="form-group">
+															<label for="memEmail" class="form-label"><i
+																class="bi bi-envelope"></i> Email</label>
+															<div class="input-group mb-3">
+																<input type="email" class="form-control" id="memEmail"
+																	name="memEmail" placeholder="email">
+																<button type="button"
+																	class="btn btn-outline-primary col-lg-2 col-xs-4"
+																	onclick="changeStyleDisplay()">
+																	<i class="bi bi-send"></i>
+																</button>
 															</div>
-														</form>
+															<div class="input-group mb-3" id="hiddenDiv" style="display:none;">
+																<input type="text" class="form-control" id="verifCode"
+																	name="verifCode" placeholder="code"
+																	data-parsley-required="true">
+																<button type="button"
+																	class="btn btn-outline-primary col-lg-2 col-xs-4"
+																	onclick="checkVerification()">
+																	<i class="bi bi-check2"></i>
+																</button>
+															</div>
+														</div>
 													</div>
 
 													<div class="col-12">
@@ -276,19 +273,19 @@
 															<label for="memKornRoadNm" class="form-label"><i
 																class="bi bi-house-check"></i> address</label>
 															<div class="input-group mb-3">
-																<input type="text" class="form-control"
+																<input type="text" class="form-control was-validated"
 																	id="memKornRoadNm" name="memKornRoadNm"
 																	placeholder="카카오 주소찾기" data-parsley-required="true">
 																<button
 																	class="btn btn-outline-primary col-lg-2 col-xs-4"
-																	onclick="sample6_execDaumPostcode()">
+																	onclick="sample6_execDaumPostcode()" >
 																	<i class="bi bi-search"></i>
 																</button>
 															</div>
 															<div class="input-group mb-3" style="display:none;">
 																<input type="text" class="form-control"
 																	id="memAddrId" name="memAddrId"
-																	placeholder="주소아이디">
+																	placeholder="주소아이디" >
 															</div>
 															<div class="input-group mb-3" style="display:none;">
 																<input type="text" class="form-control"
@@ -298,7 +295,7 @@
 															<div class="input-group mb-3">
 																<input type="text" class="form-control"
 																	id="memDtlAddr" name="memDtlAddr"
-																	placeholder="세부 주소">
+																	placeholder="세부 주소"  data-parsley-required="true">
 															</div>
 														</div>
 													</div>
@@ -308,7 +305,7 @@
 															<label for="memTel" class="form-label"><i
 																class="bi bi-phone"></i> phone</label> <input type="text"
 																class="form-control" id="memTel" name="memTel"
-																placeholder="숫자만 입력해주세요" >
+																placeholder="숫자만 입력해주세요" data-parsley-required="true">
 														</div>
 													</div>
 
