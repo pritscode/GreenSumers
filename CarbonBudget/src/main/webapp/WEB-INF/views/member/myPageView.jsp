@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MyPage</title>
 <script>
 	function sendMail() {
 		memEmail = $("#memEmail").val()
@@ -159,7 +159,7 @@
 
 			<!-- content -->
 			<div class="page-heading">
-				<h3>Profile Statistics</h3>
+				<h3>Profile Status</h3>
 			</div>
 			<div class="page-content">
 				<section class="row">
@@ -372,13 +372,12 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			</section>
+				</section>
+			</div>
 		</div>
 
 		<!-- footer 영역 -->
 		<jsp:include page="/WEB-INF/inc/footer.jsp"></jsp:include>
-	</div>
 	</div>
 	<script src="resources/assets/compiled/js/app.js"></script>
 </body>
