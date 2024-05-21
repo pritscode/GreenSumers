@@ -40,5 +40,21 @@ public class MemberService {
 			throw new Exception();
 		}
 	}
+
+	// 비밀번호 수정
+	public void updateMemberPw(MemberVO vo) throws Exception {
+		int result = dao.updateMemberPw(vo);
+		if (result == 0) {
+			throw new Exception();
+		}
+	}
+
+	// 회원 탈퇴
+	public void deleteMember(MemberVO vo) throws Exception {
+		int result = dao.deleteMember(vo);
+		if (result == 0) {
+			throw new Exception();
+		}
+	}
 	
 }
