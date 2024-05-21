@@ -7,17 +7,14 @@
 <meta charset="UTF-8">
 <title>Statistics</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 canvas {
 	width: 100%;
 	height: 100%;
-	style ="display: inline;
-	"
+	style ="display: inline;"
 }
 </style>
-<script>
-	
-</script>
 </head>
 <body>
 	<div id="app">
@@ -39,78 +36,8 @@ canvas {
 			</div>
 			<div class="page-content">
 				<section class="row">
-					<div class="col-8">
-						<div class="row">
-							<div class="col-12">
-								<div class="card" name="Compared to last year">
-									<div class="card-header">
-										<h4>Compared to last year</h4>
-									</div>
-									<div class="card-body">
-										<div class="row">
-											<div class="col-12">
-												<canvas id="twoChart" style="display: inline;"></canvas>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-12">
-								<div class="card" name="Details">
-									<div class="card-header">
-										<h4>Details</h4>
-									</div>
-									<div class="card-body">
-										<div class="row">
-											<div class="col-4">
-												<canvas id="doughnutChart" style="display: inline;"></canvas>
-											</div>
-											<div class="col-8">
-												<section>
-													<header>
-														<table class="table">
-															<thead>
-																<tr>
-																	<th>전기</th>
-																	<th>가스</th>
-																	<th>수도</th>
-																	<th>교통</th>
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
-																	<td>79.8kg/월</td>
-																	<td>15.1kg/월</td>
-																	<td>20kg/월</td>
-																	<td>10kg/월</td>
-																</tr>
-																<tr>
-																	<td>4.5%↓</td>
-																	<td>2.6%↓</td>
-																	<td>3.2%↑</td>
-																	<td>8.1%↓</td>
-																</tr>
-															</tbody>
-														</table>
-													</header>
-													<p>
-														${sessionScope.login.memNm}님의 작년대비 이산화탄소(CO₂) 발생량 통계입니다.<br />
-														${sessionScope.login.memNm}님 가정은 이산화탄소 배출량은 총 kg 이며, 비슷한
-														다른 가정 평균 79.8kg 보다 약 -100% 더 적게 배출하고 있습니다. 왼쪽의 그래프를 보고 어느
-														부분에서 이산화탄소를 많이 발생하고 있는지 비교해 보세요.
-													</p>
-												</section>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-4">
-						<div class="row">
+					<div class="col-12 col-lg-4">
+						<div class="row" id="eventDiv">
 							<div class="col-12">
 								<div class="card">
 									<div class="card-header">
@@ -217,6 +144,76 @@ canvas {
 										<div class="row">
 											<div class="col-12">
 												<canvas id="lineChart" style="display: inline;"></canvas>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-lg-8">
+						<div class="row">
+							<div class="col-12">
+								<div class="card" name="Compared to last year">
+									<div class="card-header">
+										<h4>Compared to last year</h4>
+									</div>
+									<div class="card-body">
+										<div class="row">
+											<div class="col-12">
+												<canvas id="twoChart" style="display: inline;"></canvas>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<div class="card" name="Details">
+									<div class="card-header">
+										<h4>Details</h4>
+									</div>
+									<div class="card-body">
+										<div class="row">
+											<div class="col-4">
+												<canvas id="doughnutChart" style="display: inline;"></canvas>
+											</div>
+											<div class="col-8">
+												<section>
+													<header>
+														<table class="table">
+															<thead>
+																<tr>
+																	<th>전기</th>
+																	<th>가스</th>
+																	<th>수도</th>
+																	<th>교통</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>79.8kg/월</td>
+																	<td>15.1kg/월</td>
+																	<td>20kg/월</td>
+																	<td>10kg/월</td>
+																</tr>
+																<tr>
+																	<td>4.5%↓</td>
+																	<td>2.6%↓</td>
+																	<td>3.2%↑</td>
+																	<td>8.1%↓</td>
+																</tr>
+															</tbody>
+														</table>
+													</header>
+													<p>
+														${sessionScope.login.memNm}님의 작년대비 이산화탄소(CO₂) 발생량 통계입니다.<br />
+														${sessionScope.login.memNm}님 가정은 이산화탄소 배출량은 총 kg 이며, 비슷한
+														다른 가정 평균 79.8kg 보다 약 -100% 더 적게 배출하고 있습니다. 왼쪽의 그래프를 보고 어느
+														부분에서 이산화탄소를 많이 발생하고 있는지 비교해 보세요.
+													</p>
+												</section>
 											</div>
 										</div>
 									</div>
