@@ -45,7 +45,7 @@ $(document).ready(function(){
                     <div class="logo">
                         <a href="<c:url value="/" />">
                             <img src="resources/assets/compiled/png/logo2.png"
-                                style="width: 65%; height: 3em; margin-left: 15%;" alt="Logo" srcset=""></a>
+                                style="width: 70%; height: 3em; margin-left: 15%;" alt="Logo" srcset=""></a>
                     </div>
                 </div>
                 <!-- 메뉴목록 -->
@@ -53,7 +53,7 @@ $(document).ready(function(){
                     <ul class="menu">
                         <li class="sidebar-title">재정관리</li>
 
-                        <li class="sidebar-item active ">
+                        <li class="sidebar-item">
                             <a href="<c:url value="/abView" />" class='sidebar-link'>
                                 <i class="bi bi-wallet-fill"
                                 ></i>
@@ -62,7 +62,7 @@ $(document).ready(function(){
                         </li>
 
                         <li class="sidebar-item">
-                            <a href="#" class='sidebar-link'>
+                            <a href="<c:url value='/calenderView' />" class='sidebar-link'>
                                 <i class="bi bi-calendar-check-fill"></i>
                                 <span>캘린더</span>
                             </a>
@@ -88,13 +88,13 @@ $(document).ready(function(){
 
                         <li class="sidebar-title">탄소중립</li>
                         <li class="sidebar-item ">
-                            <a href="<c:url value="/statisticsView" />" class='sidebar-link'>
+                            <a href="<c:url value="/cfComparisonView"/>" class='sidebar-link'>
                                 <i class="bi bi-tree-fill"></i>
                                 <span>내 탄소발자국</span>
                             </a>
                         </li>
                         <li class="sidebar-item ">
-                            <a href="<c:url value="/statisticsView" />" class='sidebar-link'>
+                            <a href="<c:url value="/cfComparisonView"/>" class='sidebar-link'>
                                 <i class="bi bi-bar-chart-line-fill"></i>
                                 <span>탄소발자국 비교</span>
                             </a>
