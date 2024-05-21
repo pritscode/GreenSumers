@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ComparisonController {
 
 	
-	@RequestMapping("/statisticsView")
-	public String statisticsView(HttpSession session) {
+	@RequestMapping("/cfComparisonView")
+	public String cfComparisonView(HttpSession session) {
 		if (session.getAttribute("login") == null) {
 			return "redirect:/loginView";
 		}
 		
-		return "comparison/statisticsView";
+		return "comparison/cfComparisonView";
 	}
 	
 }
