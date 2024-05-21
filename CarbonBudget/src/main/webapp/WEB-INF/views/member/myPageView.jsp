@@ -18,7 +18,7 @@
 			},
 			success : function(res) { // controllor에서 list를 return 받았음
 				console.log(res)
-
+				alert("성공적으로 메일을 전송하였습니다.");
 			},
 			error : function(e) {
 				console.log(e);
@@ -212,8 +212,8 @@
 										<h4>Change Password</h4>
 									</div>
 									<div class="card-body">
-										<form class="form form-vertical" data-parsley-validate
-											action="<c:url value='#' />">
+										<form method="post" class="form form-vertical" data-parsley-validate
+											action="<c:url value='/updatePwDo' />">
 											<div class="form-body">
 												<div id="EmailVerification">
 													<div class="col-12">
@@ -284,7 +284,7 @@
 										<h4>Edit Profile</h4>
 									</div>
 									<div class="card-body">
-										<form class="form form-vertical" data-parsley-validate
+										<form method="post" class="form form-vertical" data-parsley-validate
 											action="<c:url value='updateDo' />">
 											<div class="form-body">
 												<div class="col-12">
@@ -355,7 +355,7 @@
 														<label for="memPw" class="form-label"><i
 															class="bi bi-lock"></i> Password</label> <input type="password"
 															class="form-control" id="memPw" name="memPw"
-															placeholder="영어와 숫자를 포함한 4~12글자"
+															placeholder="회원정보 수정 전 기존 비밀번호를 입력해주세요"
 															data-parsley-required="true">
 													</div>
 												</div>
