@@ -10,8 +10,12 @@ public interface IMemberDAO {
 	public int registMember(MemberVO vo);
 	// 회원 수정
 	public int updateMember(MemberVO vo);
+	// 회원 삭제
+	public int deleteMember(MemberVO vo);
 	// 로그인
 	public MemberVO loginMember(MemberVO vo);
 	// 닉네임 중복 체크
 	public int aliasCheck(MemberVO vo);
+	// 비밀번호 수정
+	public int updateMemberPw(MemberVO vo);
 }
