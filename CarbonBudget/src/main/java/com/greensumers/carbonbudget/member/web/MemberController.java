@@ -168,4 +168,50 @@ public class MemberController {
 		
 		return "member/myPageView";
 	}
+	
+	// 비밀번호 수정
+	@RequestMapping("/updatePwDo")
+	public String updatePwDo(HttpServletRequest request, MemberVO vo, Model model, HttpSession session, RedirectAttributes re) {
+		
+		System.out.println(request.getParameter("memPw"));
+		vo.setMemPw(passwordEncoder.encode(request.getParameter("memPw")));
+		MemberVO login = (MemberVO) session.getAttribute("login");
+		vo.setMemId(login.getMemId());
+		String pwCheck = request.getParameter("pwCheck");
+		String memPw = request.getParameter("memPw");
+		System.out.println(vo);
+		// 비밀번호 체크
+		if (pwCheck.equals(memPw)) {
+			try {
+				memberService.updateMemberPw(vo);
+			} catch (Exception e) {
+				System.out.println(e);
+				return "redirect:/myPageView";
+			}
+			// RedirectAttributes 리다이렉트시 전송하고 싶은 데이터를 포함시켜서 요청할 수 있음
+			re.addFlashAttribute("msg", "비밀번호 변경이 정상적으로 처리됐습니다.");
+		} else {
+			re.addFlashAttribute("msg", "비밀번호를 확인해주세요.");
+		}
+		
+		return "member/myPageView";
+	}
+	
+	// 회원탈퇴
+		@RequestMapping("/deleteDo")
+		public String deleteDo(MemberVO vo, Model model, HttpSession session, RedirectAttributes re) {
+
+			MemberVO login = memberService.loginMember(vo);
+				try {
+					memberService.deleteMember(vo);
+					vo = memberService.loginMember(vo);
+					session.setAttribute("login", vo);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				model.addAttribute("msg", "회원 탈퇴가 완료되었습니다.");
+			
+			return "member/myPageView";
+		}
+	
 }
