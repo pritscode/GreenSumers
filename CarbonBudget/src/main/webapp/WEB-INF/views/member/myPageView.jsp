@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>MyPage</title>
+
 <script>
 	function sendMail() {
 		memEmail = $("#memEmail").val()
@@ -62,7 +63,6 @@
 	}
 
 	function alsChk() {
-
 		let memAls = $("#memAls").val();
 		$.ajax({
 			url : "<c:url value='alsCheck'/>",
@@ -86,6 +86,31 @@
 				console.log(e);
 			}
 		});
+	}
+	
+	function removeMember() {
+		let answer = prompt("'탈퇴하겠습니다.'를 정확히 입력해주세요.")
+		
+		if(answer == "탈퇴하겠습니다."){
+			console.log(answer)
+			$.ajax({
+				url : "<c:url value='/deleteDo'/>",
+				type : 'post',
+				contentType : 'application/json', // Content-Type을 명시하여 JSON 형식으로 데이터를 보냄
+				data : {
+					memId : "${sessionScope.login.memId}"
+				},
+				success : function(res) {
+					location.href= '<c:url value="/logoutDo" />';
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+		} else {
+			console.log(answer)
+			alert("정확히 입력해주세요.");
+		}
 	}
 </script>
 
@@ -362,7 +387,7 @@
 												<div class="col-12 d-flex justify-content-end" style="margin-top: 35px;">
 													<button type="submit" class="btn btn-primary me-1 mb-1">회원
 														정보 수정</button>
-													<button type="button" class="btn btn-warning me-1 mb-1">회원
+													<button type="button" class="btn btn-warning me-1 mb-1" onclick="removeMember()">회원
 														탈퇴</button>
 												</div>
 											</div>
