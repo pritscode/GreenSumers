@@ -11,8 +11,8 @@
 	</select>
 	
 	<insert id="registMember" parameterType="MemberVO">
-		INSERT INTO members(mem_id, mem_pw, mem_nm, mem_als, mem_tel, mem_lotno_addr, mem_korn_road_nm, mem_addr_id, mem_dtl_addr, mem_ext_addr, mem_email) 
-		VALUES( #{memId}, #{memPw}, #{memNm}, #{memAls}, #{memTel}, #{memLotnoAddr}, #{memKornRoadNm}, #{memAddrId}, #{memDtlAddr}, #{memExtAddr}, #{memEmail})
+		INSERT INTO members(mem_id, mem_pw, mem_nm, mem_als, mem_tel, mem_lotno_addr, mem_korn_road_nm, mem_addr_id, mem_dtl_addr, mem_email) 
+		VALUES( #{memId}, #{memPw}, #{memNm}, #{memAls}, #{memTel}, #{memLotnoAddr}, #{memKornRoadNm}, #{memAddrId}, #{memDtlAddr}, #{memEmail})
 	</insert>
 	
 	<update id="updateMember" parameterType="MemberVO">
