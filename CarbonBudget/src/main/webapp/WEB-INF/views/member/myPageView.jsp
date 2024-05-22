@@ -361,8 +361,7 @@
 														<div class="input-group mb-3">
 															<input value="${sessionScope.login.memDtlAddr}"
 																type="text" class="form-control" id="memDtlAddr"
-																name="memDtlAddr" placeholder="세부 주소"
-																data-parsley-required="true">
+																name="memDtlAddr" placeholder="세부 주소">
 														</div>
 													</div>
 												</div>
