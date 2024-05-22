@@ -1,5 +1,8 @@
 package com.greensumers.carbonbudget.member.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -123,6 +126,8 @@ public class MemberController {
 			return "redirect:/loginView";
 		}
 		session.setAttribute("login", login);
+		System.out.println(login);
+		System.out.println(vo);
 		re.addFlashAttribute("msg", login.getMemNm() + "님 환영합니다.");
 		
 		if(remember) {
@@ -149,8 +154,10 @@ public class MemberController {
 	@RequestMapping("/updateDo")
 	public String updateDo(MemberVO vo, Model model, HttpSession session, RedirectAttributes re) {
 
-		MemberVO login = memberService.loginMember(vo);
+		MemberVO login = (MemberVO) session.getAttribute("login");
 		boolean match = passwordEncoder.matches(vo.getMemPw(), login.getMemPw());
+		System.out.println(vo);
+		vo.setMemId(login.getMemId());
 		// 비밀번호 체크
 		if (!match) {
 			re.addFlashAttribute("msg", "비밀번호가 틀렸습니다.");
@@ -163,23 +170,20 @@ public class MemberController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			model.addAttribute("msg", "수정됐습니다.");
+			re.addFlashAttribute("msg", "회원 정보가 수정되었습니다.");
 		}
-		
-		return "member/myPageView";
+		return "redirect:/myPageView";
 	}
 	
 	// 비밀번호 수정
 	@RequestMapping("/updatePwDo")
 	public String updatePwDo(HttpServletRequest request, MemberVO vo, Model model, HttpSession session, RedirectAttributes re) {
 		
-		System.out.println(request.getParameter("memPw"));
 		vo.setMemPw(passwordEncoder.encode(request.getParameter("memPw")));
 		MemberVO login = (MemberVO) session.getAttribute("login");
 		vo.setMemId(login.getMemId());
 		String pwCheck = request.getParameter("pwCheck");
 		String memPw = request.getParameter("memPw");
-		System.out.println(vo);
 		// 비밀번호 체크
 		if (pwCheck.equals(memPw)) {
 			try {
@@ -194,24 +198,25 @@ public class MemberController {
 			re.addFlashAttribute("msg", "비밀번호를 확인해주세요.");
 		}
 		
-		return "member/myPageView";
+		return "redirect:/myPageView";
 	}
 	
 	// 회원탈퇴
+		@ResponseBody
 		@RequestMapping("/deleteDo")
 		public String deleteDo(MemberVO vo, Model model, HttpSession session, RedirectAttributes re) {
-
-			MemberVO login = memberService.loginMember(vo);
+			MemberVO login = (MemberVO) session.getAttribute("login");
+			vo.setMemId(login.getMemId());
+			
 				try {
 					memberService.deleteMember(vo);
-					vo = memberService.loginMember(vo);
-					session.setAttribute("login", vo);
 				} catch (Exception e) {
 					e.printStackTrace();
+					return "N";
 				}
-				model.addAttribute("msg", "회원 탈퇴가 완료되었습니다.");
-			
-			return "member/myPageView";
+//				re.addFlashAttribute("msg", "회원 탈퇴가 완료되었습니다.");
+			return "Y";
+//			return "redirect:/";
 		}
 	
 }
