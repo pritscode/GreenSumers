@@ -7,14 +7,19 @@
 <meta charset="UTF-8">
 <title>Statistics</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-canvas {
-	width: 100%;
-	height: 100%;
-	style ="display: inline;"
+@media (max-width: 386px) {
+  .card {
+    /* 자손 태그에 대한 스타일 정의 */
+    * {
+      font-size: 10px;
+    }
+  }
 }
 </style>
+<script>
+	
+</script>
 </head>
 <body>
 	<div id="app">
@@ -37,11 +42,22 @@ canvas {
 			<div class="page-content">
 				<section class="row">
 					<div class="col-12 col-lg-4">
-						<div class="row" id="eventDiv">
+						<div class="row">
 							<div class="col-12">
 								<div class="card">
 									<div class="card-header">
-										<h4>${sessionScope.login.memNm}님</h4>
+										<div class="row">
+											<div class="col-6">
+												<div class="d-flex align-items-center">
+													<h4 class="mb-0 ms-3">${sessionScope.login.memNm}님</h4>
+												</div>
+											</div>
+											<div class="col-6">
+												<div class="text-end">
+													<button type="button" class="btn btn-primary mb-0">사용량 입력</button>
+												</div>
+											</div>
+										</div>
 									</div>
 									<div class="card-body">
 										<div class="row" style="margin-bottom: 12px">
@@ -66,22 +82,7 @@ canvas {
 												</div>
 											</div>
 											<div class="col-4">
-												<h5 class="mb-0 text-end">number</h5>
-											</div>
-										</div>
-										<div class="row" style="margin-bottom: 12px">
-											<div class="col-4">
-												<div class="d-flex align-items-center">
-													<svg class="bi text-primary" width="32" height="32"
-														fill="blue" style="width: 20px">
-														<use
-															xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
-                                                    </svg>
-													<h5 class="mb-0 ms-3">비용</h5>
-												</div>
-											</div>
-											<div class="col-8">
-												<h5 class="mb-0 text-end">number</h5>
+												<h5 class="mb-0 text-end">160</h5>
 											</div>
 										</div>
 										<div class="row" style="margin-bottom: 12px">
@@ -96,22 +97,7 @@ canvas {
 												</div>
 											</div>
 											<div class="col-4">
-												<h5 class="mb-0 text-end">number</h5>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-4">
-												<div class="d-flex align-items-center">
-													<svg class="bi text-primary" width="32" height="32"
-														fill="blue" style="width: 20px">
-														<use
-															xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
-                                                    </svg>
-													<h5 class="mb-0 ms-3">비용</h5>
-												</div>
-											</div>
-											<div class="col-8">
-												<h5 class="mb-0 text-end">number</h5>
+												<h5 class="mb-0 text-end">120</h5>
 											</div>
 										</div>
 									</div>
