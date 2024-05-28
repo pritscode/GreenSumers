@@ -1,5 +1,7 @@
 package com.greensumers.carbonbudget.comparison.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,7 @@ public class ComparisonService {
 	IComparisonDAO dao;
 	
 	// 사용량조회
-	public ComparisonVO checkInUsageData(ComparisonVO vo) {
+	public List<ComparisonVO> checkInUsageData(ComparisonVO vo) {
 		return dao.checkInUsageData(vo);
 	}
 	
