@@ -68,6 +68,8 @@
 									<c:set var="size" value="${checkIn.size()}" />
 									<c:set var="lastIndex" value="${size - 1}" />
 									<c:set var="secondToLastIndex" value="${size - 2}" />
+									<c:set var="useYm" value="${checkIn[lastIndex].useYm}" />
+									<c:set var="useYmDate" value="${fn:substring(useYm, 0, 10)}" />
 									<c:set var="lastGasUsageValue" value="${checkIn[lastIndex].gasUsage}" />
 									<c:set var="lastElctrUsageValue" value="${checkIn[lastIndex].elctrUsage}" />
 									<c:set var="secondToLastGasUsageValue" value="${checkIn[secondToLastIndex].gasUsage}" />
@@ -94,7 +96,7 @@
 														</div>
 													</div>
 													<div class="col-8">
-														<h5 class="mb-0 text-end">${checkIn[lastIndex].useYm}</h5>
+														<h5 class="mb-0 text-end">${useYmDate}</h5>
 													</div>
 												</div>
 												<div class="row" style="margin-bottom: 12px">
@@ -109,7 +111,7 @@
 														</div>
 													</div>
 													<div class="col-4">
-														<h5 class="mb-0 text-end">${lastCalculationResult}</h5>
+														<h5 class="mb-0 text-end">${lastCalculationResult}kg</h5>
 													</div>
 												</div>
 												<div class="row" style="margin-bottom: 12px">
@@ -124,7 +126,7 @@
 														</div>
 													</div>
 													<div class="col-4">
-														<h5 class="mb-0 text-end">${secondToLastCalculationResult}</h5>
+														<h5 class="mb-0 text-end">${secondToLastCalculationResult}kg</h5>
 													</div>
 												</div>
 											</div>
