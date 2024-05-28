@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +37,11 @@
 			<!-- 메뉴 끝 -->
 
 			<!-- content -->
+			
+			<c:if test="${not empty msg}">
+    			<div class="alert alert-warning">${msg}</div>
+			</c:if>	
+			
 			<div class="page-heading">
 				<h3>Carbon Emissions Statistics</h3>
 			</div>
@@ -59,48 +65,69 @@
 											</div>
 										</div>
 									</div>
-									<div class="card-body">
-										<div class="row" style="margin-bottom: 12px">
-											<div class="col-4">
-												<div class="d-flex align-items-center">
-													<h5 class="mb-0 ms-3">Date</h5>
+									<c:set var="size" value="${checkIn.size()}" />
+									<c:set var="lastIndex" value="${size - 1}" />
+									<c:set var="secondToLastIndex" value="${size - 2}" />
+									<c:set var="lastGasUsageValue" value="${checkIn[lastIndex].gasUsage}" />
+									<c:set var="lastElctrUsageValue" value="${checkIn[lastIndex].elctrUsage}" />
+									<c:set var="secondToLastGasUsageValue" value="${checkIn[secondToLastIndex].gasUsage}" />
+									<c:set var="secondToLastElctrUsageValue" value="${checkIn[secondToLastIndex].elctrUsage}" />
+						            <%-- JSP 스크립틀릿을 사용하여 계산 수행 --%>
+						            <%
+						                double lastGasUsage = Double.parseDouble((String) pageContext.getAttribute("lastGasUsageValue"));
+						                double lastElctrUsage = Double.parseDouble((String) pageContext.getAttribute("lastElctrUsageValue"));
+						                double lastGasResult = lastGasUsage * 2.176;
+						                double lastElctrResult = lastElctrUsage * 0.4781;
+						                pageContext.setAttribute("lastCalculationResult", lastGasResult+lastElctrResult);
+						                
+						                double secondToLastGasUsage = Double.parseDouble((String) pageContext.getAttribute("secondToLastGasUsageValue"));
+						                double secondToLastElctrUsage = Double.parseDouble((String) pageContext.getAttribute("secondToLastElctrUsageValue"));
+						                double secondToLastGasResult = secondToLastGasUsage * 2.176;
+						                double secondToLastElctrResult = secondToLastElctrUsage * 0.4781;
+						                pageContext.setAttribute("secondToLastCalculationResult", secondToLastGasResult+secondToLastElctrResult);
+						            %>
+											<div class="card-body">
+												<div class="row" style="margin-bottom: 12px">
+													<div class="col-4">
+														<div class="d-flex align-items-center">
+															<h5 class="mb-0 ms-3">Date</h5>
+														</div>
+													</div>
+													<div class="col-8">
+														<h5 class="mb-0 text-end">${checkIn[lastIndex].useYm}</h5>
+													</div>
+												</div>
+												<div class="row" style="margin-bottom: 12px">
+													<div class="col-8">
+														<div class="d-flex align-items-center">
+															<svg class="bi text-primary" width="32" height="32"
+																fill="blue" style="width: 10px">
+																<use
+																	xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
+		                                                    </svg>
+															<h5 class="mb-0 ms-3">이번달 총 탄소배출량</h5>
+														</div>
+													</div>
+													<div class="col-4">
+														<h5 class="mb-0 text-end">${lastCalculationResult}</h5>
+													</div>
+												</div>
+												<div class="row" style="margin-bottom: 12px">
+													<div class="col-8">
+														<div class="d-flex align-items-center">
+															<svg class="bi text-primary" width="32" height="32"
+																fill="blue" style="width: 10px">
+																<use
+																	xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
+		                                                    </svg>
+															<h5 class="mb-0 ms-3">저번달 총 탄소배출량</h5>
+														</div>
+													</div>
+													<div class="col-4">
+														<h5 class="mb-0 text-end">${secondToLastCalculationResult}</h5>
+													</div>
 												</div>
 											</div>
-											<div class="col-8">
-												<h5 class="mb-0 text-end">오늘의 날짜</h5>
-											</div>
-										</div>
-										<div class="row" style="margin-bottom: 12px">
-											<div class="col-8">
-												<div class="d-flex align-items-center">
-													<svg class="bi text-primary" width="32" height="32"
-														fill="blue" style="width: 10px">
-														<use
-															xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
-                                                    </svg>
-													<h5 class="mb-0 ms-3">이번달 총 탄소배출량</h5>
-												</div>
-											</div>
-											<div class="col-4">
-												<h5 class="mb-0 text-end">160</h5>
-											</div>
-										</div>
-										<div class="row" style="margin-bottom: 12px">
-											<div class="col-8">
-												<div class="d-flex align-items-center">
-													<svg class="bi text-primary" width="32" height="32"
-														fill="blue" style="width: 10px">
-														<use
-															xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
-                                                    </svg>
-													<h5 class="mb-0 ms-3">저번달 총 탄소배출량</h5>
-												</div>
-											</div>
-											<div class="col-4">
-												<h5 class="mb-0 text-end">120</h5>
-											</div>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>
