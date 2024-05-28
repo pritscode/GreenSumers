@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greensumers.carbonbudget.comparison.dao.IComparisonDAO">
+
+	<select id="checkInUsageData" parameterType="ComparisonVO" resultType="ComparisonVO">
+		SELECT use_ym, gas_usage, elctr_usage
+		FROM household_usages 
+		WHERE address_id = #{addressId}
+	</select>
+
+	
+	<select id="" parameterType="ComparisonVO">
+		SELECT gas_usage*2.176 as gas_carbon, elctr_usage*0.4781 as elc_carbon
+		FROM household_usages
+		WHERE address_id = #{memAddrId} AND use_ym = '23/12/01'
+	</select>
+	
+
+</mapper>
