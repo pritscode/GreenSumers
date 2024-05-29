@@ -62,7 +62,7 @@ $(document).ready(function(){
                         </li>
 
                         <li class="sidebar-item">
-                            <a href="<c:url value='/calenderView' />" class='sidebar-link'>
+                            <a href="<c:url value='/calendarView' />" class='sidebar-link'>
                                 <i class="bi bi-calendar-check-fill"></i>
                                 <span>캘린더</span>
                             </a>
@@ -80,7 +80,7 @@ $(document).ready(function(){
                         </li>
 
                         <li class="sidebar-item">
-                            <a href="#" class='sidebar-link'>
+                            <a href="<c:url value="/boardWriteView" />" class='sidebar-link'>
                                 <i class="bi bi-pen-fill"></i>
                                 <span>작성하기</span>
                             </a>
@@ -94,7 +94,7 @@ $(document).ready(function(){
                             </a>
                         </li>
                         <li class="sidebar-item ">
-                            <a href="<c:url value="/cfComparisonView"/>" class='sidebar-link'>
+                            <a href="#" class='sidebar-link'>
                                 <i class="bi bi-bar-chart-line-fill"></i>
                                 <span>탄소발자국 비교</span>
                             </a>
