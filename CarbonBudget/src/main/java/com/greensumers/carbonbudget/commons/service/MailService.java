@@ -66,5 +66,23 @@ public class MailService {
         return code.equals(storedCode);
     }
 	
+	@Async
+	public void sendTemporaryPasswordMail(String to) throws UnsupportedEncodingException {
+		
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper messageHelper;
+		String code = RandomStringGenerator.generateTemporaryPassword();
+		try {
+			messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+			messageHelper.setFrom("hyy91234@gmail.com", "관리자");
+			messageHelper.setSubject("CarbonBudget 임시 비밀번호 안내메일입니다.");
+			messageHelper.setTo(to);
+			messageHelper.setText(VerificationEmailTemplete.temporaryPasswordEmailContent(code), true);
+			mailSender.send(message);
+		} catch(MessagingException e) {
+			e.printStackTrace();
+		}
+	}
+
 	
 }
