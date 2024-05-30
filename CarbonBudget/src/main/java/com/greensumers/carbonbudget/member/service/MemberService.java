@@ -1,5 +1,7 @@
 package com.greensumers.carbonbudget.member.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +57,11 @@ public class MemberService {
 		if (result == 0) {
 			throw new Exception();
 		}
+	}
+	
+	// 아이디 찾기
+	public List<MemberVO> findId(MemberVO vo) {
+		return dao.findId(vo);
 	}
 	
 }
