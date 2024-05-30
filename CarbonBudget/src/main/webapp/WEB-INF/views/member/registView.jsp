@@ -6,171 +6,227 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-	function changeStyleDisplay(){
+
+let login_check = false;
+let als_check = false;
+let email_check = false;
+let code_check = false;
+
+// 약관동의 중복체크
+form_check = () => {
+    if (!login_check) {
+        alert("아이디를 확인해주세요");
+        //$("#memId").focus();
+        return false;
+    } else if (!als_check) {
+        alert("별명 중복을 체크해주세요");
+        $("#memAls").focus();
+        return false;
+    } else if (!email_check) {
+        alert("이메일을 확인해주세요");
+        $("#memEmail").focus();
+        return false;
+    } else if(!code_check){
+    	alert("전송된 코드를 확인해주세요");
+    	return false;
+    }
+    return true;
+}
+
+	//email코드 전송
+	function changeStyleDisplay() {
 		var hiddenDiv = document.getElementById("hiddenDiv");
 		if (hiddenDiv.style.display === "none") {
-	        hiddenDiv.style.display = "";
-	    }
+			hiddenDiv.style.display = "";
+		}
 		memEmail = $("#memEmail").val()
 		$.ajax({
 			url : "<c:url value='sendVerifMailDo' />",
 			type : 'post',
 			data : {
-				memEmail: memEmail // 여기에 이메일 값을 넣으세요.
+				memEmail : memEmail
+			// 여기에 이메일 값을 넣으세요.
 			},
 			success : function(res) { // controllor에서 list를 return 받았음
-		    			console.log(res)
-		                
-		     },
+				if(res == "Success"){
+					email_check = true
+				}
+
+			},
 			error : function(e) {
 				console.log(e);
 			}
 		});
 	}
 	
-	function checkVerification(){
+	//이메일 인증
+	function checkVerification() {
 		let email = $("#memEmail").val();
 		let code = $("#verifCode").val();
-		if(code == ''){
+		if (code == '') {
 			alert("코드를 입력하세요");
 			return false;
 		}
-		
+
 		$.ajax({
 			url : "<c:url value='/verify'/>",
 			type : 'post',
 			data : {
-				email: email,
-				code: code
+				email : email,
+				code : code
 			},
-			success: function(res){
+			success : function(res) {
 				console.log(res);
-				if(res ==='Y'){
+				if (res === 'Y') {
 					alert("인증 되었습니다.");
-				}else{
+					code_check = true;
+				} else {
 					alert("번호를 확인해 주세요");
 					$("#verifCode").val('');
 					$("#verifCode").focus();
 				}
 			},
-			error: function(e){
+			error : function(e) {
 				console.log(e);
 			}
 		});
 	}
-	
-	function idChk(){
-		
-		let memId = $("#memId").val();
-		if(memId === ''){
-			$("#memId").focus();
-		} else {
-			$.ajax({
-				url: "<c:url value='loginCheck'/>",
-				type: 'post',
-				contentType: 'application/json', // Content-Type을 명시하여 JSON 형식으로 데이터를 보냄
-		        data: JSON.stringify({ memId: memId }),
-				success: function(res){
-					console.log(res);
-					if(res === "notnull"){
-						alert("중복된 아이디가 존재합니다.");
-						$("#memId").val('');
-						$("#memId").focus();
-						
-					} else {
-						alert("사용 가능한 아이디입니다.");
-					}
-				},
-				error: function(e){
-					console.log(e);
-					alert("아이디 확인 중 오류가 발생했습니다. 다시 시도해 주세요.");
-				}
-			});
-		}
+
+	// id체크
+	function checkId() {
+	    $("#id-check-feedback").html("사용가능한 아이디입니다.").hide();
+	    $("#id-check-invalid-feedback").html("아이디는 영문 대소문자, 한글, 숫자로 4에서 15자 사이이어야 합니다.").hide();
+	    let memId = $("#memId");
+	    let pattern = /^[a-zA-Z가-힣0-9]{4,15}$/; // 패턴 정의
+
+	    if (!pattern.test(memId.val())) {
+	        // 입력된 아이디가 패턴에 맞지 않으면 처리하지 않음
+	        $("#id-check-invalid-feedback").show();
+	        return;
+	    }
+
+	    $.ajax({
+	        url: "<c:url value='loginCheck'/>",
+	        type: 'post',
+	        contentType: 'application/json',
+	        data: JSON.stringify({
+	            memId: memId.val()
+	        }),
+	        success: function(res) {
+	            console.log(res);
+	            if (res === "notnull") {
+	                $("#id-check-invalid-feedback").html("중복된 아이디입니다.").show();
+	                memId.attr('data-id', "");
+	                memId.removeClass("is-valid");
+	                memId.addClass("is-invalid");
+	                document.getElementById('memId').setCustomValidity("Invalid");
+	                login_check = false;
+	            } else {
+	                $("#id-check-feedback").html("사용가능한 아이디입니다.").show();
+	                memId.attr('data-id', memId.val());
+	                memId.removeClass("is-invalid");
+	                memId.addClass("is-valid");
+	                document.getElementById('memId').setCustomValidity("");
+	                login_check = true;
+	            }
+	        },
+	        error: function(e) {
+	            console.log(e);
+	            alert("아이디 확인 중 오류가 발생했습니다. 다시 시도해 주세요.");
+	        }
+	    });
 	}
-	
-	function alsChk(){
-		
-		let memAls = $("#memAls").val();
+
+	//닉네임
+	function alsChk() {
+		$("#als-check-feedback").html("사용가능한 닉네임입니다.").hide();
+		$("#als-check-invalid-feedback").html("중복된 닉네임입니다.").hide();
+		let memAls = $("#memAls");
 		$.ajax({
-			url: "<c:url value='alsCheck'/>",
-			type: 'post',
-			contentType: 'application/json', // Content-Type을 명시하여 JSON 형식으로 데이터를 보냄
-	        data: JSON.stringify({ memAls: memAls }),
-			success: function(res){
+			url : "<c:url value='alsCheck'/>",
+			type : 'post',
+			contentType : 'application/json', // Content-Type을 명시하여 JSON 형식으로 데이터를 보냄
+			data : JSON.stringify({
+				memAls : memAls.val()
+			}),
+			success : function(res) {
 				console.log(res);
-				if(res === "notnull"){
-					alert("중복된 닉네임이 존재합니다.");
-					$("#memAls").val('');
-					$("#memAls").focus();
-					
+				if (res === "notnull") {
+					$("#als-check-invalid-feedback").html("중복된 닉네임입니다.").show();
+					memAls.attr('data-id', "");
+					memAls.removeClass("is-valid");
+					memAls.addClass("is-invalid");
+	                document.getElementById('memAls').setCustomValidity("Invalid");
+					als_check = false;
+
 				} else {
-					alert("사용 가능한 닉네임입니다.");
+					$("#als-check-feedback").html("사용가능한 닉네임입니다.").show();
+					memAls.attr('data-id', memAls.val());
+					memAls.removeClass("is-invalid");
+					memAls.addClass("is-valid");
+		            document.getElementById('memAls').setCustomValidity("");
+					als_check = true;
 				}
 			},
-			error: function(e){
+			error : function(e) {
 				console.log(e);
 			}
 		});
 	}
-	
-</script>
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-    function sample6_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	function execDaumPostcode() {
+		new daum.Postcode({
+			oncomplete : function(data) {
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var road_addr = ''; // 주소 변수
-                var jibun_addr = '';
-                var bun_ge = '';
-                var bun = '';
-                var ge = '';
-                var address_id = ''; //address 테이블에 사용되는 pk값
+				// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var road_addr = ''; // 주소 변수
+				var jibun_addr = '';
+				var bun_ge = '';
+				var bun = '';
+				var ge = '';
+				var address_id = ''; //address 테이블에 사용되는 pk값
 
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    road_addr = data.roadAddress;
-                    jibun_addr = data.jibunAddress;
-                    bun_ge = data.jibunAddressEnglish.split(',')[0]
-                    bun = bun_ge.split('-')[0].padStart(3, '0');
-                    if (bun_ge.split('-')[1] === undefined) {
-                        ge = '000'
-                    }
-                    else{
-                        ge = bun_ge.split('-')[1].padStart(3, '0');
-                    }
+				//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+				if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+					road_addr = data.roadAddress;
+					jibun_addr = data.jibunAddress;
+					bun_ge = data.jibunAddressEnglish.split(',')[0]
+					bun = bun_ge.split('-')[0].padStart(3, '0');
+					if (bun_ge.split('-')[1] === undefined) {
+						ge = '000'
+					} else {
+						ge = bun_ge.split('-')[1].padStart(3, '0');
+					}
 
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    road_addr = data.roadAddress;
-                    jibun_addr = data.jibunAddress;
-                    console.log(data)
-                    bun_ge = data.jibunAddressEnglish.split(',')[0]
-                    bun = bun_ge.split('-')[0].padStart(3, '0');
-                    if (bun_ge.split('-')[1] === undefined) {
-                        ge = '000'
-                    }
-                    else{
-                        ge = bun_ge.split('-')[1].padStart(3, '0');
-                    }
-                }
-                address_id= data.bcode+bun+ge
+				} else { // 사용자가 지번 주소를 선택했을 경우(J)
+					road_addr = data.roadAddress;
+					jibun_addr = data.jibunAddress;
+					console.log(data)
+					bun_ge = data.jibunAddressEnglish.split(',')[0]
+					bun = bun_ge.split('-')[0].padStart(3, '0');
+					if (bun_ge.split('-')[1] === undefined) {
+						ge = '000'
+					} else {
+						ge = bun_ge.split('-')[1].padStart(3, '0');
+					}
+				}
+				address_id = data.bcode + bun + ge
 
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("memKornRoadNm").value = road_addr;
-                document.getElementById("memLotnoAddr").value = jibun_addr;
-                document.getElementById("memAddrId").value = address_id;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("memDtlAddr").focus();
-            }
-        }).open();
-    }
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				document.getElementById("memKornRoadNm").value = road_addr;
+				document.getElementById("memLotnoAddr").value = jibun_addr;
+				document.getElementById("memAddrId").value = address_id;
+				// 커서를 상세주소 필드로 이동한다.
+				document.getElementById("memDtlAddr").focus();
+			}
+		}).open();
+	}
 </script>
 </head>
 <body>
@@ -191,15 +247,16 @@
 			<div class="page-heading">
 				<section id="multiple-column-form">
 					<div class="row match-height">
-						<div class="col-6" id="sign-up-form">
+						<div class="col-md-6 col-sm-12" id="sign-up-form">
 							<div class="card">
 								<div class="card-header">
 									<h2 class="card-title">Sign up</h2>
 								</div>
 								<div class="card-content">
 									<div class="card-body">
-										<form class="form form-vertical" data-parsley-validate
-											action="<c:url value='registDo' />">
+										<form class="form needs-validation" novalidate
+											action="<c:url value='registDo' />"
+											onsubmit="return form_check()">
 											<div class="form-body">
 												<div class="row">
 
@@ -209,11 +266,15 @@
 															<label for="memId" class="form-label"><i
 																class="bi bi-person"></i> ID</label>
 															<div class="input-group mb-3">
-																<input type="text" class="form-control was-validated" id="memId"
-																	name="memId" placeholder="4~12글자" data-parsley-required="true">
-																<button
-																	class="btn btn-outline-primary col-lg-2 col-xs-4"
-																	type="button" onclick="idChk()">체크</button>
+																<input type="text" class="form-control" id="memId"
+																	data-id="" onkeyup="checkId()"
+																	pattern="[a-zA-Z가-힣0-9]{4,15}" name="memId"
+																	placeholder="4~12글자" required>
+
+																<div id="id-check-invalid-feedback"
+																	class="invalid-feedback">아이디를 확인해주세요.</div>
+																<div id="id-check-feedback" class="valid-feedback"
+																	style="display: none;">사용가능한 아이디입니다.</div>
 															</div>
 														</div>
 													</div>
@@ -222,8 +283,9 @@
 														<div class="form-group">
 															<label for="memNm" class="form-label"><i
 																class="bi bi-person-vcard"></i> name</label> <input type="text"
-																class="form-control" id="memNm" name="memNm"
-																placeholder="이름" data-parsley-required="true">
+																class="form-control" id="memNm" name="memNm" required
+																placeholder="이름">
+															<div class="invalid-feedback">이름은 필수입니다.</div>
 														</div>
 													</div>
 
@@ -232,12 +294,13 @@
 															<label for="memAls" class="form-label"><i
 																class="bi bi-vector-pen"></i> alias</label>
 															<div class="input-group mb-3">
-																<input type="text"
-																	class="form-control" id="memAls" name="memAls"
-																	placeholder="별명" data-parsley-required="true">
-																<button
-																	class="btn btn-outline-primary col-lg-2 col-xs-4"
-																	type="button" onclick="alsChk()">체크</button>
+																<input type="text" class="form-control" id="memAls"
+																	data-id='' name="memAls" placeholder="별명" required
+																	onkeyup="alsChk()">
+																<div id="als-check-feedback" class="valid-feedback"
+																	style="display: none">사용가능한 닉네임입니다.</div>
+																<div id="als-check-invalid-feedback"
+																	class="invalid-feedback">닉네임은 필수입니다.</div>
 															</div>
 														</div>
 													</div>
@@ -248,22 +311,24 @@
 																class="bi bi-envelope"></i> Email</label>
 															<div class="input-group mb-3">
 																<input type="email" class="form-control" id="memEmail"
-																	name="memEmail" placeholder="email">
+																	name="memEmail" placeholder="email" required>
 																<button type="button"
 																	class="btn btn-outline-primary col-lg-2 col-xs-4"
 																	onclick="changeStyleDisplay()">
 																	<i class="bi bi-send"></i>
 																</button>
+																<div class="invalid-feedback">이메일을 확인해주세요.</div>
 															</div>
-															<div class="input-group mb-3" id="hiddenDiv" style="display:none;">
+															<div class="input-group mb-3" id="hiddenDiv"
+																style="display: none;">
 																<input type="text" class="form-control" id="verifCode"
-																	name="verifCode" placeholder="code"
-																	data-parsley-required="true">
+																	name="verifCode" placeholder="code" required>
 																<button type="button"
 																	class="btn btn-outline-primary col-lg-2 col-xs-4"
 																	onclick="checkVerification()">
 																	<i class="bi bi-check2"></i>
 																</button>
+																<div class="invalid-feedback">코드를 확인해주세요.</div>
 															</div>
 														</div>
 													</div>
@@ -273,29 +338,28 @@
 															<label for="memKornRoadNm" class="form-label"><i
 																class="bi bi-house-check"></i> address</label>
 															<div class="input-group mb-3">
-																<input type="text" class="form-control was-validated"
-																	id="memKornRoadNm" name="memKornRoadNm"
-																	placeholder="카카오 주소찾기" data-parsley-required="true">
-																<button
+																<input type="text" class="form-control"
+																	id="memKornRoadNm" name="memKornRoadNm" required
+																	readonly placeholder="카카오 주소찾기">
+																<button type="button"
 																	class="btn btn-outline-primary col-lg-2 col-xs-4"
-																	onclick="sample6_execDaumPostcode()" >
+																	onclick="execDaumPostcode()">
 																	<i class="bi bi-search"></i>
 																</button>
+																<div class="invalid-feedback">주소는 필수입니다.</div>
 															</div>
-															<div class="input-group mb-3" style="display:none;">
-																<input type="text" class="form-control"
-																	id="memAddrId" name="memAddrId"
-																	placeholder="주소아이디" >
+															<div class="input-group mb-3" style="display: none;">
+																<input type="hidden" class="form-control" id="memAddrId"
+																	name="memAddrId" placeholder="주소아이디">
 															</div>
-															<div class="input-group mb-3" style="display:none;">
+															<div class="input-group mb-3" style="display: none;">
 																<input type="text" class="form-control"
 																	id="memLotnoAddr" name="memLotnoAddr"
 																	placeholder="지번 주소">
 															</div>
 															<div class="input-group mb-3">
-																<input type="text" class="form-control"
-																	id="memDtlAddr" name="memDtlAddr"
-																	placeholder="세부 주소"  data-parsley-required="true">
+																<input type="text" class="form-control " id="memDtlAddr"
+																	name="memDtlAddr" placeholder="세부 주소">
 															</div>
 														</div>
 													</div>
@@ -304,8 +368,11 @@
 														<div class="form-group">
 															<label for="memTel" class="form-label"><i
 																class="bi bi-phone"></i> phone</label> <input type="text"
-																class="form-control" id="memTel" name="memTel"
-																placeholder="숫자만 입력해주세요" data-parsley-required="true">
+																oninput="autoHyphen2(this)" maxlength="13"
+																pattern="010-[0-9]{4}-[0-9]{4}" class="form-control"
+																id="memTel" name="memTel" placeholder="숫자만 입력해주세요"
+																required>
+															<div class="invalid-feedback">연락처는 필수입니다.</div>
 														</div>
 													</div>
 
@@ -316,7 +383,10 @@
 																class="bi bi-lock"></i> Password</label> <input type="password"
 																class="form-control" id="memPw" name="memPw"
 																placeholder="영어와 숫자를 포함한 4~12글자"
-																data-parsley-required="true">
+																pattern="[a-zA-Z0-9]{4,15}" data-parsley-required="true"
+																required>
+															<div id="pw-check-invalid-feedback"
+																class="invalid-feedback">비밀번호는 필수입니다.</div>
 														</div>
 													</div>
 
@@ -326,7 +396,9 @@
 																class="bi bi-clipboard-check"></i> pw check</label> <input
 																type="password" class="form-control" id="pwCheck"
 																name="pwCheck" placeholder="비밀번호 체크"
-																data-parsley-required="true">
+																pattern="[a-zA-Z0-9]{4,15}" data-parsley-required="true"
+																required>
+															<div class="invalid-feedback">비밀번호를 확인해주세요.</div>
 														</div>
 													</div>
 
@@ -339,20 +411,19 @@
 																<li>③ 보유 및 이용기간 : 제휴 시 서비스 이용 종료 까지</li>
 																<li>④ 동의 거부시 서비스 이용 신청 불가</li>
 															</ul>
-															<div class="form-group">
-																<span class="inp_chk"> <input type="checkbox"
-																	data-parsley-required="true" id="ck_agree"> <label
-																	for="ck_agree">위의 '개인정보 수집 이용'에 동의 합니다.</label> <label
-																	class="form-label" style="display: none;">개인정보
-																		동의</label>
-																</span>
+															<div class="form-group form-check">
+																<input type="checkbox" class="form-check-input"
+																	id="ck_agree" required> <label
+																	class="form-check-label" for="ck_agree">위의
+																	'개인정보 수집 이용'에 동의 합니다.</label>
+																<div class="invalid-feedback">동의 후 회원가입 가능합니다.</div>
 															</div>
 														</div>
 													</div>
 
 													<div class="col-12 d-flex justify-content-end">
 														<button type="submit" class="btn btn-primary me-1 mb-1">회원가입</button>
-														<button type="reset"
+														<button type="button" onclick="location.reload(true);"
 															class="btn btn-light-secondary me-1 mb-1">Reset</button>
 													</div>
 												</div>
@@ -370,6 +441,56 @@
 			<jsp:include page="/WEB-INF/inc/footer.jsp"></jsp:include>
 		</div>
 	</div>
-	<script src="resources/assets/compiled/js/app.js"></script>
+	<!-- 유효성검사 -->
+	<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+		(function() {
+			'use strict'
+
+			// Fetch all the forms we want to apply custom Bootstrap validation styles to
+			var forms = document.querySelectorAll('.needs-validation')
+
+			// Loop over them and prevent submission
+			Array.prototype.slice.call(forms).forEach(function(form) {
+				form.addEventListener('submit', function(event) {
+                    //추가
+                    // id val
+                    const validation_memId = document.getElementById('memId');
+                    const id_dataIdValue = validation_memId.getAttribute('data-id');
+                    const id_inputValue = validation_memId.value;
+                    
+                    const validation_memAls = document.getElementById('memAls');
+                    const als_dataIdValue = validation_memAls.getAttribute('data-id');
+                    const als_inputValue = validation_memAls.value;
+                    
+                    if (id_inputValue !== id_dataIdValue) {
+                    	validation_memId.setCustomValidity("Invalid");
+                    } else {
+                    	validation_memId.setCustomValidity("");
+                    }
+                    if (als_dataIdValue !== als_inputValue) {
+                    	validation_memAls.setCustomValidity("Invalid");
+                    } else {
+                    	validation_memAls.setCustomValidity("");
+                    }
+
+                    //추가
+					if (!form.checkValidity()) {
+						event.preventDefault()
+						event.stopPropagation()
+					}
+
+					form.classList.add('was-validated')
+				}, false)
+			})
+		})()
+
+		// 연락처 하이픈
+	const autoHyphen2 = (target) => {
+		 target.value = target.value
+		   .replace(/[^0-9]/g, '')
+		  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+		}
+	</script>
 </body>
 </html>
