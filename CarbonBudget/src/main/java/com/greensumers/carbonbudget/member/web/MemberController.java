@@ -51,6 +51,11 @@ public class MemberController {
 	public String findPwView() {
 		return "member/findPwView";
 	}
+	
+	@RequestMapping("/findIdView")
+	public String findIdView() {
+		return "member/findIdView";
+	}
 
 	// 아이디 중복체크
 	@ResponseBody
