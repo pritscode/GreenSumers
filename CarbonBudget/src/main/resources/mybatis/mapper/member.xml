@@ -39,4 +39,10 @@
 		WHERE mem_als = #{memAls} 
 	</select>
 	
+	<select id="findId" parameterType="MemberVO" resultType="MemberVO">
+		SELECT *
+		FROM members
+		WHERE mem_nm = #{memNm} AND mem_email = #{memEmail}
+	</select>
+	
 </mapper>
