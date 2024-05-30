@@ -19,4 +19,13 @@ public class RandomStringGenerator {
 		System.out.println(stringbuilder);
 		return stringbuilder.toString();
 	}
+
+	public static String generateTemporaryPassword() {
+		StringBuilder stringbuilder = new StringBuilder();
+		for (int i = 0; i < 6; i++) {
+			stringbuilder.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
+		}
+		System.out.println(stringbuilder);
+		return stringbuilder.toString();
+	}
 }
