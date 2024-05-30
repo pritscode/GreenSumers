@@ -1,7 +1,10 @@
 package com.greensumers.carbonbudget.member.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
+import com.greensumers.carbonbudget.member.vo.KakaoUserVo;
 import com.greensumers.carbonbudget.member.vo.MemberVO;
 
 @Mapper
@@ -18,4 +21,8 @@ public interface IMemberDAO {
 	public int aliasCheck(MemberVO vo);
 	// 비밀번호 수정
 	public int updateMemberPw(MemberVO vo);
+	//카카오톡
+	void insertKakaoUser(KakaoUserVo kakaoUser);
+	// 아이디 찾기
+	public List<MemberVO> findId(MemberVO vo);
 }
