@@ -84,32 +84,32 @@ public class VerificationEmailTemplete {
 				"            </td>\n" +
 				"        </tr>\n" +
 				"        <tr>\n" +
-				"            <td style=\"padding-top: 40px; padding-bottom: 40px;\">\n" +
+				"            <td style=\"padding-top: 40px; padding-bottom: 20px;\">\n" +
 				"                보안상의 이유로, 로그인 후 가능한 한 빨리 이 비밀번호를 변경하시기를 권장드립니다. 비밀번호 변경 절차는 다음과 같습니다.\n" +
 				"            </td>\n" +
 				"        </tr>\n" +
 				"        <tr>\n" +
-				"            <td style=\"padding-top: 40px; padding-bottom: 40px;\">\n" +
+				"            <td style=\"padding-top: 20px; padding-bottom: 10px;\">\n" +
 				"                1. 임시 비밀번호를 사용하여 계정에 로그인합니다.\n" +
 				"            </td>\n" +
 				"        </tr>\n" +
 				"        <tr>\n" +
-				"            <td style=\"padding-top: 40px; padding-bottom: 40px;\">\n" +
+				"            <td style=\"padding-top: 10px; padding-bottom: 10px;\">\n" +
 				"                2. 마이페이지로 이동합니다.\n" +
 				"            </td>\n" +
 				"        </tr>\n" +
 				"        <tr>\n" +
-				"            <td style=\"padding-top: 40px; padding-bottom: 40px;\">\n" +
+				"            <td style=\"padding-top: 10px; padding-bottom: 20px;\">\n" +
 				"                3. 임시 비밀번호를 입력하고, 새 비밀번호를 설정합니다.\n" +
 				"            </td>\n" +
 				"        </tr>\n" +
 				"        <tr>\n" +
-				"            <td style=\"padding-top: 40px; padding-bottom: 40px;\">\n" +
+				"            <td style=\"padding-top: 20px; padding-bottom: 10px;\">\n" +
 				"                임시 비밀번호를 요청하지 않으셨거나, 문의 사항이 있으시면 즉시 저희 지원팀에 연락해주세요.\n" +
 				"            </td>\n" +
 				"        </tr>\n" +
 				"        <tr>\n" +
-				"            <td style=\"padding-top: 40px; padding-bottom: 40px;\">\n" +
+				"            <td style=\"padding-top: 30px; padding-bottom: 40px;\">\n" +
 				"                감사합니다.\n" +
 				"            </td>\n" +
 				"        </tr>\n" +
