@@ -10,8 +10,7 @@
 <script src="resources/assets/static/js/pages/parsley.js"></script>
 
 <!-- alert css -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!DOCTYPE html>
@@ -19,6 +18,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<c:if test="${not empty msg}">
+		<script>alert("${msg}");</script>
+	</c:if>
 <script>
 
 	//email코드 전송
@@ -85,7 +87,7 @@
 						</form>
 						<div class="text-center mt-5 text-lg fs-4">
 							<p class='text-gray-600'>
-								아이디가 기억났다면? <a href="/loginView" class="font-bold">로그인</a>.
+								아이디가 기억났다면? <a onclick="window.close()" class="font-bold">로그인</a>.
 							</p>
 						</div>
 					</div>
