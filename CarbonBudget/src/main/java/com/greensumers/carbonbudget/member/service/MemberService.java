@@ -60,7 +60,7 @@ public class MemberService {
 	}
 	
 	// 아이디 찾기
-	public List<MemberVO> findId(MemberVO vo) {
+	public MemberVO findId(MemberVO vo) {
 		return dao.findId(vo);
 	}
 	
