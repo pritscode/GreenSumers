@@ -1,12 +1,15 @@
 package com.greensumers.carbonbudget.commons.web;
 
 import java.io.UnsupportedEncodingException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.greensumers.carbonbudget.commons.service.MailService;
+import com.greensumers.carbonbudget.member.service.MemberService;
 import com.greensumers.carbonbudget.member.vo.MemberVO;
 
 @Controller
@@ -22,6 +26,12 @@ public class MailController {
 	
 	@Autowired
 	private MailService mailService;
+	
+    @Autowired
+    MemberService memberService;
+    
+    @Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@RequestMapping(value = "/sendVerifMailDo", method = { RequestMethod.POST })	
 	public ResponseEntity<String> test(@RequestParam("memEmail") String memEmail) {
@@ -51,15 +61,36 @@ public class MailController {
 	
 	@RequestMapping(value = "/sendTemporaryPasswordMailDo")
 	public ResponseEntity<String> temporaryPasswordMailTest(MemberVO vo, HttpSession session) {
+		
 		MemberVO memberFindingPw = (MemberVO) session.getAttribute("memberFindingPw");
+		vo.setMemId(memberFindingPw.getMemId());
 		vo.setMemEmail(memberFindingPw.getMemEmail());
-		System.out.println(vo);
+		
 		try {
-			mailService.sendTemporaryPasswordMail(vo.getMemEmail());
+			CompletableFuture<String> futureCode = mailService.sendTemporaryPasswordMail(vo.getMemEmail());
+			System.out.println("========================1");
+			String code = futureCode.get(); // 비동기 작업이 완료될 때까지 대기
+			vo.setMemPw(passwordEncoder.encode(code));
+			System.out.println("========================2");
 		} catch (UnsupportedEncodingException e) {
+			System.out.println("메일을 전송하던 도중 오류가 발생했습니다.");
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			System.out.println("메일을 전송하던 도중 오류가 발생했습니다.");
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			System.out.println("메일을 전송하던 도중 오류가 발생했습니다.");
 			e.printStackTrace();
 		}
+		System.out.println(vo);
+		try {
+			memberService.updateMemberPw(vo);
+		} catch (Exception e1) {
+			System.out.println("임시 비밀번호로 비밀번호를 변경하는 도중 오류가 발생했습니다.");
+			e1.printStackTrace();
+		}
 		session.invalidate();
+		System.out.println("비밀번호가 성공적으로 변경되었습니다.");
 		return ResponseEntity.ok("Success");
 	}
 }
