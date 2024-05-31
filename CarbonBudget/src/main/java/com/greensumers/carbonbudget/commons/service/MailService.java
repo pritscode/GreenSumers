@@ -1,6 +1,7 @@
 package com.greensumers.carbonbudget.commons.service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 import javax.mail.MessagingException;
@@ -67,11 +68,12 @@ public class MailService {
     }
 	
 	@Async
-	public void sendTemporaryPasswordMail(String to) throws UnsupportedEncodingException {
+	public CompletableFuture<String>  sendTemporaryPasswordMail(String to) throws UnsupportedEncodingException {
 		
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper messageHelper;
 		String code = RandomStringGenerator.generateTemporaryPassword();
+		
 		try {
 			messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 			messageHelper.setFrom("hyy91234@gmail.com", "관리자");
@@ -82,6 +84,8 @@ public class MailService {
 		} catch(MessagingException e) {
 			e.printStackTrace();
 		}
+		
+		return CompletableFuture.completedFuture(code);
 	}
 
 	
