@@ -229,16 +229,16 @@ public class MemberController {
 		MemberVO findId = memberService.findId(vo);
 		if (findId == null) {
 			re.addFlashAttribute("msg", "이름을 확인해주세요.");
-			return "redirect:/findIdView";
+			return "redirect:/loginView";
 		}
 		boolean match = vo.getMemEmail().equals(findId.getMemEmail());
 		if(!match) {
 			re.addFlashAttribute("msg", "이메일을 확인해주세요.");
-			return "redirect:/findIdView";
+			return "redirect:/loginView";
 		}
 		session.setAttribute("findId", findId);
 		re.addFlashAttribute("msg", "회원님의 아이디는 '"+ findId.getMemId() +"'입니다.");
-		return "redirect:/findIdView";
+		return "redirect:/loginView";
 	}
 	
 	// 비밀번호 찾기 전 아이디 메일 일치 확인
@@ -247,12 +247,12 @@ public class MemberController {
 		MemberVO idCheck = memberService.loginMember(vo);
 		if (idCheck == null) {
 			re.addFlashAttribute("msg", "아이디를 확인해주세요.");
-			return "redirect:/findPwView";
+			return "redirect:/loginView";
 		}
 		boolean match = vo.getMemEmail().equals(idCheck.getMemEmail());
 		if (!match) {
 			re.addFlashAttribute("msg", "이메일을 확인해주세요.");
-			return "redirect:/findPwView";
+			return "redirect:/loginView";
 		}
 		session.setAttribute("memberFindingPw", idCheck);
 		System.out.println("임시 비밀번호 안내 메일을 전송합니다.");
