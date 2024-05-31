@@ -24,5 +24,5 @@ public interface IMemberDAO {
 	//카카오톡
 	void insertKakaoUser(KakaoUserVo kakaoUser);
 	// 아이디 찾기
-	public List<MemberVO> findId(MemberVO vo);
+	public MemberVO findId(MemberVO vo);
 }
