@@ -226,7 +226,7 @@ public class MemberController {
 	// 아이디 찾기
 	@RequestMapping("/findIdDo")
 	public String findIdDo(MemberVO vo, RedirectAttributes re, HttpSession session) {
-		List<MemberVO> findId = memberService.findId(vo);
+		MemberVO findId = memberService.findId(vo);
 		if (findId == null) {
 			re.addFlashAttribute("msg", "이름을 확인해주세요.");
 			return "redirect:/findIdView";
@@ -237,7 +237,7 @@ public class MemberController {
 			return "redirect:/findIdView";
 		}
 		session.setAttribute("findId", findId);
-		re.addFlashAttribute("msg", "아이디를 정상적으로 찾았습니다.");
+		re.addFlashAttribute("msg", "회원님의 아이디는 '"+ findId.getMemId() +"'입니다.");
 		return "redirect:/findIdView";
 	}
 	
