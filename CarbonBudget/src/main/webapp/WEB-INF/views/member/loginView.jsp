@@ -124,7 +124,7 @@
                     						<i class="bi bi-envelope"></i>
                     					</div>
                     				</div>
-                    				<button id="idSubmitBtn" class="btn btn-block btn-xl btn-outline-primary font-bold mt-3" style="margin-bottom: 20px;">아이디 찾기</button>
+                    				<button type="submit" id="idSubmitBtn" class="btn btn-block btn-xl btn-outline-primary font-bold mt-3" style="margin-bottom: 20px;">아이디 찾기</button>
                     			</form>
                     		</div>
                     	</div>
@@ -151,7 +151,7 @@
                     						<i class="bi bi-envelope"></i>
                     					</div>
                     				</div>
-                    				<button id="pwSubmitBtn" class="btn btn-block btn-xl btn-outline-primary font-bold mt-3" style="margin-bottom: 20px;">임시 비밀번호 설정</button>
+                    				<button type="submit" id="pwSubmitBtn" class="btn btn-block btn-xl btn-outline-primary font-bold mt-3" style="margin-bottom: 20px;">임시 비밀번호 설정</button>
                     			</form>
                     		</div>
                     	</div>
@@ -195,58 +195,6 @@
 				pwModal.style.display = "none";
 			}
 		}
-		
-		// 폼 제출 비동기 처리
-        $('#idFindingForm').submit(function(event) {
-            event.preventDefault(); // 기본 제출 방지
-
-            // 폼 데이터를 객체로 수집
-            var formData = $(this).serialize();
-            console.log(formData); // 폼 데이터 확인
-
-            // 비동기 폼 제출
-            $.ajax({
-                type: 'POST',
-                url: $(this).attr('action'),
-                data: formData,
-                success: function(response) {
-                    console.log('응답:', response);
-                    // 성공적으로 저장된 후의 동작 (예: 모달 닫기, 메시지 표시 등)
-                    $('#findIdModal').hide();
-                },
-                error: function(error) {
-                    console.error('오류:', error);
-                    // 오류 발생 시의 동작
-                    alert('오류가 발생했습니다.');
-                }
-            });
-        });
-		
-		// 폼 제출 비동기 처리
-        $('#pwFindingForm').submit(function(event) {
-            event.preventDefault(); // 기본 제출 방지
-
-            // 폼 데이터를 객체로 수집
-            var formData = $(this).serialize();
-            console.log(formData); // 폼 데이터 확인
-
-            // 비동기 폼 제출
-            $.ajax({
-                type: 'POST',
-                url: $(this).attr('action'),
-                data: formData,
-                success: function(response) {
-                    console.log('응답:', response);
-                    // 성공적으로 저장된 후의 동작 (예: 모달 닫기, 메시지 표시 등)
-                    $('#findPwModal').hide();
-                },
-                error: function(error) {
-                    console.error('오류:', error);
-                    // 오류 발생 시의 동작
-                    alert('오류가 발생했습니다.');
-                }
-            });
-        });
 		
 	</script>
 </body>
