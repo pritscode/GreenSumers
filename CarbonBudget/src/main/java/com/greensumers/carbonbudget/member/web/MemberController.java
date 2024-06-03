@@ -1,9 +1,5 @@
 package com.greensumers.carbonbudget.member.web;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +34,11 @@ public class MemberController {
 	@RequestMapping("/registView")
 	public String registView() {
 		return "member/registView";
+	}
+	
+	@RequestMapping("/socialRegistView")
+	public String socialRegistView() {
+		return "member/socialRegistView";
 	}
 
 	@RequestMapping("/myPageView")
@@ -237,7 +238,7 @@ public class MemberController {
 			return "redirect:/loginView";
 		}
 		session.setAttribute("findId", findId);
-		re.addFlashAttribute("msg", "회원님의 아이디는 '"+ findId.getMemId() +"'입니다.");
+		re.addFlashAttribute("msg", "회원님의 아이디는 "+ findId.getMemId() +"입니다.");
 		return "redirect:/loginView";
 	}
 	
