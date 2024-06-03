@@ -5,10 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>loginView</title>
-<c:if test="${not empty msg}">
-    <script>alert("<c:out value='${msg}' />");</script>
-</c:if>
+<title>Insert title here</title>
 <style>
 /* 모달 스타일 */
 .modal {
@@ -66,45 +63,52 @@
 
 			<!-- content -->
 			<div class="page-content" style="margin-top: 7%; margin-bottom: 15%;">
-                <div class="col-lg-4 login-form">
-                    <div class="d-flex justify-content-center">
-                        <h1 style="margin-bottom: 8%;">Login</h1>
-                    </div>
-                    <form method="post" action="<c:url value="loginDo" />">
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input value="${cookie.rememberId.value}" type="text" class="form-control form-control-xl" placeholder="Username" name="memId" id="memId">
-                            <div class="form-control-icon">
-                                <i class="bi bi-person"></i>
-                            </div>
-                        </div>
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" placeholder="Password" name="memPw">
-                            <div class="form-control-icon">
-                                <i class="bi bi-shield-lock"></i>
-                            </div>
-                            <div style="margin-top: 20px; text-align: center;">
-							    <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=9c660e710311cc2c921e701ceda99c06&redirect_uri=http://192.168.0.21:8080/carbonbudget/kakaoLogin">
-							        <img src="resources/img/kakao_login_medium_narrow.png">
-							    </a>
+				<div class="col-lg-4 login-form">
+					<div class="d-flex justify-content-center">
+						<h1 style="margin-bottom: 8%;">Login</h1>
+					</div>
+					<form method="post" action="<c:url value="loginDo" />">
+						<div class="form-group position-relative has-icon-left mb-4">
+							<input value="${cookie.rememberId.value}" type="text"
+								class="form-control form-control-xl" placeholder="Username"
+								name="memId" id="memId">
+							<div class="form-control-icon">
+								<i class="bi bi-person"></i>
 							</div>
-                        </div>
-                        <div class="form-check form-check-lg d-flex align-items-end">
-                            <input ${cookie.rememberId.value==null ? "" : "checked"} class="form-check-input me-2" type="checkbox" name="remember" id="rememberId">
-                            <label class="form-check-label text-gray-600" for="rememberId">
-                                	아이디 기억하기
-                            </label>
-                        </div>
-                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-3">로그인</button>
-                    </form>
-                    <div class="text-center mt-5 text-lg fs-4">
-                        <span class ="login-inner"><a class="font-bold" href="<c:url value='/registView'/>">회원가입</a></span>
-                        <div class="vr"></div>
-                        <span id="addIdEntry" class ="login-inner"><a class="font-bold" onclick="">아이디찾기</a></span>
+						</div>
+						<div class="form-group position-relative has-icon-left mb-4">
+							<input type="password" class="form-control form-control-xl"
+								placeholder="Password" name="memPw">
+							<div class="form-control-icon">
+								<i class="bi bi-shield-lock"></i>
+							</div>
+						</div>
+						<div class="form-check form-check-lg d-flex align-items-end">
+							<input ${cookie.rememberId.value==null ? "" : "checked"}
+								class="form-check-input me-2" type="checkbox" name="remember"
+								id="rememberId"> <label
+								class="form-check-label text-gray-600" for="rememberId">
+								아이디 기억하기 </label>
+						</div>
+						<div>
+							<button class="btn btn-primary btn-block btn-lg shadow-lg mt-3">로그인</button>
+						</div>
+					</form>
+				</div>
+				<div class="text-center mt-5 text-lg fs-4">
+					<span class="login-inner"><a class="font-bold"
+						href="<c:url value='/registView'/>">회원가입</a></span>
+					<div class="vr"></div>
+					<span id="addIdEntry" class ="login-inner"><a class="font-bold" onclick="">아이디찾기</a></span>
                         <div class="vr"></div>
                         <span id="addPwEntry" class ="login-inner"><a class="font-bold" onclick="">비밀번호찾기</a></span>
-                    </div>
-                    
-                    <!-- 아이디 찾기 모달 -->
+					<div class="row">
+						<div class="text-center">
+							<img id="google-login" src="resources/img/web_light_sq_na@3x.png"
+								style="width: 50px; margin-top: 15px; cursor: pointer;">
+						</div>
+					</div>
+					<!-- 아이디 찾기 모달 -->
                     <div id="findIdModal" class="modal">
                     	<div class="modal-dialog modal-dialog-centered">
                     		<div class="modal-content">
@@ -157,15 +161,27 @@
                     	</div>
                     </div>
                     <!-- 비밀번호 찾기 모달 끝 -->
-                    
-                </div>
-            </div>
+				</div>
+			</div>
 
 			<!-- footer 영역 -->
 			<jsp:include page="/WEB-INF/inc/footer.jsp"></jsp:include>
 		</div>
 	</div>
 	<script>
+		$("#google-login").click(function() {
+			$.ajax({
+				url : '<c:url value="/api/v1/oauth2/google" />',
+				type : "POST",
+				success : function(res) {
+					window.location.href = res;
+				},
+				error : function(e) {
+					console.log(e)
+				}
+			});
+		});
+		
 		// 모달 요소
 		var idModal = document.getElementById("findIdModal");
 		var pwModal = document.getElementById("findPwModal");
