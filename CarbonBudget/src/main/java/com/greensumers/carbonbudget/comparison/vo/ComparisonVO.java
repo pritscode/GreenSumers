@@ -6,15 +6,16 @@ import lombok.Data;
 public class ComparisonVO {
 
 	private String addressId;
-	private String gasUsage;
-	private String elctrUsage;
+	private Double gasUsage;
+	private Double elctrUsage;
 	private String useYm;
+	private Double emissions;
 	
-	public String getGasUsage() {
-        return gasUsage != null ? gasUsage : "0.0";
+	public Double getGasUsage() {
+        return gasUsage != null ? gasUsage : 0.0;
     }
 	
-	public String getElctrUsage() {
-        return elctrUsage != null ? elctrUsage : "0.0";
+	public Double getElctrUsage() {
+        return elctrUsage != null ? elctrUsage : 0.0;
     }
 }
