@@ -3,16 +3,24 @@
 <mapper namespace="com.greensumers.carbonbudget.comparison.dao.IComparisonDAO">
 
 	<select id="checkInUsageData" parameterType="ComparisonVO" resultType="ComparisonVO">
-		SELECT use_ym, gas_usage, elctr_usage
+		SELECT TO_CHAR(use_ym, 'YYYY-MM') AS use_ym,
+		ROUND(gas_usage*2.176, 1) as gas_usage,
+		ROUND(elctr_usage*0.4781, 1) as elctr_usage,
+		ROUND(gas_usage*2.176+elctr_usage*0.4781, 1) as emissions
 		FROM household_usages 
 		WHERE address_id = #{addressId}
+		ORDER BY use_ym
 	</select>
 
 	
-	<select id="" parameterType="ComparisonVO">
-		SELECT gas_usage*2.176 as gas_carbon, elctr_usage*0.4781 as elc_carbon
+	<select id="userData" parameterType="ComparisonVO" resultType="ComparisonVO">
+		SELECT TO_CHAR(use_ym, 'YYYY-MM') AS use_ym,
+		ROUND(AVG(gas_usage*2.176), 1) as gas_usage,
+		ROUND(AVG(elctr_usage*0.4781), 1) as elctr_usage,
+		ROUND(AVG(gas_usage*2.176), 1)+ROUND(AVG(elctr_usage*0.4781), 1) as emissions
 		FROM household_usages
-		WHERE address_id = #{memAddrId} AND use_ym = '23/12/01'
+		GROUP BY use_ym
+		ORDER BY use_ym
 	</select>
 	
 
