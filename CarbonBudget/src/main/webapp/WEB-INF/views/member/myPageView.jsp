@@ -184,7 +184,7 @@
 
 			<!-- content -->
 			<div class="page-heading">
-				<h3>Profile Status</h3>
+				<h3>내 정보</h3>
 			</div>
 			<div class="page-content">
 				<section class="row">
@@ -204,7 +204,7 @@
 														<use
 															xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
                                                     </svg>
-													<h5 class="mb-0 ms-3">ID</h5>
+													<h5 class="mb-0 ms-3">아이디</h5>
 												</div>
 											</div>
 											<div class="col-8">
@@ -219,7 +219,7 @@
 														<use
 															xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
                                                     </svg>
-													<h5 class="mb-0 ms-3">Email</h5>
+													<h5 class="mb-0 ms-3">이메일</h5>
 												</div>
 											</div>
 											<div class="col-8">
@@ -234,7 +234,7 @@
 							<div class="col-12">
 								<div class="card">
 									<div class="card-header">
-										<h4>Change Password</h4>
+										<h4>비밀번호 변경</h4>
 									</div>
 									<div class="card-body">
 										<form method="post" class="form form-vertical" data-parsley-validate
@@ -244,11 +244,11 @@
 													<div class="col-12">
 														<div class="form-group">
 															<label for="memEmail" class="form-label"><i
-																class="bi bi-envelope"></i> Email</label>
+																class="bi bi-envelope"></i> 이메일</label>
 															<div class="input-group mb-3">
 																<input disabled value="${sessionScope.login.memEmail}"
 																	type="email" class="form-control" id="memEmail"
-																	name="memEmail" placeholder="email">
+																	name="memEmail" placeholder="이메일">
 																<button type="button"
 																	class="btn btn-outline-primary col-lg-2 col-xs-4"
 																	onclick="sendMail()">
@@ -257,7 +257,7 @@
 															</div>
 															<div class="input-group mb-3">
 																<input type="text" class="form-control" id="verifCode"
-																	name="verifCode" placeholder="code"
+																	name="verifCode" placeholder="인증코드"
 																	data-parsley-required="true">
 																<button type="button"
 																	class="btn btn-outline-primary col-lg-2 col-xs-4"
@@ -273,7 +273,7 @@
 													<div class="col-12">
 														<div class="form-group">
 															<label for="memPw" class="form-label"><i
-																class="bi bi-lock"></i> Password</label> <input type="password"
+																class="bi bi-lock"></i> 비밀번호</label> <input type="password"
 																class="form-control" id="memPw" name="memPw"
 																placeholder="영어와 숫자를 포함한 4~12글자"
 																data-parsley-required="true">
@@ -282,9 +282,9 @@
 													<div class="col-12">
 														<div class="form-group">
 															<label for="pwCheck" class="form-label"><i
-																class="bi bi-clipboard-check"></i> pw check</label> <input
+																class="bi bi-clipboard-check"></i> 비밀번호 확인</label> <input
 																type="password" class="form-control" id="pwCheck"
-																name="pwCheck" placeholder="비밀번호 체크"
+																name="pwCheck" placeholder="비밀번호 확인"
 																data-parsley-required="true">
 														</div>
 													</div>
@@ -306,7 +306,7 @@
 							<div class="col-12">
 								<div class="card">
 									<div class="card-header">
-										<h4>Edit Profile</h4>
+										<h4>개인 정보 수정</h4>
 									</div>
 									<div class="card-body">
 										<form method="post" class="form form-vertical" data-parsley-validate
@@ -315,7 +315,7 @@
 												<div class="col-12">
 													<div class="form-group">
 														<label for="memNm" class="form-label"><i
-															class="bi bi-person-vcard"></i> name</label> <input
+															class="bi bi-person-vcard"></i> 이름</label> <input
 															value="${sessionScope.login.memNm }" type="text"
 															class="form-control" id="memNm" name="memNm"
 															placeholder="이름" data-parsley-required="true">
@@ -324,11 +324,11 @@
 												<div class="col-12">
 													<div class="form-group">
 														<label for="memAls" class="form-label"><i
-															class="bi bi-vector-pen"></i> alias</label>
+															class="bi bi-vector-pen"></i> 닉네임</label>
 														<div class="input-group mb-3">
 															<input value="${sessionScope.login.memAls}" type="text"
 																class="form-control" id="memAls" name="memAls"
-																placeholder="별명" data-parsley-required="true">
+																placeholder="닉네임" data-parsley-required="true">
 															<button class="btn btn-outline-primary col-lg-2 col-xs-4"
 																type="button" onclick="alsChk()">체크</button>
 														</div>
@@ -337,7 +337,7 @@
 												<div class="col-12">
 													<div class="form-group">
 														<label for="memKornRoadNm" class="form-label"><i
-															class="bi bi-house-check"></i> address</label>
+															class="bi bi-house-check"></i> 주소</label>
 														<div class="input-group mb-3">
 															<input value="${sessionScope.login.memKornRoadNm}"
 																type="text" class="form-control was-validated"
@@ -368,7 +368,7 @@
 												<div class="col-12">
 													<div class="form-group">
 														<label for="memTel" class="form-label"><i
-															class="bi bi-phone"></i> phone</label> <input
+															class="bi bi-phone"></i> 전화번호</label> <input
 															value="${sessionScope.login.memTel}" type="text"
 															class="form-control" id="memTel" name="memTel"
 															placeholder="숫자만 입력해주세요" data-parsley-required="true">
@@ -377,9 +377,9 @@
 												<div class="col-12">
 													<div class="form-group">
 														<label for="memPw" class="form-label"><i
-															class="bi bi-lock"></i> Password</label> <input type="password"
+															class="bi bi-lock"></i> 비밀번호</label> <input type="password"
 															class="form-control" id="memPw" name="memPw"
-															placeholder="회원정보 수정 전 기존 비밀번호를 입력해주세요"
+															placeholder="기존 비밀번호를 입력해주세요"
 															data-parsley-required="true">
 													</div>
 												</div>
