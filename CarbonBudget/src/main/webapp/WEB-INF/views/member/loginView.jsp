@@ -65,12 +65,12 @@
 			<div class="page-content" style="margin-top: 7%; margin-bottom: 15%;">
 				<div class="col-lg-4 login-form">
 					<div class="d-flex justify-content-center">
-						<h1 style="margin-bottom: 8%;">Login</h1>
+						<h1 style="margin-bottom: 8%;">로그인</h1>
 					</div>
 					<form method="post" action="<c:url value="loginDo" />">
 						<div class="form-group position-relative has-icon-left mb-4">
 							<input value="${cookie.rememberId.value}" type="text"
-								class="form-control form-control-xl" placeholder="Username"
+								class="form-control form-control-xl" placeholder="아이디"
 								name="memId" id="memId">
 							<div class="form-control-icon">
 								<i class="bi bi-person"></i>
@@ -78,7 +78,7 @@
 						</div>
 						<div class="form-group position-relative has-icon-left mb-4">
 							<input type="password" class="form-control form-control-xl"
-								placeholder="Password" name="memPw">
+								placeholder="비밀번호" name="memPw">
 							<div class="form-control-icon">
 								<i class="bi bi-shield-lock"></i>
 							</div>
