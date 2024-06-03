@@ -28,10 +28,17 @@ public class ComparisonController {
 		vo.setAddressId(login.getMemAddrId());
 		
 		List<ComparisonVO> checkIn = comparisonService.checkInUsageData(vo);
+		List<ComparisonVO> totalData = comparisonService.userData(vo);
 		session.setAttribute("checkIn", checkIn);
+		session.setAttribute("totalData", totalData);
 		System.out.println(checkIn);
+		System.out.println(totalData);
 		
 		return "comparison/cfComparisonView";
 	}
 	
+	@RequestMapping("/ComparisonView")
+	public String ComparisonView() {
+		return "comparison/ComparisonView";
+	}
 }
