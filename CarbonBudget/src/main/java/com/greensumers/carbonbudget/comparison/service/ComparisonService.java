@@ -14,9 +14,14 @@ public class ComparisonService {
 	@Autowired
 	IComparisonDAO dao;
 	
-	// 사용량조회
+	// 사용자 사용량조회
 	public List<ComparisonVO> checkInUsageData(ComparisonVO vo) {
 		return dao.checkInUsageData(vo);
+	}
+	
+	// 전체 사용자 사용량 조회
+	public List<ComparisonVO> userData(ComparisonVO vo) {
+		return dao.userData(vo);
 	}
 	
 }
