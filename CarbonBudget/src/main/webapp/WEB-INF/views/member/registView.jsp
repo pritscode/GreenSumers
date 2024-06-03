@@ -14,6 +14,7 @@
 let login_check = false;
 let als_check = false;
 let email_check = false;
+let email_duplication = true;
 let code_check = false;
 
 // 약관동의 중복체크
@@ -22,11 +23,7 @@ form_check = () => {
         alert("아이디를 확인해주세요");
         //$("#memId").focus();
         return false;
-    } else if (!als_check) {
-        alert("별명 중복을 체크해주세요");
-        $("#memAls").focus();
-        return false;
-    } else if (!email_check) {
+    } else if (email_duplication) {
         alert("이메일을 확인해주세요");
         $("#memEmail").focus();
         return false;
@@ -39,6 +36,10 @@ form_check = () => {
 
 	//email코드 전송
 	function changeStyleDisplay() {
+		if (email_duplication == true){
+			alert("이메일을 다시 입력해주세요")
+			return
+		}
 		var hiddenDiv = document.getElementById("hiddenDiv");
 		if (hiddenDiv.style.display === "none") {
 			hiddenDiv.style.display = "";
@@ -53,9 +54,8 @@ form_check = () => {
 			},
 			success : function(res) { // controllor에서 list를 return 받았음
 				if(res == "Success"){
-					email_check = true
+					alert("코드가 전송됐습니다.")
 				}
-
 			},
 			error : function(e) {
 				console.log(e);
@@ -141,35 +141,35 @@ form_check = () => {
 	    });
 	}
 
-	//닉네임
-	function alsChk() {
-		$("#als-check-feedback").html("사용가능한 닉네임입니다.").hide();
-		$("#als-check-invalid-feedback").html("중복된 닉네임입니다.").hide();
-		let memAls = $("#memAls");
+	//이메일 중복 체크
+	function emailChk() {
+		$("#email-check-feedback").html("사용가능한 이메일입니다.").hide();
+		$("#email-check-invalid-feedback").html("중복된 이메일입니다.").hide();
+		let memEmail = $("#memEmail");
 		$.ajax({
 			url : "<c:url value='alsCheck'/>",
 			type : 'post',
 			contentType : 'application/json', // Content-Type을 명시하여 JSON 형식으로 데이터를 보냄
 			data : JSON.stringify({
-				memAls : memAls.val()
+				memEmail : memEmail.val()
 			}),
 			success : function(res) {
 				console.log(res);
 				if (res === "notnull") {
-					$("#als-check-invalid-feedback").html("중복된 닉네임입니다.").show();
-					memAls.attr('data-id', "");
-					memAls.removeClass("is-valid");
-					memAls.addClass("is-invalid");
-	                document.getElementById('memAls').setCustomValidity("Invalid");
-					als_check = false;
+					$("#email-check-invalid-feedback").html("중복된 이메일입니다.").show();
+					memEmail.attr('data-id', "");
+					memEmail.removeClass("is-valid");
+					memEmail.addClass("is-invalid");
+	                document.getElementById('memEmail').setCustomValidity("Invalid");
+	                email_duplication = true;
 
 				} else {
-					$("#als-check-feedback").html("사용가능한 닉네임입니다.").show();
-					memAls.attr('data-id', memAls.val());
-					memAls.removeClass("is-invalid");
-					memAls.addClass("is-valid");
-		            document.getElementById('memAls').setCustomValidity("");
-					als_check = true;
+					$("#email-check-feedback").html("사용가능한 이메일입니다.").show();
+					memEmail.attr('data-id', memEmail.val());
+					memEmail.removeClass("is-invalid");
+					memEmail.addClass("is-valid");
+		            document.getElementById('memEmail').setCustomValidity("");
+		            email_duplication = false;
 				}
 			},
 			error : function(e) {
@@ -250,7 +250,7 @@ form_check = () => {
 						<div class="col-md-6 col-sm-12" id="sign-up-form">
 							<div class="card">
 								<div class="card-header">
-									<h2 class="card-title">Sign up</h2>
+									<h2 class="card-title">회원가입</h2>
 								</div>
 								<div class="card-content">
 									<div class="card-body">
@@ -264,7 +264,7 @@ form_check = () => {
 													<div class="col-12">
 														<div class="form-group">
 															<label for="memId" class="form-label"><i
-																class="bi bi-person"></i> ID</label>
+																class="bi bi-person"></i> 아이디</label>
 															<div class="input-group mb-3">
 																<input type="text" class="form-control" id="memId"
 																	data-id="" onkeyup="checkId()"
@@ -282,7 +282,7 @@ form_check = () => {
 													<div class="col-12">
 														<div class="form-group">
 															<label for="memNm" class="form-label"><i
-																class="bi bi-person-vcard"></i> name</label> <input type="text"
+																class="bi bi-person-vcard"></i> 이름</label> <input type="text"
 																class="form-control" id="memNm" name="memNm" required
 																placeholder="이름">
 															<div class="invalid-feedback">이름은 필수입니다.</div>
@@ -292,15 +292,12 @@ form_check = () => {
 													<div class="col-12">
 														<div class="form-group">
 															<label for="memAls" class="form-label"><i
-																class="bi bi-vector-pen"></i> alias</label>
+																class="bi bi-vector-pen"></i> 닉네임</label>
 															<div class="input-group mb-3">
 																<input type="text" class="form-control" id="memAls"
-																	data-id='' name="memAls" placeholder="별명" required
-																	onkeyup="alsChk()">
-																<div id="als-check-feedback" class="valid-feedback"
-																	style="display: none">사용가능한 닉네임입니다.</div>
-																<div id="als-check-invalid-feedback"
-																	class="invalid-feedback">닉네임은 필수입니다.</div>
+																	data-id='' name="memAls" placeholder="닉네임" required>
+															<div class="invalid-feedback">닉네임을 확인해주세요.</div>
+																
 															</div>
 														</div>
 													</div>
@@ -308,27 +305,31 @@ form_check = () => {
 													<div class="col-12">
 														<div class="form-group">
 															<label for="memEmail" class="form-label"><i
-																class="bi bi-envelope"></i> Email</label>
+																class="bi bi-envelope"></i> 이메일</label>
 															<div class="input-group mb-3">
 																<input type="email" class="form-control" id="memEmail"
-																	name="memEmail" placeholder="email" required>
+																	name="memEmail" placeholder="이메일" required
+																	onkeyup="emailChk()">
 																<button type="button"
 																	class="btn btn-outline-primary col-lg-2 col-xs-4"
 																	onclick="changeStyleDisplay()">
 																	<i class="bi bi-send"></i>
 																</button>
-																<div class="invalid-feedback">이메일을 확인해주세요.</div>
+																<div id="email-check-feedback" class="valid-feedback"
+																	style="display: none">사용가능한 이메일입니다.</div>
+																<div id="email-check-invalid-feedback"
+																	class="invalid-feedback">이메일은 필수입니다.</div>
 															</div>
 															<div class="input-group mb-3" id="hiddenDiv"
 																style="display: none;">
 																<input type="text" class="form-control" id="verifCode"
-																	name="verifCode" placeholder="code" required>
+																	name="verifCode" placeholder="인증코드" required>
 																<button type="button"
 																	class="btn btn-outline-primary col-lg-2 col-xs-4"
 																	onclick="checkVerification()">
 																	<i class="bi bi-check2"></i>
 																</button>
-																<div class="invalid-feedback">코드를 확인해주세요.</div>
+																<div class="invalid-feedback">인증코드를 확인해주세요.</div>
 															</div>
 														</div>
 													</div>
@@ -336,7 +337,7 @@ form_check = () => {
 													<div class="col-12">
 														<div class="form-group">
 															<label for="memKornRoadNm" class="form-label"><i
-																class="bi bi-house-check"></i> address</label>
+																class="bi bi-house-check"></i> 주소</label>
 															<div class="input-group mb-3">
 																<input type="text" class="form-control"
 																	id="memKornRoadNm" name="memKornRoadNm" required
@@ -367,7 +368,7 @@ form_check = () => {
 													<div class="col-12">
 														<div class="form-group">
 															<label for="memTel" class="form-label"><i
-																class="bi bi-phone"></i> phone</label> <input type="text"
+																class="bi bi-phone"></i> 전화번호</label> <input type="text"
 																oninput="autoHyphen2(this)" maxlength="13"
 																pattern="010-[0-9]{4}-[0-9]{4}" class="form-control"
 																id="memTel" name="memTel" placeholder="숫자만 입력해주세요"
@@ -380,7 +381,7 @@ form_check = () => {
 													<div class="col-12">
 														<div class="form-group">
 															<label for="memPw" class="form-label"><i
-																class="bi bi-lock"></i> Password</label> <input type="password"
+																class="bi bi-lock"></i> 비밀번호</label> <input type="password"
 																class="form-control" id="memPw" name="memPw"
 																placeholder="영어와 숫자를 포함한 4~12글자"
 																pattern="[a-zA-Z0-9]{4,15}" data-parsley-required="true"
@@ -393,9 +394,9 @@ form_check = () => {
 													<div class="col-12">
 														<div class="form-group">
 															<label for="pwCheck" class="form-label"><i
-																class="bi bi-clipboard-check"></i> pw check</label> <input
+																class="bi bi-clipboard-check"></i> 비밀번호 확인</label> <input
 																type="password" class="form-control" id="pwCheck"
-																name="pwCheck" placeholder="비밀번호 체크"
+																name="pwCheck" placeholder="비밀번호 확인"
 																pattern="[a-zA-Z0-9]{4,15}" data-parsley-required="true"
 																required>
 															<div class="invalid-feedback">비밀번호를 확인해주세요.</div>
@@ -424,7 +425,7 @@ form_check = () => {
 													<div class="col-12 d-flex justify-content-end">
 														<button type="submit" class="btn btn-primary me-1 mb-1">회원가입</button>
 														<button type="button" onclick="location.reload(true);"
-															class="btn btn-light-secondary me-1 mb-1">Reset</button>
+															class="btn btn-light-secondary me-1 mb-1">전체 삭제</button>
 													</div>
 												</div>
 											</div>
@@ -459,7 +460,7 @@ form_check = () => {
                     const id_dataIdValue = validation_memId.getAttribute('data-id');
                     const id_inputValue = validation_memId.value;
                     
-                    const validation_memAls = document.getElementById('memAls');
+                    const validation_memAls = document.getElementById('memEmail');
                     const als_dataIdValue = validation_memAls.getAttribute('data-id');
                     const als_inputValue = validation_memAls.value;
                     
