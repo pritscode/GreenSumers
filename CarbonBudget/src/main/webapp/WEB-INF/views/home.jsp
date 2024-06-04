@@ -1,11 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Home</title>
+<title>Statistics</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- 데이터 리스트 설정 -->
+<!-- 인덱스 -->
+<c:set var="totalDataSize" value="${totalData.size()}" />
+<c:set var="lastIndex" value="${totalDataSize - 1}" />
+<c:set var="secondToLastIndex" value="${totalDataSize - 2}" />
+<c:set var="thirdToLastIndex" value="${totalDataSize - 3}" />
+<c:set var="fourthToLastIndex" value="${totalDataSize - 4}" />
+<c:set var="fifthToLastIndex" value="${totalDataSize - 5}" />
+<c:set var="sixthToLastIndex" value="${totalDataSize - 6}" />
+<c:set var="seventhToLastIndex" value="${totalDataSize - 7}" />
+<c:set var="eighthToLastIndex" value="${totalDataSize - 8}" />
+<c:set var="ninthToLastIndex" value="${totalDataSize - 9}" />
+<c:set var="tenthToLastIndex" value="${totalDataSize - 10}" />
+<c:set var="eleventhToLastIndex" value="${totalDataSize - 11}" />
+<c:set var="twelfthToLastIndex" value="${totalDataSize - 12}" />
+<c:set var="thirteenthToLastIndex" value="${totalDataSize - 13}" />
+
+<!-- 날짜 -->
+<c:set var="useYm" value="${checkIn[lastIndex].useYm}" />
+<c:set var="lastUseYm" value="${checkIn[secondToLastIndex].useYm}" />
+<c:set var="secondToLastUseYm" value="${checkIn[thirdToLastIndex].useYm}" />
+<c:set var="thirdToLastUseYm" value="${checkIn[fourthToLastIndex].useYm}" />
+<c:set var="fourthToLastUseYm" value="${checkIn[fifthToLastIndex].useYm}" />
+<c:set var="fifthToLastUseYm" value="${checkIn[sixthToLastIndex].useYm}" />
+<c:set var="sixthToLastUseYm" value="${checkIn[seventhToLastIndex].useYm}" />
+<c:set var="seventhToLastUseYm" value="${checkIn[eighthToLastIndex].useYm}" />
+<c:set var="eighthToLastUseYm" value="${checkIn[ninthToLastIndex].useYm}" />
+<c:set var="ninthToLastUseYm" value="${checkIn[tenthToLastIndex].useYm}" />
+<c:set var="tenthToLastUseYm" value="${checkIn[eleventhToLastIndex].useYm}" />
+<c:set var="eleventhToLastUseYm" value="${checkIn[twelfthToLastIndex].useYm}" />
+<c:set var="twelfthToLastUseYm" value="${checkIn[thirteenthToLastIndex].useYm}" />
+
+<!-- 전체 사용자 차트 변수 데이터 설정 -->
+<c:set var="lastGasUsage" value="${totalData[lastIndex].gasUsage}" />
+<c:set var="lastElctrUsage" value="${totalData[lastIndex].elctrUsage}" />
+<c:set var="thirteenthToLastGasUsage" value="${totalData[thirteenthToLastIndex].gasUsage}" />
+<c:set var="thirteenthToLastElctrUsage" value="${totalData[thirteenthToLastIndex].elctrUsage}" />
+
+<!-- 탄소배출량 데이터 -->
+<c:set var="lastEmissions" value="${totalData[lastIndex].emissions}" />
+<c:set var="secondToLastEmissions" value="${totalData[secondToLastIndex].emissions}" />
+<c:set var="thirdToLastEmissions" value="${totalData[thirdToLastIndex].emissions}" />
+<c:set var="fourthToLastEmissions" value="${totalData[fourthToLastIndex].emissions}" />
+<c:set var="fifthToLastEmissions" value="${totalData[fifthToLastIndex].emissions}" />
+<c:set var="sixthToLastEmissions" value="${totalData[sixthToLastIndex].emissions}" />
+<c:set var="seventhToLastEmissions" value="${totalData[seventhToLastIndex].emissions}" />
+<c:set var="eighthToLastEmissions" value="${totalData[eighthToLastIndex].emissions}" />
+<c:set var="ninthToLastEmissions" value="${totalData[ninthToLastIndex].emissions}" />
+<c:set var="tenthToLastEmissions" value="${totalData[tenthToLastIndex].emissions}" />
+<c:set var="eleventhToLastEmissions" value="${totalData[eleventhToLastIndex].emissions}" />
+<c:set var="twelfthToLastEmissions" value="${totalData[twelfthToLastIndex].emissions}" />
+<c:set var="thirteenthToLastEmissions" value="${totalData[thirteenthToLastIndex].emissions}" />
+
 </head>
 <body>
 	<div id="app">
@@ -23,79 +79,74 @@
 
 			<!-- content -->
 			<div class="page-heading">
-				<h3>Profile Statistics</h3>
+				<h3>전체 탄소 배출량 통계</h3>
 			</div>
 			<div class="page-content">
 				<section class="row">
-					<div class="col-12 col-lg-9">
+					<div class="col-12 col-lg-4">
 						<div class="row">
-							<div class="col-6 col-lg-3 col-md-6">
+							<div class="col-12">
 								<div class="card">
-									<div class="card-body px-4 py-4-5">
-										<div class="row">
-											<div
-												class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-												<div class="stats-icon purple mb-2">
-													<i class="iconly-boldShow"></i>
-												</div>
-											</div>
-											<div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-												<h6 class="text-muted font-semibold">Profile Views</h6>
-												<h6 class="font-extrabold mb-0">112.000</h6>
-											</div>
+									<div class="card-header">
+										<div class="d-flex align-items-center">
+											<h4 class="mb-0 ms-3">전체 사용자</h4>
 										</div>
 									</div>
-								</div>
-							</div>
-							<div class="col-6 col-lg-3 col-md-6">
-								<div class="card">
-									<div class="card-body px-4 py-4-5">
-										<div class="row">
-											<div
-												class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-												<div class="stats-icon blue mb-2">
-													<i class="iconly-boldProfile"></i>
+											<div class="card-body">
+												<div class="row" style="margin-bottom: 12px">
+													<div class="col-4">
+														<div class="d-flex align-items-center">
+															<h5 class="mb-0 ms-3">날짜</h5>
+														</div>
+													</div>
+													<div class="col-8">
+														<h5 class="mb-0 text-end">${useYm}</h5>
+													</div>
+												</div>
+												<div class="row" style="margin-bottom: 12px">
+													<div class="col-7">
+														<div class="d-flex align-items-center">
+															<svg class="bi text-primary" width="32" height="32"
+																fill="blue" style="width: 10px">
+																<use
+																	xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
+		                                                    </svg>
+															<h6 class="mb-0 ms-3">금월 배출량</h5>
+														</div>
+													</div>
+													<div class="col-5">
+														<h6 class="mb-0 text-end">${lastEmissions}kg</h5>
+													</div>
+												</div>
+												<div class="row" style="margin-bottom: 12px">
+													<div class="col-7">
+														<div class="d-flex align-items-center">
+															<svg class="bi text-primary" width="32" height="32"
+																fill="blue" style="width: 10px">
+																<use
+																	xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
+		                                                    </svg>
+															<h6 class="mb-0 ms-3">전월 배출량</h5>
+														</div>
+													</div>
+													<div class="col-5">
+														<h6 class="mb-0 text-end">${secondToLastEmissions}kg</h5>
+													</div>
 												</div>
 											</div>
-											<div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-												<h6 class="text-muted font-semibold">Followers</h6>
-												<h6 class="font-extrabold mb-0">183.000</h6>
-											</div>
-										</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<div class="card" name="Compare to others">
+									<div class="card-header">
+										<h4>유저 평균 배출량</h4>
 									</div>
-								</div>
-							</div>
-							<div class="col-6 col-lg-3 col-md-6">
-								<div class="card">
-									<div class="card-body px-4 py-4-5">
+									<div class="card-body">
 										<div class="row">
-											<div
-												class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-												<div class="stats-icon green mb-2">
-													<i class="iconly-boldAdd-User"></i>
-												</div>
-											</div>
-											<div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-												<h6 class="text-muted font-semibold">Following</h6>
-												<h6 class="font-extrabold mb-0">80.000</h6>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-6 col-lg-3 col-md-6">
-								<div class="card">
-									<div class="card-body px-4 py-4-5">
-										<div class="row">
-											<div
-												class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-												<div class="stats-icon red mb-2">
-													<i class="iconly-boldBookmark"></i>
-												</div>
-											</div>
-											<div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-												<h6 class="text-muted font-semibold">Saved Post</h6>
-												<h6 class="font-extrabold mb-0">112</h6>
+											<div class="col-12">
+												<canvas id="myChart" style="display: inline;"></canvas>
 											</div>
 										</div>
 									</div>
@@ -104,199 +155,218 @@
 						</div>
 						<div class="row">
 							<div class="col-12">
-								<div class="card">
+								<div class="card" name="Monthly Carbon Emissions">
 									<div class="card-header">
-										<h4>Profile Visit</h4>
+										<h4>월 배출량</h4>
 									</div>
 									<div class="card-body">
-										<div id="chart-profile-visit"></div>
+										<div class="row">
+											<div class="col-12">
+												<canvas id="lineChart" style="display: inline;"></canvas>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-lg-8">
+						<div class="row">
+							<div class="col-12">
+								<div class="card" name="Compared to last year">
+									<div class="card-header">
+										<h4>작년대비 배출량</h4>
+									</div>
+									<div class="card-body">
+										<div class="row">
+											<div class="col-12">
+												<canvas id="twoChart" style="display: inline;"></canvas>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-12 col-xl-4">
-								<div class="card">
+							<div class="col-12">
+								<div class="card" name="Details">
 									<div class="card-header">
-										<h4>Profile Visit</h4>
+										<h4>세부사항</h4>
 									</div>
 									<div class="card-body">
 										<div class="row">
-											<div class="col-7">
-												<div class="d-flex align-items-center">
-													<svg class="bi text-primary" width="32" height="32"
-														fill="blue" style="width: 10px">
-                                                        <use
-															xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
-                                                    </svg>
-													<h5 class="mb-0 ms-3">Europe</h5>
-												</div>
+											<div class="col-12 col-md-4">
+												<canvas id="doughnutChart" style="display: inline;"></canvas>
 											</div>
-											<div class="col-5">
-												<h5 class="mb-0 text-end">862</h5>
-											</div>
-											<div class="col-12">
-												<div id="chart-europe"></div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-7">
-												<div class="d-flex align-items-center">
-													<svg class="bi text-success" width="32" height="32"
-														fill="blue" style="width: 10px">
-                                                        <use
-															xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
-                                                    </svg>
-													<h5 class="mb-0 ms-3">America</h5>
-												</div>
-											</div>
-											<div class="col-5">
-												<h5 class="mb-0 text-end">375</h5>
-											</div>
-											<div class="col-12">
-												<div id="chart-america"></div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-7">
-												<div class="d-flex align-items-center">
-													<svg class="bi text-danger" width="32" height="32"
-														fill="blue" style="width: 10px">
-                                                        <use
-															xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
-                                                    </svg>
-													<h5 class="mb-0 ms-3">Indonesia</h5>
-												</div>
-											</div>
-											<div class="col-5">
-												<h5 class="mb-0 text-end">1025</h5>
-											</div>
-											<div class="col-12">
-												<div id="chart-indonesia"></div>
+											<div class="col-12 col-md-8">
+												<section>
+													<header>
+														<table class="table">
+															<thead>
+																<tr>
+																	<th>전기</th>
+																	<th>가스</th>
+																	<th>수도</th>
+																	<th>교통</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>${lastElctrUsage}kg</td>
+																	<td>${lastGasUsage}kg</td>
+																	<td>-</td>
+																	<td>-</td>
+																</tr>
+															</tbody>
+														</table>
+													</header>
+													<p>
+														전체 사용자 ${useYm} 이산화탄소(CO₂) 발생량 통계입니다.<br />
+														가정 평균 ${lastEmissions}kg 배출하고 있습니다. 그래프를 보고 어느
+														부분에서 이산화탄소를 많이 발생하고 있는지 비교해 보세요.
+													</p>
+												</section>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-12 col-xl-8">
-								<div class="card">
-									<div class="card-header">
-										<h4>Latest Comments</h4>
-									</div>
-									<div class="card-body">
-										<div class="table-responsive">
-											<table class="table table-hover table-lg">
-												<thead>
-													<tr>
-														<th>Name</th>
-														<th>Comment</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td class="col-3">
-															<div class="d-flex align-items-center">
-																<div class="avatar avatar-md">
-																	<img src="resources/assets/compiled/jpg/5.jpg">
-																</div>
-																<p class="font-bold ms-3 mb-0">Si Cantik</p>
-															</div>
-														</td>
-														<td class="col-auto">
-															<p class=" mb-0">Congratulations on your graduation!</p>
-														</td>
-													</tr>
-													<tr>
-														<td class="col-3">
-															<div class="d-flex align-items-center">
-																<div class="avatar avatar-md">
-																	<img src="resources/assets/compiled/jpg/2.jpg">
-																</div>
-																<p class="font-bold ms-3 mb-0">Si Ganteng</p>
-															</div>
-														</td>
-														<td class="col-auto">
-															<p class=" mb-0">Wow amazing design! Can you make
-																another tutorial for this design?</p>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-12 col-lg-3">
-						<div class="card">
-							<div class="card-body py-4 px-4">
-								<div class="d-flex align-items-center">
-									<div class="avatar avatar-xl">
-										<img src="resources/assets/compiled/jpg/1.jpg" alt="Face 1">
-									</div>
-									<div class="ms-3 name">
-										<h5 class="font-bold">John Duck</h5>
-										<h6 class="text-muted mb-0">@johnducky</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-header">
-								<h4>Recent Messages</h4>
-							</div>
-							<div class="card-content pb-4">
-								<div class="recent-message d-flex px-4 py-3">
-									<div class="avatar avatar-lg">
-										<img src="resources/assets/compiled/jpg/4.jpg">
-									</div>
-									<div class="name ms-4">
-										<h5 class="mb-1">Hank Schrader</h5>
-										<h6 class="text-muted mb-0">@johnducky</h6>
-									</div>
-								</div>
-								<div class="recent-message d-flex px-4 py-3">
-									<div class="avatar avatar-lg">
-										<img src="resources/assets/compiled/jpg/5.jpg">
-									</div>
-									<div class="name ms-4">
-										<h5 class="mb-1">Dean Winchester</h5>
-										<h6 class="text-muted mb-0">@imdean</h6>
-									</div>
-								</div>
-								<div class="recent-message d-flex px-4 py-3">
-									<div class="avatar avatar-lg">
-										<img src="resources/assets/compiled/jpg/1.jpg">
-									</div>
-									<div class="name ms-4">
-										<h5 class="mb-1">John Dodol</h5>
-										<h6 class="text-muted mb-0">@dodoljohn</h6>
-									</div>
-								</div>
-								<div class="px-4">
-									<button
-										class='btn btn-block btn-xl btn-outline-primary font-bold mt-3'>Start
-										Conversation</button>
-								</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-header">
-								<h4>Visitors Profile</h4>
-							</div>
-							<div class="card-body">
-								<div id="chart-visitors-profile"></div>
 							</div>
 						</div>
 					</div>
 				</section>
 			</div>
-			<!-- footer 영역 -->
-			<jsp:include page="/WEB-INF/inc/footer.jsp"></jsp:include>
 		</div>
+
+		<!-- footer 영역 -->
+		<jsp:include page="/WEB-INF/inc/footer.jsp"></jsp:include>
 	</div>
+	<script src="resources/assets/compiled/js/app.js"></script>
+
+
+	<!-- 에너지 사용량 차트 -->
+	<script>
+		// 차트 생성
+		const ctx = document.getElementById('myChart').getContext('2d');
+		const myChart = new Chart(ctx, {
+			type : 'bar',
+			data : {
+				labels : [ '사용자 평균' ],
+				datasets : [ {
+					label : '전기',
+					data : [ ${lastElctrUsage} ],
+					backgroundColor : 'rgba(54, 162, 235, 0.5)'
+				}, {
+					label : '가스',
+					data : [ ${lastGasUsage} ],
+					backgroundColor : 'rgba(255, 99, 132, 0.5)'
+				}, {
+					label : '수도',
+					data : [ 0 ],
+					backgroundColor : 'rgba(75, 192, 192, 0.2)'
+				}, {
+					label : '교통',
+					data : [ 0 ],
+					backgroundColor : 'rgba(153, 102, 255, 0.2)'
+				} ]
+			},
+			options : {
+				scales : {
+					x : {
+						stacked : true
+					},
+					y : {
+						stacked : true
+					}
+				},
+				indexAxis : 'y'
+			}
+		});
+
+		const lineCtx = document.getElementById('lineChart').getContext('2d');
+		const lineChart = new Chart(lineCtx, {
+			type : 'line',
+			data : {
+				labels : [ "${eleventhToLastUseYm}",
+						   "${tenthToLastUseYm}",
+						   "${ninthToLastUseYm}",
+						   "${eighthToLastUseYm}",
+						   "${seventhToLastUseYm}",
+						   "${sixthToLastUseYm}",
+						   "${fifthToLastUseYm}",
+						   "${fourthToLastUseYm}",
+						   "${thirdToLastUseYm}",
+						   "${secondToLastUseYm}",
+						   "${lastUseYm}",
+						   "${useYm}" ],
+				datasets : [ {
+					label : '탄소배출량',
+					data : [ ${twelfthToLastEmissions},
+							 ${eleventhToLastEmissions},
+							 ${tenthToLastEmissions},
+							 ${ninthToLastEmissions},
+							 ${eighthToLastEmissions},
+							 ${seventhToLastEmissions},
+							 ${sixthToLastEmissions},
+							 ${fifthToLastEmissions},
+							 ${fourthToLastEmissions},
+							 ${thirdToLastEmissions},
+							 ${secondToLastEmissions},
+							 ${lastEmissions} ],
+					fill : false,
+					tension : 0.2
+				} ]
+			},
+			options : {
+				scales : {
+					y : {
+						beginAtZero : true
+					}
+				}
+			}
+		});
+
+		const twoctx = document.getElementById('twoChart').getContext('2d');
+		const twoChart = new Chart(twoctx, {
+			type : 'bar',
+			data : {
+				labels : [ "${twelfthToLastUseYm}", "${useYm}" ],
+				datasets : [ {
+					label : '전기',
+					data : [ ${thirteenthToLastElctrUsage}, ${lastElctrUsage} ]
+				}, {
+					label : '가스',
+					data : [ ${thirteenthToLastGasUsage}, ${lastGasUsage} ]
+				}, {
+					label : '수도',
+					data : [ 0, 0 ]
+				}, {
+					label : '교통',
+					data : [ 0, 0 ]
+				} ]
+			},
+			options : {
+				indexAxis : 'x',
+				scales : {
+					y : {
+						beginAtZero : true
+					}
+				}
+			}
+		});
+
+		const doughnut = document.getElementById('doughnutChart').getContext(
+				'2d');
+		const doughnutChart = new Chart(doughnut, {
+			type : 'doughnut',
+			data : {
+				labels : [ '전기', '가스', '수도', '교통' ],
+				datasets : [ {
+					label : '탄소배출량 세부 항목',
+					data : [ ${lastElctrUsage}, ${lastGasUsage}, 0, 0 ]
+				} ]
+			}
+
+		});
+	</script>
 </body>
-	<script src="resources/assets/extensions/apexcharts/apexcharts.min.js"></script>
-	<script src="resources/assets/static/js/pages/dashboard.js"></script>
 </html>
