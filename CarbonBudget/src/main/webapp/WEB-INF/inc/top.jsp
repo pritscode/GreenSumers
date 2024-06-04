@@ -94,9 +94,9 @@ $(document).ready(function(){
                             </a>
                         </li>
                         <li class="sidebar-item ">
-                            <a href="#" class='sidebar-link'>
+                            <a href="<c:url value="/" />" class='sidebar-link'>
                                 <i class="bi bi-bar-chart-line-fill"></i>
-                                <span>탄소발자국 비교</span>
+                                <span>전체 탄소발자국</span>
                             </a>
                         </li>
 
