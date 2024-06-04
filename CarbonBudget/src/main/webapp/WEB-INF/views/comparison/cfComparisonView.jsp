@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page import="com.greensumers.carbonbudget.commons.utils.CarbonCalculator" %>
+<%@ page import="com.greensumers.carbonbudget.comparison.vo.ComparisonVO" %>
+<%@ page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,17 +14,57 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- 사용자 차트 변수 데이터 설정 -->
+<!-- 인덱스 -->
 <c:set var="checkInSize" value="${checkIn.size()}" />
 <c:set var="lastIndex" value="${checkInSize - 1}" />
 <c:set var="secondToLastIndex" value="${checkInSize - 2}" />
+<c:set var="thirdToLastIndex" value="${checkInSize - 3}" />
+<c:set var="fourthToLastIndex" value="${checkInSize - 4}" />
+<c:set var="fifthToLastIndex" value="${checkInSize - 5}" />
+<c:set var="sixthToLastIndex" value="${checkInSize - 6}" />
+<c:set var="seventhToLastIndex" value="${checkInSize - 7}" />
+<c:set var="eighthToLastIndex" value="${checkInSize - 8}" />
+<c:set var="ninthToLastIndex" value="${checkInSize - 9}" />
+<c:set var="tenthToLastIndex" value="${checkInSize - 10}" />
+<c:set var="eleventhToLastIndex" value="${checkInSize - 11}" />
+<c:set var="twelfthToLastIndex" value="${checkInSize - 12}" />
+<c:set var="thirteenthToLastIndex" value="${checkInSize - 13}" />
+
+<!-- 날짜 -->
 <c:set var="useYm" value="${checkIn[lastIndex].useYm}" />
-<c:set var="useLastYm" value="${checkIn[secondToLastIndex].useYm}" />
+<c:set var="lastUseYm" value="${checkIn[secondToLastIndex].useYm}" />
+<c:set var="secondToLastUseYm" value="${checkIn[thirdToLastIndex].useYm}" />
+<c:set var="thirdToLastUseYm" value="${checkIn[fourthToLastIndex].useYm}" />
+<c:set var="fourthToLastUseYm" value="${checkIn[fifthToLastIndex].useYm}" />
+<c:set var="fifthToLastUseYm" value="${checkIn[sixthToLastIndex].useYm}" />
+<c:set var="sixthToLastUseYm" value="${checkIn[seventhToLastIndex].useYm}" />
+<c:set var="seventhToLastUseYm" value="${checkIn[eighthToLastIndex].useYm}" />
+<c:set var="eighthToLastUseYm" value="${checkIn[ninthToLastIndex].useYm}" />
+<c:set var="ninthToLastUseYm" value="${checkIn[tenthToLastIndex].useYm}" />
+<c:set var="tenthToLastUseYm" value="${checkIn[eleventhToLastIndex].useYm}" />
+<c:set var="eleventhToLastUseYm" value="${checkIn[twelfthToLastIndex].useYm}" />
+<c:set var="twelfthToLastUseYm" value="${checkIn[thirteenthToLastIndex].useYm}" />
+
+<!-- 에너지 데이터 -->
 <c:set var="lastGasUsage" value="${checkIn[lastIndex].gasUsage}" />
 <c:set var="lastElctrUsage" value="${checkIn[lastIndex].elctrUsage}" />
+<c:set var="thirteenthToLastGasUsage" value="${checkIn[thirteenthToLastIndex].gasUsage}" />
+<c:set var="thirteenthToLastElctrUsage" value="${checkIn[thirteenthToLastIndex].elctrUsage}" />
+
+<!-- 탄소배출량 데이터 -->
 <c:set var="lastEmissions" value="${checkIn[lastIndex].emissions}" />
-<c:set var="secondToLastGasUsage" value="${checkIn[secondToLastIndex].gasUsage}" />
-<c:set var="secondToLastElctrUsage" value="${checkIn[secondToLastIndex].elctrUsage}" />
 <c:set var="secondToLastEmissions" value="${checkIn[secondToLastIndex].emissions}" />
+<c:set var="thirdToLastEmissions" value="${checkIn[thirdToLastIndex].emissions}" />
+<c:set var="fourthToLastEmissions" value="${checkIn[fourthToLastIndex].emissions}" />
+<c:set var="fifthToLastEmissions" value="${checkIn[fifthToLastIndex].emissions}" />
+<c:set var="sixthToLastEmissions" value="${checkIn[sixthToLastIndex].emissions}" />
+<c:set var="seventhToLastEmissions" value="${checkIn[seventhToLastIndex].emissions}" />
+<c:set var="eighthToLastEmissions" value="${checkIn[eighthToLastIndex].emissions}" />
+<c:set var="ninthToLastEmissions" value="${checkIn[ninthToLastIndex].emissions}" />
+<c:set var="tenthToLastEmissions" value="${checkIn[tenthToLastIndex].emissions}" />
+<c:set var="eleventhToLastEmissions" value="${checkIn[eleventhToLastIndex].emissions}" />
+<c:set var="twelfthToLastEmissions" value="${checkIn[twelfthToLastIndex].emissions}" />
+<c:set var="thirteenthToLastEmissions" value="${checkIn[thirteenthToLastIndex].emissions}" />
 
 <!-- 전체 사용자 차트 변수 데이터 설정 -->
 <c:set var="totalDataSize" value="${totalData.size()}" />
@@ -32,6 +76,50 @@
 <c:set var="totalDataSecondToLastGasUsage" value="${totalData[totalDataSecondToLastIndex].gasUsage}" />
 <c:set var="totalDataSecondToLastElctrUsage" value="${totalData[totalDataSecondToLastIndex].elctrUsage}" />
 <c:set var="totalDataSecondToLastEmissions" value="${totalData[totalDataSecondToLastIndex].emissions}" />
+
+<%-- JSP 스크립틀릿을 사용하여 계산 수행 --%>
+<%
+    /* 전체 사용자 대비 전기탄소배출비율 */
+    double elctrRate = 0;
+	try {
+	    // 세션에서 데이터 가져오기
+	    List<ComparisonVO> checkIn = (List<ComparisonVO>) session.getAttribute("checkIn");
+	    List<ComparisonVO> totalData = (List<ComparisonVO>) session.getAttribute("totalData");
+	
+	    elctrRate = CarbonCalculator.calculateElctrRate(checkIn, totalData);
+	} catch (IllegalArgumentException e) {
+	    // 에러 처리
+	}
+    pageContext.setAttribute("elctrRate", elctrRate);
+
+    /* 전체 사용자 대비 가스탄소배출비율 */
+    double gasRate = 0;
+	try {
+	    // 세션에서 데이터 가져오기
+	    List<ComparisonVO> checkIn = (List<ComparisonVO>) session.getAttribute("checkIn");
+	    List<ComparisonVO> totalData = (List<ComparisonVO>) session.getAttribute("totalData");
+	
+	    gasRate = CarbonCalculator.calculateGasRate(checkIn, totalData);
+	} catch (IllegalArgumentException e) {
+	    // 에러 처리
+	}
+    pageContext.setAttribute("gasRate", gasRate);
+    
+	/* 전체 사용자 대비 탄소배출비율 */
+	double carbonRate = 0;
+	try {
+	    // 세션에서 데이터 가져오기
+	    List<ComparisonVO> checkIn = (List<ComparisonVO>) session.getAttribute("checkIn");
+	    List<ComparisonVO> totalData = (List<ComparisonVO>) session.getAttribute("totalData");
+	
+	    carbonRate = CarbonCalculator.calculateCarbonRate(checkIn, totalData);
+	} catch (IllegalArgumentException e) {
+	    // 에러 처리
+	}
+    pageContext.setAttribute("carbonRate", carbonRate);
+%>
+            
+            
 
 </head>
 <body>
@@ -189,8 +277,8 @@
 																	<td>-</td>
 																</tr>
 																<tr>
-																	<td>4.5%↓</td>
-																	<td>2.6%↓</td>
+																	<td>${elctrRate}%</td>
+																	<td>${gasRate}%</td>
 																	<td>-</td>
 																	<td>-</td>
 																</tr>
@@ -200,7 +288,7 @@
 													<p>
 														${sessionScope.login.memNm}님의 ${useYm} 이산화탄소(CO₂) 발생량 통계입니다.<br />
 														${sessionScope.login.memNm}님 가정은 이산화탄소 배출량은 총 ${lastEmissions}kg이며, 비슷한
-														다른 가정 평균 ${totalDataLastEmissions}kg 보다 약 --% -- 배출하고 있습니다. 그래프를 보고 어느
+														다른 가정 평균 ${totalDataLastEmissions}kg 보다 약 ${carbonRate}%로 배출하고 있습니다. 그래프를 보고 어느
 														부분에서 이산화탄소를 많이 발생하고 있는지 비교해 보세요.
 													</p>
 												</section>
@@ -221,7 +309,7 @@
 	<script src="resources/assets/compiled/js/app.js"></script>
 
 
-	<!-- 지역별 월 평균 에너지 사용량 -->
+	<!-- 에너지 사용량 차트 -->
 	<script>
 		// 차트 생성
 		const ctx = document.getElementById('myChart').getContext('2d');
@@ -232,11 +320,11 @@
 				datasets : [ {
 					label : '전기',
 					data : [ ${totalDataLastElctrUsage}, ${lastElctrUsage} ],
-					backgroundColor : 'rgba(255, 99, 132, 0.5)'
+					backgroundColor : 'rgba(54, 162, 235, 0.5)'
 				}, {
 					label : '가스',
 					data : [ ${totalDataLastGasUsage}, ${lastGasUsage} ],
-					backgroundColor : 'rgba(54, 162, 235, 0.5)'
+					backgroundColor : 'rgba(255, 99, 132, 0.5)'
 				}, {
 					label : '수도',
 					data : [ 0, 0 ],
@@ -264,10 +352,32 @@
 		const lineChart = new Chart(lineCtx, {
 			type : 'line',
 			data : {
-				labels : [ '1월', '2월', '3월', '4월' ],
+				labels : [ "${eleventhToLastUseYm}",
+						   "${tenthToLastUseYm}",
+						   "${ninthToLastUseYm}",
+						   "${eighthToLastUseYm}",
+						   "${seventhToLastUseYm}",
+						   "${sixthToLastUseYm}",
+						   "${fifthToLastUseYm}",
+						   "${fourthToLastUseYm}",
+						   "${thirdToLastUseYm}",
+						   "${secondToLastUseYm}",
+						   "${lastUseYm}",
+						   "${useYm}" ],
 				datasets : [ {
 					label : '탄소배출량',
-					data : [ 10, 23, 4, 25 ],
+					data : [ ${twelfthToLastEmissions},
+							 ${eleventhToLastEmissions},
+							 ${tenthToLastEmissions},
+							 ${ninthToLastEmissions},
+							 ${eighthToLastEmissions},
+							 ${seventhToLastEmissions},
+							 ${sixthToLastEmissions},
+							 ${fifthToLastEmissions},
+							 ${fourthToLastEmissions},
+							 ${thirdToLastEmissions},
+							 ${secondToLastEmissions},
+							 ${lastEmissions} ],
 					fill : false,
 					tension : 0.2
 				} ]
@@ -275,8 +385,7 @@
 			options : {
 				scales : {
 					y : {
-						beginAtZero : true,
-						max : 30
+						beginAtZero : true
 					}
 				}
 			}
@@ -286,13 +395,13 @@
 		const twoChart = new Chart(twoctx, {
 			type : 'bar',
 			data : {
-				labels : [ ${useLastYm}, ${useYm} ],
+				labels : [ "${twelfthToLastUseYm}", "${useYm}" ],
 				datasets : [ {
 					label : '전기',
-					data : [ ${secondToLastElctrUsage}, ${lastElctrUsage} ]
+					data : [ ${thirteenthToLastElctrUsage}, ${lastElctrUsage} ]
 				}, {
 					label : '가스',
-					data : [ ${secondToLastGasUsage}, ${lastGasUsage} ]
+					data : [ ${thirteenthToLastGasUsage}, ${lastGasUsage} ]
 				}, {
 					label : '수도',
 					data : [ 0, 0 ]
