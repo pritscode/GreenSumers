@@ -1,6 +1,12 @@
 package com.greensumers.carbonbudget.commons.utils;
 
 import java.text.ParseException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.greensumers.carbonbudget.comparison.service.ComparisonService;
+import com.greensumers.carbonbudget.comparison.vo.ComparisonVO;
 
 public class CarbonCalculator {
 	
@@ -36,4 +42,23 @@ public class CarbonCalculator {
 		double result = gasData + elctrData;
 		return result;
 	}
+	
+	public static double calculateCarbonRate(List<ComparisonVO> userCheckIn, List<ComparisonVO> totalData) {
+        if (userCheckIn.isEmpty() || totalData.isEmpty()) {
+            throw new IllegalArgumentException("The lists must not be empty.");
+        }
+
+        ComparisonVO lastUserData = userCheckIn.get(userCheckIn.size() - 1);
+        ComparisonVO lastTotalData = totalData.get(totalData.size() - 1);
+
+        double carbonRate = lastUserData.getEmissions()/lastTotalData.getEmissions();
+
+        if (carbonRate == 0) {
+            throw new IllegalArgumentException("Total emissions must not be zero.");
+        }
+        
+        System.out.println(carbonRate);
+
+        return carbonRate;
+    }
 }
