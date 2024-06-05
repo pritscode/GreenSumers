@@ -254,19 +254,19 @@
 				datasets : [ {
 					label : '전기',
 					data : [ ${lastElctrUsage} ],
-					backgroundColor : 'rgba(0, 133, 137, 0.5)'
+					backgroundColor : 'rgba(0, 26, 193, 0.4)'
 				}, {
 					label : '가스',
 					data : [ ${lastGasUsage} ],
-					backgroundColor : 'rgba(131, 220, 183, 0.5)'
+					backgroundColor : 'rgba(76, 0, 211, 0.3)'
 				}, {
 					label : '수도',
 					data : [ 0 ],
-					backgroundColor : 'rgba(135, 225, 245, 0.7)'
+					backgroundColor : 'rgba(16, 237, 255, 0.3)'
 				}, {
 					label : '교통',
 					data : [ 0 ],
-					backgroundColor : 'rgba(93, 173, 236, 0.7)'
+					backgroundColor : 'rgba(93, 177, 236, 0.5)'
 				} ]
 			},
 			options : {
@@ -333,19 +333,19 @@
 				datasets : [ {
 					label : '전기',
 					data : [ ${thirteenthToLastElctrUsage}, ${lastElctrUsage} ],
-					backgroundColor : 'rgba(0, 133, 137, 0.5)'
+					backgroundColor : 'rgba(0, 26, 193, 0.4)'
 				}, {
 					label : '가스',
 					data : [ ${thirteenthToLastGasUsage}, ${lastGasUsage} ],
-					backgroundColor : 'rgba(131, 220, 183, 0.5)'
+					backgroundColor : 'rgba(76, 0, 211, 0.3)'
 				}, {
 					label : '수도',
 					data : [ 0, 0 ],
-					backgroundColor : 'rgba(135, 225, 245, 0.7)'
+					backgroundColor : 'rgba(16, 237, 255, 0.3)'
 				}, {
 					label : '교통',
 					data : [ 0, 0 ],
-					backgroundColor : 'rgba(93, 173, 236, 0.7)'
+					backgroundColor : 'rgba(93, 177, 236, 0.5)'
 				} ]
 			},
 			options : {
@@ -367,7 +367,7 @@
 				datasets : [ {
 					label : '탄소배출량 세부 항목',
 					data : [ ${lastElctrUsage}, ${lastGasUsage}, 0, 0 ],
-					backgroundColor : ['rgba(0, 133, 137, 0.5)', 'rgba(131, 220, 183, 0.5)', 'rgba(135, 225, 245, 0.7)', 'rgba(93, 173, 236, 0.7)']
+					backgroundColor : ['rgba(0, 26, 193, 0.4)', 'rgba(76, 0, 211, 0.3)', 'rgba(16, 237, 255, 0.3)', 'rgba(93, 177, 236, 0.5)']
 				} ]
 			}
 
