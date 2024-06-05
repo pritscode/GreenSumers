@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ page import="com.greensumers.carbonbudget.commons.utils.CarbonCalculator" %>
-<%@ page import="com.greensumers.carbonbudget.comparison.vo.ComparisonVO" %>
-<%@ page import="java.util.List" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page
+	import="com.greensumers.carbonbudget.commons.utils.CarbonCalculator"%>
+<%@ page
+	import="com.greensumers.carbonbudget.comparison.vo.ComparisonVO"%>
+<%@ page import="java.util.List"%>
 
 <!DOCTYPE html>
 <html>
@@ -33,93 +35,122 @@
 <!-- 날짜 -->
 <c:set var="useYm" value="${checkIn[lastIndex].useYm}" />
 <c:set var="lastUseYm" value="${checkIn[secondToLastIndex].useYm}" />
-<c:set var="secondToLastUseYm" value="${checkIn[thirdToLastIndex].useYm}" />
-<c:set var="thirdToLastUseYm" value="${checkIn[fourthToLastIndex].useYm}" />
-<c:set var="fourthToLastUseYm" value="${checkIn[fifthToLastIndex].useYm}" />
+<c:set var="secondToLastUseYm"
+	value="${checkIn[thirdToLastIndex].useYm}" />
+<c:set var="thirdToLastUseYm"
+	value="${checkIn[fourthToLastIndex].useYm}" />
+<c:set var="fourthToLastUseYm"
+	value="${checkIn[fifthToLastIndex].useYm}" />
 <c:set var="fifthToLastUseYm" value="${checkIn[sixthToLastIndex].useYm}" />
-<c:set var="sixthToLastUseYm" value="${checkIn[seventhToLastIndex].useYm}" />
-<c:set var="seventhToLastUseYm" value="${checkIn[eighthToLastIndex].useYm}" />
-<c:set var="eighthToLastUseYm" value="${checkIn[ninthToLastIndex].useYm}" />
+<c:set var="sixthToLastUseYm"
+	value="${checkIn[seventhToLastIndex].useYm}" />
+<c:set var="seventhToLastUseYm"
+	value="${checkIn[eighthToLastIndex].useYm}" />
+<c:set var="eighthToLastUseYm"
+	value="${checkIn[ninthToLastIndex].useYm}" />
 <c:set var="ninthToLastUseYm" value="${checkIn[tenthToLastIndex].useYm}" />
-<c:set var="tenthToLastUseYm" value="${checkIn[eleventhToLastIndex].useYm}" />
-<c:set var="eleventhToLastUseYm" value="${checkIn[twelfthToLastIndex].useYm}" />
-<c:set var="twelfthToLastUseYm" value="${checkIn[thirteenthToLastIndex].useYm}" />
+<c:set var="tenthToLastUseYm"
+	value="${checkIn[eleventhToLastIndex].useYm}" />
+<c:set var="eleventhToLastUseYm"
+	value="${checkIn[twelfthToLastIndex].useYm}" />
+<c:set var="twelfthToLastUseYm"
+	value="${checkIn[thirteenthToLastIndex].useYm}" />
 
 <!-- 에너지 데이터 -->
 <c:set var="lastGasUsage" value="${checkIn[lastIndex].gasUsage}" />
 <c:set var="lastElctrUsage" value="${checkIn[lastIndex].elctrUsage}" />
-<c:set var="thirteenthToLastGasUsage" value="${checkIn[thirteenthToLastIndex].gasUsage}" />
-<c:set var="thirteenthToLastElctrUsage" value="${checkIn[thirteenthToLastIndex].elctrUsage}" />
+<c:set var="thirteenthToLastGasUsage"
+	value="${checkIn[thirteenthToLastIndex].gasUsage}" />
+<c:set var="thirteenthToLastElctrUsage"
+	value="${checkIn[thirteenthToLastIndex].elctrUsage}" />
 
 <!-- 탄소배출량 데이터 -->
 <c:set var="lastEmissions" value="${checkIn[lastIndex].emissions}" />
-<c:set var="secondToLastEmissions" value="${checkIn[secondToLastIndex].emissions}" />
-<c:set var="thirdToLastEmissions" value="${checkIn[thirdToLastIndex].emissions}" />
-<c:set var="fourthToLastEmissions" value="${checkIn[fourthToLastIndex].emissions}" />
-<c:set var="fifthToLastEmissions" value="${checkIn[fifthToLastIndex].emissions}" />
-<c:set var="sixthToLastEmissions" value="${checkIn[sixthToLastIndex].emissions}" />
-<c:set var="seventhToLastEmissions" value="${checkIn[seventhToLastIndex].emissions}" />
-<c:set var="eighthToLastEmissions" value="${checkIn[eighthToLastIndex].emissions}" />
-<c:set var="ninthToLastEmissions" value="${checkIn[ninthToLastIndex].emissions}" />
-<c:set var="tenthToLastEmissions" value="${checkIn[tenthToLastIndex].emissions}" />
-<c:set var="eleventhToLastEmissions" value="${checkIn[eleventhToLastIndex].emissions}" />
-<c:set var="twelfthToLastEmissions" value="${checkIn[twelfthToLastIndex].emissions}" />
-<c:set var="thirteenthToLastEmissions" value="${checkIn[thirteenthToLastIndex].emissions}" />
+<c:set var="secondToLastEmissions"
+	value="${checkIn[secondToLastIndex].emissions}" />
+<c:set var="thirdToLastEmissions"
+	value="${checkIn[thirdToLastIndex].emissions}" />
+<c:set var="fourthToLastEmissions"
+	value="${checkIn[fourthToLastIndex].emissions}" />
+<c:set var="fifthToLastEmissions"
+	value="${checkIn[fifthToLastIndex].emissions}" />
+<c:set var="sixthToLastEmissions"
+	value="${checkIn[sixthToLastIndex].emissions}" />
+<c:set var="seventhToLastEmissions"
+	value="${checkIn[seventhToLastIndex].emissions}" />
+<c:set var="eighthToLastEmissions"
+	value="${checkIn[eighthToLastIndex].emissions}" />
+<c:set var="ninthToLastEmissions"
+	value="${checkIn[ninthToLastIndex].emissions}" />
+<c:set var="tenthToLastEmissions"
+	value="${checkIn[tenthToLastIndex].emissions}" />
+<c:set var="eleventhToLastEmissions"
+	value="${checkIn[eleventhToLastIndex].emissions}" />
+<c:set var="twelfthToLastEmissions"
+	value="${checkIn[twelfthToLastIndex].emissions}" />
+<c:set var="thirteenthToLastEmissions"
+	value="${checkIn[thirteenthToLastIndex].emissions}" />
 
 <!-- 전체 사용자 차트 변수 데이터 설정 -->
 <c:set var="totalDataSize" value="${totalData.size()}" />
 <c:set var="totalDataLastIndex" value="${totalDataSize - 1}" />
 <c:set var="totalDataSecondToLastIndex" value="${totalDataSize - 2}" />
-<c:set var="totalDataLastGasUsage" value="${totalData[totalDataLastIndex].gasUsage}" />
-<c:set var="totalDataLastElctrUsage" value="${totalData[totalDataLastIndex].elctrUsage}" />
-<c:set var="totalDataLastEmissions" value="${totalData[totalDataLastIndex].emissions}" />
-<c:set var="totalDataSecondToLastGasUsage" value="${totalData[totalDataSecondToLastIndex].gasUsage}" />
-<c:set var="totalDataSecondToLastElctrUsage" value="${totalData[totalDataSecondToLastIndex].elctrUsage}" />
-<c:set var="totalDataSecondToLastEmissions" value="${totalData[totalDataSecondToLastIndex].emissions}" />
+<c:set var="totalDataLastGasUsage"
+	value="${totalData[totalDataLastIndex].gasUsage}" />
+<c:set var="totalDataLastElctrUsage"
+	value="${totalData[totalDataLastIndex].elctrUsage}" />
+<c:set var="totalDataLastEmissions"
+	value="${totalData[totalDataLastIndex].emissions}" />
+<c:set var="totalDataSecondToLastGasUsage"
+	value="${totalData[totalDataSecondToLastIndex].gasUsage}" />
+<c:set var="totalDataSecondToLastElctrUsage"
+	value="${totalData[totalDataSecondToLastIndex].elctrUsage}" />
+<c:set var="totalDataSecondToLastEmissions"
+	value="${totalData[totalDataSecondToLastIndex].emissions}" />
 
 <%-- JSP 스크립틀릿을 사용하여 계산 수행 --%>
 <%
-    /* 전체 사용자 대비 전기탄소배출비율 */
-    double elctrRate = 0;
+	/* 전체 사용자 대비 전기탄소배출비율 */
+	double elctrRate = 0;
 	try {
-	    // 세션에서 데이터 가져오기
-	    List<ComparisonVO> checkIn = (List<ComparisonVO>) session.getAttribute("checkIn");
-	    List<ComparisonVO> totalData = (List<ComparisonVO>) session.getAttribute("totalData");
-	
-	    elctrRate = CarbonCalculator.calculateElctrRate(checkIn, totalData);
-	} catch (IllegalArgumentException e) {
-	    // 에러 처리
-	}
-    pageContext.setAttribute("elctrRate", elctrRate);
+		// 세션에서 데이터 가져오기
+		List<ComparisonVO> checkIn = (List<ComparisonVO>) session.getAttribute("checkIn");
+		List<ComparisonVO> totalData = (List<ComparisonVO>) session.getAttribute("totalData");
 
-    /* 전체 사용자 대비 가스탄소배출비율 */
-    double gasRate = 0;
-	try {
-	    // 세션에서 데이터 가져오기
-	    List<ComparisonVO> checkIn = (List<ComparisonVO>) session.getAttribute("checkIn");
-	    List<ComparisonVO> totalData = (List<ComparisonVO>) session.getAttribute("totalData");
-	
-	    gasRate = CarbonCalculator.calculateGasRate(checkIn, totalData);
+		elctrRate = CarbonCalculator.calculateElctrRate(checkIn, totalData);
 	} catch (IllegalArgumentException e) {
-	    // 에러 처리
+		// 에러 처리
 	}
-    pageContext.setAttribute("gasRate", gasRate);
-    
+	pageContext.setAttribute("elctrRate", elctrRate);
+
+	/* 전체 사용자 대비 가스탄소배출비율 */
+	double gasRate = 0;
+	try {
+		// 세션에서 데이터 가져오기
+		List<ComparisonVO> checkIn = (List<ComparisonVO>) session.getAttribute("checkIn");
+		List<ComparisonVO> totalData = (List<ComparisonVO>) session.getAttribute("totalData");
+
+		gasRate = CarbonCalculator.calculateGasRate(checkIn, totalData);
+	} catch (IllegalArgumentException e) {
+		// 에러 처리
+	}
+	pageContext.setAttribute("gasRate", gasRate);
+
 	/* 전체 사용자 대비 탄소배출비율 */
 	double carbonRate = 0;
 	try {
-	    // 세션에서 데이터 가져오기
-	    List<ComparisonVO> checkIn = (List<ComparisonVO>) session.getAttribute("checkIn");
-	    List<ComparisonVO> totalData = (List<ComparisonVO>) session.getAttribute("totalData");
-	
-	    carbonRate = CarbonCalculator.calculateCarbonRate(checkIn, totalData);
+		// 세션에서 데이터 가져오기
+		List<ComparisonVO> checkIn = (List<ComparisonVO>) session.getAttribute("checkIn");
+		List<ComparisonVO> totalData = (List<ComparisonVO>) session.getAttribute("totalData");
+
+		carbonRate = CarbonCalculator.calculateCarbonRate(checkIn, totalData);
 	} catch (IllegalArgumentException e) {
-	    // 에러 처리
+		// 에러 처리
 	}
-    pageContext.setAttribute("carbonRate", carbonRate);
+	pageContext.setAttribute("carbonRate", carbonRate);
 %>
-            
-            
+
+
 
 </head>
 <body>
@@ -140,8 +171,8 @@
 			<div class="page-heading">
 				<h3>탄소 배출량 통계</h3>
 			</div>
-			<div class="page-content">
-				<section class="row">
+			<div class="page-content" style="margin-bottom: 0PX;">
+				<section class="row" style="height: 175px;">
 					<div class="col-12 col-lg-4">
 						<div class="row">
 							<div class="col-12">
@@ -151,58 +182,62 @@
 											<h4 class="mb-0 ms-3">${sessionScope.login.memNm}님</h4>
 										</div>
 									</div>
-											<div class="card-body">
-												<div class="row" style="margin-bottom: 12px">
-													<div class="col-4">
-														<div class="d-flex align-items-center">
-															<h5 class="mb-0 ms-3">날짜</h5>
-														</div>
-													</div>
-													<div class="col-8">
-														<h5 class="mb-0 text-end">${useYm}</h5>
-													</div>
-												</div>
-												<div class="row" style="margin-bottom: 12px">
-													<div class="col-7">
-														<div class="d-flex align-items-center">
-															<svg class="bi text-primary" width="32" height="32"
-																fill="blue" style="width: 10px">
-																<use
-																	xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
-		                                                    </svg>
-															<h6 class="mb-0 ms-3">금월 배출량</h5>
-														</div>
-													</div>
-													<div class="col-5">
-														<h6 class="mb-0 text-end">${lastEmissions}kg</h5>
-													</div>
-												</div>
-												<div class="row" style="margin-bottom: 12px">
-													<div class="col-7">
-														<div class="d-flex align-items-center">
-															<svg class="bi text-primary" width="32" height="32"
-																fill="blue" style="width: 10px">
-																<use
-																	xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
-		                                                    </svg>
-															<h6 class="mb-0 ms-3">전월 배출량</h5>
-														</div>
-													</div>
-													<div class="col-5">
-														<h6 class="mb-0 text-end">${secondToLastEmissions}kg</h5>
-													</div>
+									<div class="card-body">
+										<div class="row" style="margin-bottom: 12px">
+											<div class="col-4">
+												<div class="d-flex align-items-center">
+													<h5 class="mb-0 ms-3">날짜</h5>
 												</div>
 											</div>
+											<div class="col-8">
+												<h5 class="mb-0 text-end">${useYm}</h5>
+											</div>
+										</div>
+										<div class="row" style="margin-bottom: 12px">
+											<div class="col-7">
+												<div class="d-flex align-items-center">
+													<svg class="bi text-primary" width="32" height="32"
+														fill="blue" style="width: 10px">
+																<use
+															xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
+		                                                    </svg>
+													<h6 class="mb-0 ms-3">
+														금월 배출량
+														</h5>
+												</div>
+											</div>
+											<div class="col-5">
+												<h6 class="mb-0 text-end">${lastEmissions}kg</h5>
+											</div>
+										</div>
+										<div class="row" style="margin-bottom: 12px">
+											<div class="col-7">
+												<div class="d-flex align-items-center">
+													<svg class="bi text-primary" width="32" height="32"
+														fill="blue" style="width: 10px">
+																<use
+															xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
+		                                                    </svg>
+													<h6 class="mb-0 ms-3">
+														전월 배출량
+														</h5>
+												</div>
+											</div>
+											<div class="col-5">
+												<h6 class="mb-0 text-end">${secondToLastEmissions}kg</h5>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row" style="height: 300px;">
 							<div class="col-12">
 								<div class="card" name="Compare to others">
 									<div class="card-header">
 										<h4>유저 평균 배출량</h4>
 									</div>
-									<div class="card-body">
+									<div class="card-body" style="height: 196px;">
 										<div class="row">
 											<div class="col-12">
 												<canvas id="myChart" style="display: inline;"></canvas>
@@ -286,10 +321,12 @@
 														</table>
 													</header>
 													<p>
-														${sessionScope.login.memNm}님의 ${useYm} 이산화탄소(CO₂) 발생량 통계입니다.<br />
-														${sessionScope.login.memNm}님 가정은 이산화탄소 배출량은 총 ${lastEmissions}kg이며, 비슷한
-														다른 가정 평균 ${totalDataLastEmissions}kg 보다 약 ${carbonRate}%로 배출하고 있습니다. 그래프를 보고 어느
-														부분에서 이산화탄소를 많이 발생하고 있는지 비교해 보세요.
+														${sessionScope.login.memNm}님의 ${useYm} 이산화탄소(CO₂) 배출량
+														통계입니다.<br /> ${sessionScope.login.memNm}님 가정의 총 이산화탄소 배출량은 
+														${lastEmissions}kg으로, 이는 비슷한 다른 가정의 평균 배출량인
+														${totalDataLastEmissions}kg 대비 약 ${carbonRate}% 입니다. 
+														그래프를 통해 각 항목별 이산화탄소 배출량을 비교하여, 어떤 부분에서 더 많은 
+														배출이 발생하고 있는지 확인해 보시기 바랍니다.
 													</p>
 												</section>
 											</div>
@@ -352,7 +389,8 @@
 		const lineChart = new Chart(lineCtx, {
 			type : 'line',
 			data : {
-				labels : [ "${eleventhToLastUseYm}",
+				labels : [ "${twelfthToLastUseYm}",
+						   "${eleventhToLastUseYm}",
 						   "${tenthToLastUseYm}",
 						   "${ninthToLastUseYm}",
 						   "${eighthToLastUseYm}",
@@ -366,7 +404,8 @@
 						   "${useYm}" ],
 				datasets : [ {
 					label : '탄소배출량',
-					data : [ ${twelfthToLastEmissions},
+					data : [ ${thirteenthToLastEmissions},
+							 ${twelfthToLastEmissions},
 							 ${eleventhToLastEmissions},
 							 ${tenthToLastEmissions},
 							 ${ninthToLastEmissions},
