@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,38 +29,61 @@
 <!-- 날짜 -->
 <c:set var="useYm" value="${checkIn[lastIndex].useYm}" />
 <c:set var="lastUseYm" value="${checkIn[secondToLastIndex].useYm}" />
-<c:set var="secondToLastUseYm" value="${checkIn[thirdToLastIndex].useYm}" />
-<c:set var="thirdToLastUseYm" value="${checkIn[fourthToLastIndex].useYm}" />
-<c:set var="fourthToLastUseYm" value="${checkIn[fifthToLastIndex].useYm}" />
+<c:set var="secondToLastUseYm"
+	value="${checkIn[thirdToLastIndex].useYm}" />
+<c:set var="thirdToLastUseYm"
+	value="${checkIn[fourthToLastIndex].useYm}" />
+<c:set var="fourthToLastUseYm"
+	value="${checkIn[fifthToLastIndex].useYm}" />
 <c:set var="fifthToLastUseYm" value="${checkIn[sixthToLastIndex].useYm}" />
-<c:set var="sixthToLastUseYm" value="${checkIn[seventhToLastIndex].useYm}" />
-<c:set var="seventhToLastUseYm" value="${checkIn[eighthToLastIndex].useYm}" />
-<c:set var="eighthToLastUseYm" value="${checkIn[ninthToLastIndex].useYm}" />
+<c:set var="sixthToLastUseYm"
+	value="${checkIn[seventhToLastIndex].useYm}" />
+<c:set var="seventhToLastUseYm"
+	value="${checkIn[eighthToLastIndex].useYm}" />
+<c:set var="eighthToLastUseYm"
+	value="${checkIn[ninthToLastIndex].useYm}" />
 <c:set var="ninthToLastUseYm" value="${checkIn[tenthToLastIndex].useYm}" />
-<c:set var="tenthToLastUseYm" value="${checkIn[eleventhToLastIndex].useYm}" />
-<c:set var="eleventhToLastUseYm" value="${checkIn[twelfthToLastIndex].useYm}" />
-<c:set var="twelfthToLastUseYm" value="${checkIn[thirteenthToLastIndex].useYm}" />
+<c:set var="tenthToLastUseYm"
+	value="${checkIn[eleventhToLastIndex].useYm}" />
+<c:set var="eleventhToLastUseYm"
+	value="${checkIn[twelfthToLastIndex].useYm}" />
+<c:set var="twelfthToLastUseYm"
+	value="${checkIn[thirteenthToLastIndex].useYm}" />
 
 <!-- 전체 사용자 차트 변수 데이터 설정 -->
 <c:set var="lastGasUsage" value="${totalData[lastIndex].gasUsage}" />
 <c:set var="lastElctrUsage" value="${totalData[lastIndex].elctrUsage}" />
-<c:set var="thirteenthToLastGasUsage" value="${totalData[thirteenthToLastIndex].gasUsage}" />
-<c:set var="thirteenthToLastElctrUsage" value="${totalData[thirteenthToLastIndex].elctrUsage}" />
+<c:set var="thirteenthToLastGasUsage"
+	value="${totalData[thirteenthToLastIndex].gasUsage}" />
+<c:set var="thirteenthToLastElctrUsage"
+	value="${totalData[thirteenthToLastIndex].elctrUsage}" />
 
 <!-- 탄소배출량 데이터 -->
 <c:set var="lastEmissions" value="${totalData[lastIndex].emissions}" />
-<c:set var="secondToLastEmissions" value="${totalData[secondToLastIndex].emissions}" />
-<c:set var="thirdToLastEmissions" value="${totalData[thirdToLastIndex].emissions}" />
-<c:set var="fourthToLastEmissions" value="${totalData[fourthToLastIndex].emissions}" />
-<c:set var="fifthToLastEmissions" value="${totalData[fifthToLastIndex].emissions}" />
-<c:set var="sixthToLastEmissions" value="${totalData[sixthToLastIndex].emissions}" />
-<c:set var="seventhToLastEmissions" value="${totalData[seventhToLastIndex].emissions}" />
-<c:set var="eighthToLastEmissions" value="${totalData[eighthToLastIndex].emissions}" />
-<c:set var="ninthToLastEmissions" value="${totalData[ninthToLastIndex].emissions}" />
-<c:set var="tenthToLastEmissions" value="${totalData[tenthToLastIndex].emissions}" />
-<c:set var="eleventhToLastEmissions" value="${totalData[eleventhToLastIndex].emissions}" />
-<c:set var="twelfthToLastEmissions" value="${totalData[twelfthToLastIndex].emissions}" />
-<c:set var="thirteenthToLastEmissions" value="${totalData[thirteenthToLastIndex].emissions}" />
+<c:set var="secondToLastEmissions"
+	value="${totalData[secondToLastIndex].emissions}" />
+<c:set var="thirdToLastEmissions"
+	value="${totalData[thirdToLastIndex].emissions}" />
+<c:set var="fourthToLastEmissions"
+	value="${totalData[fourthToLastIndex].emissions}" />
+<c:set var="fifthToLastEmissions"
+	value="${totalData[fifthToLastIndex].emissions}" />
+<c:set var="sixthToLastEmissions"
+	value="${totalData[sixthToLastIndex].emissions}" />
+<c:set var="seventhToLastEmissions"
+	value="${totalData[seventhToLastIndex].emissions}" />
+<c:set var="eighthToLastEmissions"
+	value="${totalData[eighthToLastIndex].emissions}" />
+<c:set var="ninthToLastEmissions"
+	value="${totalData[ninthToLastIndex].emissions}" />
+<c:set var="tenthToLastEmissions"
+	value="${totalData[tenthToLastIndex].emissions}" />
+<c:set var="eleventhToLastEmissions"
+	value="${totalData[eleventhToLastIndex].emissions}" />
+<c:set var="twelfthToLastEmissions"
+	value="${totalData[twelfthToLastIndex].emissions}" />
+<c:set var="thirteenthToLastEmissions"
+	value="${totalData[thirteenthToLastIndex].emissions}" />
 
 </head>
 <body>
@@ -81,7 +104,7 @@
 			<div class="page-heading">
 				<h3>전체 탄소 배출량 통계</h3>
 			</div>
-			<div class="page-content">
+			<div class="page-content" style="margin-bottom: 0PX;">
 				<section class="row">
 					<div class="col-12 col-lg-4">
 						<div class="row">
@@ -92,48 +115,52 @@
 											<h4 class="mb-0 ms-3">전체 사용자</h4>
 										</div>
 									</div>
-											<div class="card-body">
-												<div class="row" style="margin-bottom: 12px">
-													<div class="col-4">
-														<div class="d-flex align-items-center">
-															<h5 class="mb-0 ms-3">날짜</h5>
-														</div>
-													</div>
-													<div class="col-8">
-														<h5 class="mb-0 text-end">${useYm}</h5>
-													</div>
-												</div>
-												<div class="row" style="margin-bottom: 12px">
-													<div class="col-7">
-														<div class="d-flex align-items-center">
-															<svg class="bi text-primary" width="32" height="32"
-																fill="blue" style="width: 10px">
-																<use
-																	xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
-		                                                    </svg>
-															<h6 class="mb-0 ms-3">금월 배출량</h5>
-														</div>
-													</div>
-													<div class="col-5">
-														<h6 class="mb-0 text-end">${lastEmissions}kg</h5>
-													</div>
-												</div>
-												<div class="row" style="margin-bottom: 12px">
-													<div class="col-7">
-														<div class="d-flex align-items-center">
-															<svg class="bi text-primary" width="32" height="32"
-																fill="blue" style="width: 10px">
-																<use
-																	xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
-		                                                    </svg>
-															<h6 class="mb-0 ms-3">전월 배출량</h5>
-														</div>
-													</div>
-													<div class="col-5">
-														<h6 class="mb-0 text-end">${secondToLastEmissions}kg</h5>
-													</div>
+									<div class="card-body">
+										<div class="row" style="margin-bottom: 12px">
+											<div class="col-4">
+												<div class="d-flex align-items-center">
+													<h5 class="mb-0 ms-3">날짜</h5>
 												</div>
 											</div>
+											<div class="col-8">
+												<h5 class="mb-0 text-end">${useYm}</h5>
+											</div>
+										</div>
+										<div class="row" style="margin-bottom: 12px">
+											<div class="col-7">
+												<div class="d-flex align-items-center">
+													<svg class="bi text-primary" width="32" height="32"
+														fill="blue" style="width: 10px">
+																<use
+															xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
+		                                                    </svg>
+													<h6 class="mb-0 ms-3">
+														금월 배출량
+														</h5>
+												</div>
+											</div>
+											<div class="col-5">
+												<h6 class="mb-0 text-end">${lastEmissions}kg</h5>
+											</div>
+										</div>
+										<div class="row" style="margin-bottom: 12px">
+											<div class="col-7">
+												<div class="d-flex align-items-center">
+													<svg class="bi text-primary" width="32" height="32"
+														fill="blue" style="width: 10px">
+																<use
+															xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
+		                                                    </svg>
+													<h6 class="mb-0 ms-3">
+														전월 배출량
+														</h5>
+												</div>
+											</div>
+											<div class="col-5">
+												<h6 class="mb-0 text-end">${secondToLastEmissions}kg</h5>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -141,7 +168,7 @@
 							<div class="col-12">
 								<div class="card" name="Compare to others">
 									<div class="card-header">
-										<h4>유저 평균 배출량</h4>
+										<h4>평균 배출량</h4>
 									</div>
 									<div class="card-body">
 										<div class="row">
@@ -221,9 +248,9 @@
 														</table>
 													</header>
 													<p>
-														전체 사용자 ${useYm} 이산화탄소(CO₂) 발생량 통계입니다.<br />
-														가정 평균 ${lastEmissions}kg 배출하고 있습니다. 그래프를 보고 어느
-														부분에서 이산화탄소를 많이 발생하고 있는지 비교해 보세요.
+														전체 사용자의 ${useYm} 이산화탄소(CO₂) 발생량 통계입니다.<br /> 가정당 평균 배출량은
+														${lastEmissions}kg 입니다. 그래프를 통해 각 항목별 이산화탄소 배출량을 비교하여, 
+														어떤 부분에서 더 많은 배출이 발생하고 있는지 확인해 보시기 바랍니다.
 													</p>
 												</section>
 											</div>
@@ -286,7 +313,8 @@
 		const lineChart = new Chart(lineCtx, {
 			type : 'line',
 			data : {
-				labels : [ "${eleventhToLastUseYm}",
+				labels : [ "${twelfthToLastUseYm}",
+						   "${eleventhToLastUseYm}",
 						   "${tenthToLastUseYm}",
 						   "${ninthToLastUseYm}",
 						   "${eighthToLastUseYm}",
@@ -300,7 +328,8 @@
 						   "${useYm}" ],
 				datasets : [ {
 					label : '탄소배출량',
-					data : [ ${twelfthToLastEmissions},
+					data : [ ${thirteenthToLastEmissions},
+							 ${twelfthToLastEmissions},
 							 ${eleventhToLastEmissions},
 							 ${tenthToLastEmissions},
 							 ${ninthToLastEmissions},
