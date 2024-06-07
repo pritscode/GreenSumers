@@ -15,22 +15,25 @@
 <title>Statistics</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-	#myChart {
-       min-width: 50%; /* 원하는 최소 너비로 변경하세요 */
-       min-height: 80%;
-   }
-	#lineChart {
-       min-width: 60%;
-       min-height: 80%;
-   }
-	#twoChart {
-       min-width: 100%;
-       min-height: 80%;
-   }
-	#doughnutChart {
-       min-width: 80%;
-       min-height: 40%;
-   }
+#myChart {
+	min-width: 50%; /* 원하는 최소 너비로 변경하세요 */
+	min-height: 80%;
+}
+
+#lineChart {
+	min-width: 60%;
+	min-height: 80%;
+}
+
+#twoChart {
+	min-width: 100%;
+	min-height: 80%;
+}
+
+#doughnutChart {
+	min-width: 80%;
+	min-height: 40%;
+}
 </style>
 
 <!-- 사용자 차트 변수 데이터 설정 -->
@@ -194,7 +197,8 @@
 					<div class="col-md-12 col-lg-4">
 						<div class="row">
 							<div class="col-12">
-								<div class="card" style="height: 175px; display: flex; flex-direction: column;">
+								<div class="card"
+									style="height: 175px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<div class="d-flex align-items-center">
 											<h4 class="mb-0 ms-3">${sessionScope.login.memNm}님</h4>
@@ -251,13 +255,15 @@
 						</div>
 						<div class="row">
 							<div class="col-12">
-								<div class="card" name="Compare to others" height="180px" style="height: 280px; display: flex; flex-direction: column;">
+								<div class="card" name="Compare to others" height="180px"
+									style="height: 280px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<h4>유저 평균 배출량</h4>
 									</div>
 									<div class="card-body">
 										<div class="row">
-											<div class="col-12" style="height: 180px; text-align: center;">
+											<div class="col-12"
+												style="height: 180px; text-align: center;">
 												<canvas id="myChart" style="display: inline;"></canvas>
 											</div>
 										</div>
@@ -267,13 +273,15 @@
 						</div>
 						<div class="row">
 							<div class="col-12">
-								<div class="card" name="Monthly Carbon Emissions" style="height: 310px; display: flex; flex-direction: column;">
+								<div class="card" name="Monthly Carbon Emissions"
+									style="height: 310px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<h4>월 배출량</h4>
 									</div>
 									<div class="card-body">
 										<div class="row">
-											<div class="col-12" style="height: 215px; text-align: center;">
+											<div class="col-12"
+												style="height: 215px; text-align: center;">
 												<canvas id="lineChart" style="display: inline;"></canvas>
 											</div>
 										</div>
@@ -285,13 +293,15 @@
 					<div class="col-12 col-lg-8">
 						<div class="row">
 							<div class="col-12">
-								<div class="card" name="Compared to last year" style="height: 490px; display: flex; flex-direction: column;">
+								<div class="card" name="Compared to last year"
+									style="height: 490px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<h4>작년대비 배출량</h4>
 									</div>
 									<div class="card-body">
 										<div class="row">
-											<div class="col-12" style="height: 400px; text-align: center;">
+											<div class="col-12"
+												style="height: 400px; text-align: center;">
 												<canvas id="twoChart" style="display: inline;"></canvas>
 											</div>
 										</div>
@@ -301,13 +311,15 @@
 						</div>
 						<div class="row">
 							<div class="col-12">
-								<div class="card" name="Details" style="height: 310px; display: flex; flex-direction: column;">
+								<div class="card" name="Details"
+									style="height: 310px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<h4>세부사항</h4>
 									</div>
 									<div class="card-body">
 										<div class="row">
-											<div class="col-3" style="height: 218px; text-align: center; display: flex; justify-content: center; align-items: center;">
+											<div class="col-3"
+												style="height: 218px; text-align: center; display: flex; justify-content: center; align-items: center;">
 												<canvas id="doughnutChart" style="display: inline;"></canvas>
 											</div>
 											<div class="col-9">
@@ -330,19 +342,24 @@
 																	<td>-</td>
 																</tr>
 																<tr>
-																	<td>${elctrRate}%</td>
-																	<td>${gasRate}%</td>
+																	<td><c:if test="${elctrRate > 100}">
+																			<span style="color: #F24A2C;">${elctrRate}%</span>
+																		</c:if> <c:if test="${elctrRate <= 100}">
+																			<span style="color: #2C8CF2;">${elctrRate}%</span>
+																		</c:if></td>
+																	<td><c:if test="${gasRate > 100}">
+																			<span style="color: #F24A2C;">${gasRate}%</span>
+																		</c:if> <c:if test="${gasRate <= 100}">
+																			<span style="color: #2C8CF2;">${gasRate}%</span>
+																		</c:if></td>
 																	<td>-</td>
 																	<td>-</td>
 																</tr>
 															</tbody>
 														</table>
 													</header>
-													<p>
-														총 이산화탄소 배출량은 ${lastEmissions}kg으로, 
-														이는 다른 가정의 평균 배출량인
-														${totalDataLastEmissions}kg 대비 약 ${carbonRate}% 입니다. 
-													</p>
+													<p>총 이산화탄소 배출량은 ${lastEmissions}kg으로, 이는 다른 가정의 평균 배출량인
+														${totalDataLastEmissions}kg 대비 약 ${carbonRate}% 입니다.</p>
 												</section>
 											</div>
 										</div>
