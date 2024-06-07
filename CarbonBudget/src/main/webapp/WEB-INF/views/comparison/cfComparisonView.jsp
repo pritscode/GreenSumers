@@ -26,7 +26,8 @@
 }
 
 #twoChart {
-	min-width: 100%;
+	min-width: 60%;
+	max-width: 90%;
 	min-height: 80%;
 }
 
