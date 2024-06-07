@@ -294,8 +294,7 @@
 					<div class="col-12 col-lg-8">
 						<div class="row">
 							<div class="col-12">
-								<div class="card" name="Compared to last year"
-									style="height: 490px; display: flex; flex-direction: column;">
+								<div class="card" style="height: 490px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<h4>작년대비 배출량</h4>
 									</div>
