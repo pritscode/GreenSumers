@@ -14,6 +14,24 @@
 <meta charset="UTF-8">
 <title>Statistics</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+	#myChart {
+       min-width: 50%; /* 원하는 최소 너비로 변경하세요 */
+       min-height: 80%;
+   }
+	#lineChart {
+       min-width: 60%;
+       min-height: 80%;
+   }
+	#twoChart {
+       min-width: 100%;
+       min-height: 80%;
+   }
+	#doughnutChart {
+       min-width: 80%;
+       min-height: 40%;
+   }
+</style>
 
 <!-- 사용자 차트 변수 데이터 설정 -->
 <!-- 인덱스 -->
@@ -171,12 +189,12 @@
 			<div class="page-heading">
 				<h3>탄소 배출량 통계</h3>
 			</div>
-			<div class="page-content" style="margin-bottom: 0PX;">
-				<section class="row" style="height: 175px;">
-					<div class="col-12 col-lg-4">
+			<div class="page-content">
+				<section class="row">
+					<div class="col-md-12 col-lg-4">
 						<div class="row">
 							<div class="col-12">
-								<div class="card">
+								<div class="card" style="height: 175px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<div class="d-flex align-items-center">
 											<h4 class="mb-0 ms-3">${sessionScope.login.memNm}님</h4>
@@ -231,15 +249,15 @@
 								</div>
 							</div>
 						</div>
-						<div class="row" style="height: 300px;">
+						<div class="row">
 							<div class="col-12">
-								<div class="card" name="Compare to others">
+								<div class="card" name="Compare to others" height="180px" style="height: 280px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<h4>유저 평균 배출량</h4>
 									</div>
-									<div class="card-body" style="height: 196px;">
+									<div class="card-body">
 										<div class="row">
-											<div class="col-12">
+											<div class="col-12" style="height: 180px; text-align: center;">
 												<canvas id="myChart" style="display: inline;"></canvas>
 											</div>
 										</div>
@@ -249,13 +267,13 @@
 						</div>
 						<div class="row">
 							<div class="col-12">
-								<div class="card" name="Monthly Carbon Emissions">
+								<div class="card" name="Monthly Carbon Emissions" style="height: 310px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<h4>월 배출량</h4>
 									</div>
 									<div class="card-body">
 										<div class="row">
-											<div class="col-12">
+											<div class="col-12" style="height: 215px; text-align: center;">
 												<canvas id="lineChart" style="display: inline;"></canvas>
 											</div>
 										</div>
@@ -267,13 +285,13 @@
 					<div class="col-12 col-lg-8">
 						<div class="row">
 							<div class="col-12">
-								<div class="card" name="Compared to last year">
+								<div class="card" name="Compared to last year" style="height: 490px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<h4>작년대비 배출량</h4>
 									</div>
 									<div class="card-body">
 										<div class="row">
-											<div class="col-12">
+											<div class="col-12" style="height: 400px; text-align: center;">
 												<canvas id="twoChart" style="display: inline;"></canvas>
 											</div>
 										</div>
@@ -283,16 +301,16 @@
 						</div>
 						<div class="row">
 							<div class="col-12">
-								<div class="card" name="Details">
+								<div class="card" name="Details" style="height: 310px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<h4>세부사항</h4>
 									</div>
 									<div class="card-body">
 										<div class="row">
-											<div class="col-12 col-md-4">
+											<div class="col-3" style="height: 218px; text-align: center; display: flex; justify-content: center; align-items: center;">
 												<canvas id="doughnutChart" style="display: inline;"></canvas>
 											</div>
-											<div class="col-12 col-md-8">
+											<div class="col-9">
 												<section>
 													<header>
 														<table class="table">
@@ -321,12 +339,9 @@
 														</table>
 													</header>
 													<p>
-														${sessionScope.login.memNm}님의 ${useYm} 이산화탄소(CO₂) 배출량
-														통계입니다.<br /> ${sessionScope.login.memNm}님 가정의 총 이산화탄소 배출량은 
-														${lastEmissions}kg으로, 이는 비슷한 다른 가정의 평균 배출량인
+														총 이산화탄소 배출량은 ${lastEmissions}kg으로, 
+														이는 다른 가정의 평균 배출량인
 														${totalDataLastEmissions}kg 대비 약 ${carbonRate}% 입니다. 
-														그래프를 통해 각 항목별 이산화탄소 배출량을 비교하여, 어떤 부분에서 더 많은 
-														배출이 발생하고 있는지 확인해 보시기 바랍니다.
 													</p>
 												</section>
 											</div>
@@ -467,6 +482,13 @@
 				'2d');
 		const doughnutChart = new Chart(doughnut, {
 			type : 'doughnut',
+			options : {
+				plugins : {
+					legend : {
+						display : false
+					}
+				}
+			},
 			data : {
 				labels : [ '전기', '가스', '수도', '교통' ],
 				datasets : [ {
