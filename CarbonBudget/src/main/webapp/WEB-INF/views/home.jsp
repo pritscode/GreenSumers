@@ -18,7 +18,8 @@
        min-height: 80%;
    }
 	#twoChart {
-       min-width: 100%;
+       min-width: 60%;
+	   max-width: 90%;
        min-height: 80%;
    }
 	#doughnutChart {
@@ -305,11 +306,11 @@
 					backgroundColor : 'rgba(76, 0, 211, 0.3)'
 				}, {
 					label : '수도',
-					data : [ 0 ],
+					data : [ 4000 ],
 					backgroundColor : 'rgba(16, 237, 255, 0.3)'
 				}, {
 					label : '교통',
-					data : [ 0 ],
+					data : [ 7000 ],
 					backgroundColor : 'rgba(93, 177, 236, 0.5)'
 				} ]
 			},
@@ -386,11 +387,11 @@
 					backgroundColor : 'rgba(76, 0, 211, 0.3)'
 				}, {
 					label : '수도',
-					data : [ 0, 0 ],
+					data : [ 4000, 4100 ],
 					backgroundColor : 'rgba(16, 237, 255, 0.3)'
 				}, {
 					label : '교통',
-					data : [ 0, 0 ],
+					data : [ 7000, 7100 ],
 					backgroundColor : 'rgba(93, 177, 236, 0.5)'
 				} ]
 			},
@@ -419,7 +420,7 @@
 				labels : [ '전기', '가스', '수도', '교통' ],
 				datasets : [ {
 					label : '탄소배출량 세부 항목',
-					data : [ ${lastElctrUsage}, ${lastGasUsage}, 0, 0 ],
+					data : [ ${lastElctrUsage}, ${lastGasUsage}, 4000, 7000 ],
 					backgroundColor : ['rgba(0, 26, 193, 0.4)', 'rgba(76, 0, 211, 0.3)', 'rgba(16, 237, 255, 0.3)', 'rgba(93, 177, 236, 0.5)']
 				} ]
 			}
