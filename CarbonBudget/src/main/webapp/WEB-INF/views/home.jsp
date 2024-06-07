@@ -8,7 +8,24 @@
 <meta charset="UTF-8">
 <title>Statistics</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<style>
+	#myChart {
+       min-width: 50%; /* 원하는 최소 너비로 변경하세요 */
+       min-height: 80%;
+   }
+	#lineChart {
+       min-width: 60%;
+       min-height: 80%;
+   }
+	#twoChart {
+       min-width: 100%;
+       min-height: 80%;
+   }
+	#doughnutChart {
+       min-width: 80%;
+       min-height: 40%;
+   }
+</style>
 <!-- 데이터 리스트 설정 -->
 <!-- 인덱스 -->
 <c:set var="totalDataSize" value="${totalData.size()}" />
@@ -109,7 +126,7 @@
 					<div class="col-12 col-lg-4">
 						<div class="row">
 							<div class="col-12">
-								<div class="card">
+								<div class="card" style="height: 175px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<div class="d-flex align-items-center">
 											<h4 class="mb-0 ms-3">전체 사용자</h4>
@@ -166,13 +183,13 @@
 						</div>
 						<div class="row">
 							<div class="col-12">
-								<div class="card" name="Compare to others">
+								<div class="card" name="Compare to others" style="height: 280px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<h4>평균 배출량</h4>
 									</div>
 									<div class="card-body">
 										<div class="row">
-											<div class="col-12">
+											<div class="col-12" style="height: 180px; text-align: center;">
 												<canvas id="myChart" style="display: inline;"></canvas>
 											</div>
 										</div>
@@ -182,13 +199,13 @@
 						</div>
 						<div class="row">
 							<div class="col-12">
-								<div class="card" name="Monthly Carbon Emissions">
+								<div class="card" name="Monthly Carbon Emissions" style="height: 310px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<h4>월 배출량</h4>
 									</div>
 									<div class="card-body">
 										<div class="row">
-											<div class="col-12">
+											<div class="col-12" style="height: 215px; text-align: center;">
 												<canvas id="lineChart" style="display: inline;"></canvas>
 											</div>
 										</div>
@@ -200,13 +217,13 @@
 					<div class="col-12 col-lg-8">
 						<div class="row">
 							<div class="col-12">
-								<div class="card" name="Compared to last year">
+								<div class="card" name="Compared to last year" style="height: 490px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<h4>작년대비 배출량</h4>
 									</div>
 									<div class="card-body">
 										<div class="row">
-											<div class="col-12">
+											<div class="col-12" style="height: 400px; text-align: center;">
 												<canvas id="twoChart" style="display: inline;"></canvas>
 											</div>
 										</div>
@@ -216,16 +233,16 @@
 						</div>
 						<div class="row">
 							<div class="col-12">
-								<div class="card" name="Details">
+								<div class="card" name="Details" style="height: 310px; display: flex; flex-direction: column;">
 									<div class="card-header">
 										<h4>세부사항</h4>
 									</div>
 									<div class="card-body">
 										<div class="row">
-											<div class="col-12 col-md-4">
+											<div class="col-3" style="height: 218px; text-align: center; display: flex; justify-content: center; align-items: center;">
 												<canvas id="doughnutChart" style="display: inline;"></canvas>
 											</div>
-											<div class="col-12 col-md-8">
+											<div class="col-9">
 												<section>
 													<header>
 														<table class="table">
@@ -248,8 +265,8 @@
 														</table>
 													</header>
 													<p>
-														전체 사용자의 ${useYm} 이산화탄소(CO₂) 발생량 통계입니다.<br /> 가정당 평균 배출량은
-														${lastEmissions}kg 입니다. 그래프를 통해 각 항목별 이산화탄소 배출량을 비교하여, 
+														가정당 평균 배출량은 ${lastEmissions}kg 입니다.
+														그래프를 통해 각 항목별 이산화탄소 배출량을 비교하여, 
 														어떤 부분에서 더 많은 배출이 발생하고 있는지 확인해 보시기 바랍니다.
 													</p>
 												</section>
@@ -391,6 +408,13 @@
 				'2d');
 		const doughnutChart = new Chart(doughnut, {
 			type : 'doughnut',
+			options : {
+				plugins : {
+					legend : {
+						display : false
+					}
+				}
+			},
 			data : {
 				labels : [ '전기', '가스', '수도', '교통' ],
 				datasets : [ {
