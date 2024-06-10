@@ -1,7 +1,5 @@
 package com.greensumers.carbonbudget.member.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,13 +24,13 @@ public class MemberService {
 	}
 
 	// 회원조회
-	public MemberVO loginMember(MemberVO vo) {
-		return dao.loginMember(vo);
+	public MemberVO emailLogin(MemberVO vo) {
+		return dao.emailLogin(vo);
 	}
 	
-	// 닉네임 중복 체크
-	public int aliasCheck(MemberVO vo) {
-		return dao.aliasCheck(vo);
+	// 소셜로그인 회원조회
+	public MemberVO loginMember(MemberVO vo) {
+		return dao.loginMember(vo);
 	}
 	
 	// 회원 수정
@@ -58,6 +56,14 @@ public class MemberService {
 			throw new Exception();
 		}
 	}
+	
+	// 차량 정보 업데이트
+		public void carUpdate(MemberVO vo) throws Exception {
+			int result = dao.carUpdate(vo);
+			if (result == 0) {
+				throw new Exception();
+			}
+		}
 	
 	// 아이디 찾기
 	public MemberVO findId(MemberVO vo) {
