@@ -62,32 +62,6 @@
 		});
 	}
 
-	function alsChk() {
-		let memAls = $("#memAls").val();
-		$.ajax({
-			url : "<c:url value='alsCheck'/>",
-			type : 'post',
-			contentType : 'application/json', // Content-Type을 명시하여 JSON 형식으로 데이터를 보냄
-			data : JSON.stringify({
-				memAls : memAls
-			}),
-			success : function(res) {
-				console.log(res);
-				if (res === "notnull") {
-					alert("중복된 닉네임이 존재합니다.");
-					$("#memAls").val('');
-					$("#memAls").focus();
-
-				} else {
-					alert("사용 가능한 닉네임입니다.");
-				}
-			},
-			error : function(e) {
-				console.log(e);
-			}
-		});
-	}
-	
 	function removeMember() {
 		let answer = prompt("'탈퇴하겠습니다.'를 정확히 입력해주세요.")
 		
@@ -325,13 +299,9 @@
 													<div class="form-group">
 														<label for="memAls" class="form-label"><i
 															class="bi bi-vector-pen"></i> 닉네임</label>
-														<div class="input-group mb-3">
 															<input value="${sessionScope.login.memAls}" type="text"
 																class="form-control" id="memAls" name="memAls"
 																placeholder="닉네임" data-parsley-required="true">
-															<button class="btn btn-outline-primary col-lg-2 col-xs-4"
-																type="button" onclick="alsChk()">체크</button>
-														</div>
 													</div>
 												</div>
 												<div class="col-12">
