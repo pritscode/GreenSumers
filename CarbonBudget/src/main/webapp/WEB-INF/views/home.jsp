@@ -45,28 +45,28 @@
 <c:set var="thirteenthToLastIndex" value="${totalDataSize - 13}" />
 
 <!-- 날짜 -->
-<c:set var="useYm" value="${checkIn[lastIndex].useYm}" />
-<c:set var="lastUseYm" value="${checkIn[secondToLastIndex].useYm}" />
+<c:set var="useYm" value="${totalData[lastIndex].useYm}" />
+<c:set var="lastUseYm" value="${totalData[secondToLastIndex].useYm}" />
 <c:set var="secondToLastUseYm"
-	value="${checkIn[thirdToLastIndex].useYm}" />
+	value="${totalData[thirdToLastIndex].useYm}" />
 <c:set var="thirdToLastUseYm"
-	value="${checkIn[fourthToLastIndex].useYm}" />
+	value="${totalData[fourthToLastIndex].useYm}" />
 <c:set var="fourthToLastUseYm"
-	value="${checkIn[fifthToLastIndex].useYm}" />
-<c:set var="fifthToLastUseYm" value="${checkIn[sixthToLastIndex].useYm}" />
+	value="${totalData[fifthToLastIndex].useYm}" />
+<c:set var="fifthToLastUseYm" value="${totalData[sixthToLastIndex].useYm}" />
 <c:set var="sixthToLastUseYm"
-	value="${checkIn[seventhToLastIndex].useYm}" />
+	value="${totalData[seventhToLastIndex].useYm}" />
 <c:set var="seventhToLastUseYm"
-	value="${checkIn[eighthToLastIndex].useYm}" />
+	value="${totalData[eighthToLastIndex].useYm}" />
 <c:set var="eighthToLastUseYm"
-	value="${checkIn[ninthToLastIndex].useYm}" />
-<c:set var="ninthToLastUseYm" value="${checkIn[tenthToLastIndex].useYm}" />
+	value="${totalData[ninthToLastIndex].useYm}" />
+<c:set var="ninthToLastUseYm" value="${totalData[tenthToLastIndex].useYm}" />
 <c:set var="tenthToLastUseYm"
-	value="${checkIn[eleventhToLastIndex].useYm}" />
+	value="${totalData[eleventhToLastIndex].useYm}" />
 <c:set var="eleventhToLastUseYm"
-	value="${checkIn[twelfthToLastIndex].useYm}" />
+	value="${totalData[twelfthToLastIndex].useYm}" />
 <c:set var="twelfthToLastUseYm"
-	value="${checkIn[thirteenthToLastIndex].useYm}" />
+	value="${totalData[thirteenthToLastIndex].useYm}" />
 
 <!-- 전체 사용자 차트 변수 데이터 설정 -->
 <c:set var="lastGasUsage" value="${totalData[lastIndex].gasUsage}" />
