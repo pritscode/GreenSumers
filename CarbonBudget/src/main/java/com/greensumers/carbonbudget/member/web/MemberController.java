@@ -30,7 +30,21 @@ public class MemberController {
 	public String loginView() {
 		return "member/loginView";
 	}
-
+	
+	// 테스트 중	
+	@RequestMapping("/modalTest")
+	public String modalTest() {
+		return "member/modalTest";
+	}
+	
+	@RequestMapping("/survey")
+	public String survey() {
+		return "member/survey";
+	}
+	
+	//테스트 코드 끝
+	
+	
 	@RequestMapping("/registView")
 	public String registView() {
 		return "member/registView";
@@ -73,22 +87,6 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		return "null";
-	}
-	
-	// 닉네임 중복체크
-	@ResponseBody
-	@RequestMapping(value = "/alsCheck", method = RequestMethod.POST)
-	public String aliasCheck(@RequestBody MemberVO vo, RedirectAttributes re) {
-		try {
-			int check = memberService.aliasCheck(vo);
-			System.out.println(check);
-			if (check == 0) {
-				return "null";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "notnull";
 	}
 
 	@RequestMapping("/registDo")
