@@ -88,6 +88,22 @@ public class MemberController {
 		}
 		return "null";
 	}
+	
+	// 닉네임 중복체크
+	@ResponseBody
+	@RequestMapping(value = "/alsCheck", method = RequestMethod.POST)
+	public String aliasCheck(@RequestBody MemberVO vo, RedirectAttributes re) {
+		try {
+			int check = memberService.aliasCheck(vo);
+			System.out.println(check);
+			if (check == 0) {
+				return "null";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "notnull";
+	}	
 
 	@RequestMapping("/registDo")
 	public String registDo(HttpServletRequest request, MemberVO vo, RedirectAttributes re) {
