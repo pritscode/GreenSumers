@@ -17,6 +17,8 @@ public interface IMemberDAO {
 	public MemberVO loginMember(MemberVO vo);
 	// 소셜로그인
 	public MemberVO emailLogin(MemberVO vo);
+	// 닉네임 중복 체크
+	public int aliasCheck(MemberVO vo);
 	// 비밀번호 수정
 	public int updateMemberPw(MemberVO vo);
 	//카카오톡
