@@ -33,6 +33,12 @@ public class MemberService {
 		return dao.loginMember(vo);
 	}
 	
+	// 닉네임 중복 체크
+	public int aliasCheck(MemberVO vo) {
+		return dao.aliasCheck(vo);
+	}
+		
+	
 	// 회원 수정
 	public void updateMember(MemberVO vo) throws Exception {
 		int result = dao.updateMember(vo);
